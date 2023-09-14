@@ -25,12 +25,6 @@ modules:
       disk-quota: 256M
       memory: 256M
     requires:
-      - name: srv-api
-        group: destinations
-        properties:
-          name: srv-api # must be used in xs-app.json as well
-          url: ~{srv-url}
-          forwardAuthToken: true
       - name: btp-go-xsuaa
 
 resources:
@@ -41,5 +35,5 @@ resources:
       service-plan: application
       path: ./xs-security.json
       config:
-        xsappname: btp-go-${org}-${space}
+        xsappname: btp-go-${space}
         tenant-mode: dedicated

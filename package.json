@@ -4,7 +4,8 @@
   "description": "BTP home page of links to services group by directory (project) and subaccount",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "undeploy": "cf undeploy btp-go --delete-services --delete-service-keys"
   },
   "repository": {
     "type": "git",
