@@ -1,0 +1,40 @@
+{
+    "btp": [
+        {
+            "name": "Digital Core",
+            "short": "DCore",
+            "subaccounts": [
+                {
+                    "name": "Sandbox",
+                    "subdomain": "ncfaws-17",
+                    "region": "us10",
+                    "services": [
+                        "abap",
+                        "launchpad",
+                        "cpi",
+                        "apim",
+                        "spa"
+                    ]
+                }
+            ]
+        }
+    ], 
+    "renderer" : {
+        "abap": {
+            "name": "ABAP Cloud",
+            "link": "https://{instance_id}.{region}.abap.ondemand.com"
+        }, 
+        "launchpad": {
+            "name": "Launchpad",
+            "link": "https://{subdomain}.launchpad.{region}.ondemand.com"
+        },
+        "cpi": {
+            "name": "Integration - CPI",
+            "link": "https://{subdomain}.cpi.{region}.ondemand.com"
+        },
+        "apim": {
+            "name": "Integration - APIM",
+            "link": "https://{subdomain}.apim.{region}.ondemand.com"
+        }
+    }
+}
