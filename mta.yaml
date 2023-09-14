@@ -14,6 +14,12 @@ modules:
   - name: btp-go
     type: approuter.nodejs
     path: app/ # from cds.env.folders. Consider also cds.env.build.target -> gen/app
+    build-parameters:
+      builder: npm-ci
+      ignore:
+        - default-*.json
+        - .env
+        - "*node_modules*"
     parameters:
       keep-existing-routes: true
       disk-quota: 256M
