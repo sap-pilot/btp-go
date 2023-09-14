@@ -23,5 +23,14 @@
   "homepage": "https://github.com/sap-pilot/btp-go#readme",
   "devDependencies": {
     "@sap/cds-dk": "^7"
+  },
+  "dependencies": {
+    "@sap/xssec": "^3",
+    "passport": "^0"
+  },
+  "cds": {
+    "requires": {
+      "auth": "xsuaa"
+    }
   }
 }
