@@ -165,9 +165,9 @@
                         <!-- render dropdown for services with children -->
                         <li class="btn-group py-0">
                           <a class="btn link-secondary py-0 pe-1 zh-24" target="_blank" v-bind:title="rs.fullName" v-bind:href="rs.url">{{rs.name}}</a>
-                          <button type="button" class="btn py-0 ps-1 zh-24 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                          <a type="button" class="btn py-0 ps-1 zh-24 link-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
-                          </button>
+                          </a>
                           <ul class="dropdown-menu">
                             <li v-for="rc in rs.children"><a class="dropdown-item" v-bind:title="rc.fullName" v-bind:href="rc.url">{{rc.name}}</a></li>
                           </ul>
