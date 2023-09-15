@@ -1,40 +1,175 @@
 {
     "btp": [
         {
-            "name": "Digital Core",
-            "short": "DCore",
-            "subaccounts": [
+            "globalAccountId": "CA160438TID000000000740787196",
+            "name": "Chevron",
+            "cockpitRegion": "amer",
+            "directories": [
                 {
-                    "name": "Sandbox",
-                    "subdomain": "ncfaws-17",
+                    "name": "Digital Core - US East",
+                    "short": "DCore USE",
                     "region": "us10",
-                    "services": [
-                        "abap",
-                        "launchpad",
-                        "cpi",
-                        "apim",
-                        "spa"
+                    "subaccounts": [
+                        {
+                            "subaccountId": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                            "name": "Sandbox",
+                            "subdomain": "ncfaws-17",
+                            "services": [
+                                "abap",
+                                "build",
+                                "launchpad",
+                                "int",
+                                "spa",
+                                "workflow"
+                            ],
+                            "params": {
+                                "abap": {
+                                    "instance": "41081360-6b0c-4b04-9bbc-5e72b14e7876"
+                                },
+                                "hana": {
+                                    "spaceId": "23f5586c-36b9-4424-b597-5f201e9ff217",
+                                },
+                                "int": {
+                                    "instance": "cpi003"
+                                },
+                                "launchpad": {
+                                    "site": "dcore-sandbox"
+                                },
+                                "job": {
+                                    "instance": "b1b794bd-7d35-4e02-bb74-95931e2f01a4"
+                                }
+                            }
+                        }
                     ]
                 }
             ]
         }
-    ], 
-    "renderer" : {
+    ],
+    "template": {
         "abap": {
             "name": "ABAP Cloud",
-            "link": "https://{instance_id}.{region}.abap.ondemand.com"
-        }, 
+            "url": "https://{instance}.abap-web.{region}.hana.ondemand.com/ui#Shell-home"
+        },
+        "bas": {
+            "name": "BAS",
+            "url": "https://{subdomain}.{region}cf.applicationstudio.cloud.sap/index.html"
+        },
+        "build": {
+            "name": "Build",
+            "url": "https://{subdomain}.us10.build.cloud.sap/lobby"
+        },
+        "cockpit": {
+            "name": "Cockpit",
+            "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/subaccountoverview",
+            "children": [
+                {
+                    "name": "Service Market Place",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/service-marketplace"
+                },
+                {
+                    "name": "Instance and Subscriptions",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/service-instances"
+                },
+                {},
+                {
+                    "name": "Spaces",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/spaces"
+                },
+                {
+                    "name": "Org Membeers",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/users"
+                },
+                {},
+                {
+                    "name": "HTML5 Apps",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/html5applications"
+                },
+                {},
+                {
+                    "name": "Destinations",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/destinations"
+                },
+                {
+                    "name": "Cloud Connectors",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/connectivity"
+                },
+                {},
+                {
+                    "name": "Users",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/usersOverview"
+                },
+                {
+                    "name": "Role Collections",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/connectivity"
+                },
+                {
+                    "name": "Roles",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/roles"
+                },
+                {
+                    "name": "Trust Configuration",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/trustConfiguration"
+                },
+                {},
+                {
+                    "name": "Entitlements",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/entitlements"
+                },
+                {
+                    "name": "Usage Analytics",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/subaccountUsageAnalytics"
+                }
+            ]
+        },
+        "hana": {
+            "name": "HANA Cockpit",
+            "url": "https://hana-cockpit.cfapps.{region}.hana.ondemand.com/hcs/sap/hana/cloud/index.html#/org/{subaccountId}/space/{spaceId}/databases"
+        },
+        "int": {
+            "name": "Integration Suite",
+            "url": "https://{subdomain}.it-{instance}.cfapps.{region}.hana.ondemand.com/itspaces/shell/discover",
+            "children": [
+                {
+                    "name": "API Portal",
+                    "url": "https://{subdomain}.apiportal.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Dev Portal",
+                    "url": "https://{subdomain}.devportal.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Event Mesh",
+                    "url": "https://{subdomain}.enterprise-messaging.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Open Connector",
+                    "url": "https://my.openconnectors.{region}.ext.hana.ondemand.com/login/sso?accountExternalId={subaccountId}&customerId=1382&orgExternalId={globalAccountId}"
+                }
+            ]
+        },
+        "job": {
+            "name": "Job Scheduler",
+            "url": "https://jobscheduler-dashboard.cfapps.{region}.hana.ondemand.com/manageinstances/{instance}#/jobs"
+        },
+        "kibana": {
+            "name": "Kibana",
+            "url": "https://logs.cf.{region}.hana.ondemand.com/app/kibana_overview#/"
+        },
         "launchpad": {
             "name": "Launchpad",
-            "link": "https://{subdomain}.launchpad.{region}.ondemand.com"
+            "url": "https://{subdomain}.launchpad.cfapps.{region}.hana.ondemand.com/site/{site}"
         },
-        "cpi": {
-            "name": "Integration - CPI",
-            "link": "https://{subdomain}.cpi.{region}.ondemand.com"
+        "launchpad-manager": {
+            "name": "Launchpad Manager",
+            "url": "https://{subdomain}.dt.launchpad.cfapps.{region}.hana.ondemand.com/sites#Site-Directory"
         },
-        "apim": {
-            "name": "Integration - APIM",
-            "link": "https://{subdomain}.apim.{region}.ondemand.com"
+        "spa": {
+            "name": "SPA",
+            "url": "https://{subdomain}.{region}.build.cloud.sap/lobby"
+        },
+        "workflow": {
+            "name": "Workflow",
+            "url": "https://{subdomain}.cockpit.workflowmanagement.cfapps.{region}.hana.ondemand.com/cp.portal/site"
         }
     }
 }
