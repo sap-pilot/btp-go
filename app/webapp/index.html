@@ -5,96 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Links to BTP and S/4HANA">
     <title>Go BTP - Chevron</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico"/>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
     <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-      h4 {
-        font-size: 18px;
-      }
-      link-disabled {
-        text-decoration: line-through;
-      }
-      /* .dropend:hover .dropdown-menu {
-            display: block;
-      } */
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-      .b-example-divider {
-        width: 100%;
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .btn-bd-primary {
-        --bd-violet-bg: #712cf9;
-        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-        --bs-btn-font-weight: 600;
-        --bs-btn-color: var(--bs-white);
-        --bs-btn-bg: var(--bd-violet-bg);
-        --bs-btn-border-color: var(--bd-violet-bg);
-        --bs-btn-hover-color: var(--bs-white);
-        --bs-btn-hover-bg: #6528e0;
-        --bs-btn-hover-border-color: #6528e0;
-        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-        --bs-btn-active-color: var(--bs-btn-hover-color);
-        --bs-btn-active-bg: #5a23c8;
-        --bs-btn-active-border-color: #5a23c8;
-      }
-      .bd-mode-toggle {
-        z-index: 1500;
-      }
-    </style>
-
-    
     <!-- Custom styles for this template -->
     <link href="./assets/css/style.css" rel="stylesheet">
+    <style>
+    h4 {
+      font-size: 1.2rem;
+    }
+    a {
+      text-decoration: none;
+    }
+    </style>
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -140,7 +65,7 @@
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="https://github.com/sap-pilot/btp-go#readme">Readme</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="https://github.com/sap-pilot/btp-go/issues">Issues</a>
         <!-- presentation mode togger - not implemented yet disable for now -->
-        <!-- <div class="dropdown bd-mode-toggle">
+        <div class="dropdown bd-mode-toggle d-none">
           <button class="btn py-2 dropdown-toggle d-flex align-items-center"
                   id="bd-table"
                   type="button"
@@ -180,7 +105,7 @@
               </button>
             </li>
           </ul>
-        </div> -->
+        </div> 
         <div class="dropdown bd-mode-toggle">
           <button class="btn py-2 dropdown-toggle d-flex align-items-center"
                   id="bd-theme"
@@ -219,260 +144,65 @@
     </div>
   </header>
 
-  <main>
-    <h3 class="display-6 text-center mb-4">Digital Core (DCore)</h3> 
-    <div class="row text-center">
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">DCore Sandbox</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li class="btn-group">
-                <button type="button" class="btn py-0 pe-1">Integration</button>
-                <button type="button" class="btn py-0 ps-1 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">API Portal</a></li>
-                  <li><a class="dropdown-item" href="#">Dev Portal</a></li>
-                  <li><a class="dropdown-item" href="#">Event Mesh</a></li>
-                </ul>
-              </li>
-              <li><a href="#wfm" class="link-secondary" title="Hibernated. Contact BTP team to start service."><s>Workflow</s></a></li>
-            </ul>
-            <div class="btn-group w-100">
-              <button type="button" class="btn btn-outline-primary btn-sm w-100">Cockpit</button>
-              <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Service Marketplace</a></li>
-                <li><a class="dropdown-item" href="#">Services</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Spaces</a></li>
-                <li><a class="dropdown-item" href="#">Org Members</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">HTML5 Apps</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Destiations</a></li>
-                <li><a class="dropdown-item" href="#">Cloud Connectors</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Users</a></li>
-                <li><a class="dropdown-item" href="#">Role Collections</a></li>
-                <li><a class="dropdown-item" href="#">Roles</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Entitlements</a></li>
-                <li><a class="dropdown-item" href="#">Usage Analytics</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">DCore Dev</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li class="btn-group">
-                <a type="button" class="btn py-0 pe-1" href="#int" target="_blank">Integration</a>
-                <button type="button" class="btn py-0 ps-1 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">API Portal</a></li>
-                  <li><a class="dropdown-item" href="#">Dev Portal</a></li>
-                  <li><a class="dropdown-item" href="#">Event Mesh</a></li>
-                </ul>
-              </li>
-              <li>Workflow</li>
-            </ul>
-            <div class="btn-group w-100">
-              <button type="button" class="btn btn-outline-primary btn-sm w-100">Cockpit</button>
-              <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Service Marketplace</a></li>
-                <li><a class="dropdown-item" href="#">Services</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Spaces</a></li>
-                <li><a class="dropdown-item" href="#">Org Members</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">HTML5 Apps</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Destiations</a></li>
-                <li><a class="dropdown-item" href="#">Cloud Connectors</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Users</a></li>
-                <li><a class="dropdown-item" href="#">Role Collections</a></li>
-                <li><a class="dropdown-item" href="#">Roles</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Entitlements</a></li>
-                <li><a class="dropdown-item" href="#">Usage Analytics</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">DCore Staging</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li class="btn-group">
-                <button type="button" class="btn py-0 pe-1">Integration</button>
-                <button type="button" class="btn py-0 ps-1 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">API Portal</a></li>
-                  <li><a class="dropdown-item" href="#">Dev Portal</a></li>
-                  <li><a class="dropdown-item" href="#">Event Mesh</a></li>
-                </ul>
-              </li>
-              <li>Workflow</li>
-            </ul>
-            <div class="btn-group w-100">
-              <button type="button" class="btn btn-outline-primary btn-sm w-100">Cockpit</button>
-              <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Service Marketplace</a></li>
-                <li><a class="dropdown-item" href="#">Services</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Spaces</a></li>
-                <li><a class="dropdown-item" href="#">Org Members</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">HTML5 Apps</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Destiations</a></li>
-                <li><a class="dropdown-item" href="#">Cloud Connectors</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Users</a></li>
-                <li><a class="dropdown-item" href="#">Role Collections</a></li>
-                <li><a class="dropdown-item" href="#">Roles</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Entitlements</a></li>
-                <li><a class="dropdown-item" href="#">Usage Analytics</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">DCore Pre-Prod</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li class="btn-group">
-                <button type="button" class="btn py-0 pe-1">Integration</button>
-                <button type="button" class="btn py-0 ps-1 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">API Portal</a></li>
-                  <li><a class="dropdown-item" href="#">Dev Portal</a></li>
-                  <li><a class="dropdown-item" href="#">Event Mesh</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Separated link</a></li>
-                </ul>
-              </li>
-              <li>Workflow</li>
-            </ul>
-            <div class="btn-group w-100">
-              <button type="button" class="btn btn-outline-primary btn-sm w-100">Cockpit</button>
-              <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Service Marketplace</a></li>
-                <li><a class="dropdown-item" href="#">Services</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Spaces</a></li>
-                <li><a class="dropdown-item" href="#">Org Members</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">HTML5 Apps</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Destiations</a></li>
-                <li><a class="dropdown-item" href="#">Cloud Connectors</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Users</a></li>
-                <li><a class="dropdown-item" href="#">Role Collections</a></li>
-                <li><a class="dropdown-item" href="#">Roles</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Entitlements</a></li>
-                <li><a class="dropdown-item" href="#">Usage Analytics</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-primary">
-          <div class="card-header py-3 text-bg-primary border-primary">
-            <h4 class="my-0 fw-normal">DCore Prod</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li class="btn-group">
-                <button type="button" class="btn py-0 pe-1">Integration</button>
-                <button type="button" class="btn py-0 ps-1 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">API Portal</a></li>
-                  <li><a class="dropdown-item" href="#">Dev Portal</a></li>
-                  <li><a class="dropdown-item" href="#">Event Mesh</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Separated link</a></li>
-                </ul>
-              </li>
-              <li>Workflow</li>
-            </ul>
-            <div class="btn-group w-100">
-              <button type="button" class="btn btn-primary btn-sm w-100">Cockpit</button>
-              <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Service Marketplace</a></li>
-                <li><a class="dropdown-item" href="#">Services</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Spaces</a></li>
-                <li><a class="dropdown-item" href="#">Org Members</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">HTML5 Apps</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Destiations</a></li>
-                <li><a class="dropdown-item" href="#">Cloud Connectors</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Users</a></li>
-                <li><a class="dropdown-item" href="#">Role Collections</a></li>
-                <li><a class="dropdown-item" href="#">Roles</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Entitlements</a></li>
-                <li><a class="dropdown-item" href="#">Usage Analytics</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <main id="app">
+    <template v-if="btp.globalAccounts">
+      <template v-for="ga in btp.globalAccounts">
+        <template v-for="dir in ga.directories">
+          <h3 class="display-6 text-center mb-4">{{dir.name}} ({{dir.short}})</h3> 
+          <div class="row text-center" >
 
+            <div class="col" v-for="sa in dir.subaccounts">
+              <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                  <h4 class="my-0 fw-normal">{{dir.short}} {{sa.name}}</h4>
+                </div>
+                <div class="card-body">
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <template v-for="rs in sa.renderedServices">
+                      <template v-if="rs.children">
+                        <!-- render dropdown for services with children -->
+                        <li class="btn-group">
+                          <a class="btn link-secondary py-0 pe-1" target="_blank" v-bind:title="rs.fullName" v-bind:href="rs.url">{{rs.name}}</a>
+                          <button type="button" class="btn py-0 ps-1 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li v-for="rc in rs.children"><a class="dropdown-item" v-bind:title="rc.fullName" v-bind:href="rc.url">{{rc.name}}</a></li>
+                          </ul>
+                        </li>
+                      </template>
+                      <template v-else>
+                        <!-- render simple link for service without children -->
+                        <li><a class="link-secondary" v-bind:title="rs.fullName" v-bind:href="rs.url">{{rs.name}}</a></li>
+                      </template><!-- end of v-if:children -->
+                    </template>
+                  </ul>
+                  <template v-if="sa.cockpit">
+                    <div class="btn-group w-100">
+                      <a target="_blank" type="button" class="btn btn-outline-primary btn-sm w-100" v-bind:href="sa.cockpit.url">Cockpit</a>
+                      <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li v-for="rs in sa.cockpit.children">
+                          <template v-if="rs.divider">
+                            <li><hr class="dropdown-divider"></li>
+                          </template>
+                          <template v-else>
+                            <a target="_blank" class="dropdown-item" v-bind:href="rs.url">{{rs.name}}</a></li>
+                          </template>
+                        </li>
+                      </ul>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div> <!-- end of subaccount card (col)-->
+          </div> <!-- end of subaccounts (row) -->
+        </template> <!-- end of directories -->
+      </template> <!-- end of global accounts-->
+    </template>
+    
     <div class="table-responsive">
       <table class="table text-center">
         <thead>
@@ -527,255 +257,6 @@
       </table>
     </div>
 
-    <h3 class="display-6 text-center mb-4">Central Finance (cFin)</h3> 
-
-    <div class="row text-center">
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">cFin Sandbox</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li>Integration - APIM</li>
-              <li>Integration - CPI</li>
-              <li>Workflow </li>
-            </ul>
-            <button type="button" class="w-100 btn btn-md btn-outline-primary">Cockpit</button>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">cFin Dev</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li>Integration - APIM</li>
-              <li>Integration - CPI</li>
-              <li>Workflow</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-md btn-outline-primary">Cockpit</button>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">cFin Staging</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li>Integration - APIM</li>
-              <li>Integration - CPI</li>
-              <li>Workflow</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-md btn-outline-primary">Cockpit</button>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-primary">
-          <div class="card-header py-3 text-bg-primary border-primary">
-            <h4 class="my-0 fw-normal">cFin Prod</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li>Integration - APIM</li>
-              <li>Integration - CPI</li>
-              <li>Workflow</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-md btn-primary">Cockpit</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="table-responsive">
-      <table class="table text-center">
-        <thead>
-          <tr>
-            <th style="width: 34%;"></th>
-            <th style="width: 22%;">Dev</th>
-            <th style="width: 22%;">Pre-Prod</th>
-            <th style="width: 22%;">Prod</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row" class="text-start">ABAP Cloud</th>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Data Intelligence</th>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th scope="row" class="text-start">Integration - APIM</th>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Integration - CPI</th>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Cockpit</th>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Workflow</th>
-            <td></td>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3 class="display-6 text-center mb-4">CIRCA</h3> 
-
-    <div class="row text-center">
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">CIRCA Dev</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li>Integration - APIM</li>
-              <li>Integration - CPI</li>
-              <li>Workflow </li>
-            </ul>
-            <button type="button" class="w-100 btn btn-md btn-outline-primary">Cockpit</button>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">CIRCA Staging</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li>Integration - APIM</li>
-              <li>Integration - CPI</li>
-              <li>Workflow</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-md btn-outline-primary">Cockpit</button>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">CIRCA Pre-Prod</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li>Integration - APIM</li>
-              <li>Integration - CPI</li>
-              <li>Workflow</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-md btn-outline-primary">Cockpit</button>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-primary opacity-50">
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
-            Q4'23
-            <span class="visually-hidden">planned</span>
-          </span>
-          <div class="card-header py-3 text-bg-primary border-primary">
-            <h4 class="my-0 fw-normal">CIRCA Prod</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>ABAP Cloud</li>
-              <li>Integration - APIM</li>
-              <li>Integration - CPI</li>
-              <li>Workflow</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-md btn-primary disabled">Cockpit</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="table-responsive">
-      <table class="table text-center">
-        <thead>
-          <tr>
-            <th style="width: 34%;"></th>
-            <th style="width: 22%;">Dev</th>
-            <th style="width: 22%;">Pre-Prod</th>
-            <th style="width: 22%;">Prod</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row" class="text-start">ABAP Cloud</th>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Data Intelligence</th>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th scope="row" class="text-start">Integration - APIM</th>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Integration - CPI</th>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Cockpit</th>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Workflow</th>
-            <td></td>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </main>
 
   <footer class="pt-4 my-md-5 pt-md-5 border-top">
@@ -816,18 +297,8 @@
     </div>
   </footer>
 </div>
-<script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
-<script language="javascript">
-//   $(document).ready(function() {
-//     $('.dropdown').hover(function() {
-//       $(this).addClass('show');
-//       $(this).find('.dropdown-menu').addClass('show');
-//     }, function() {
-//       $(this).removeClass('show');
-//       $(this).find('.dropdown-menu').removeClass('show');
-//     });
 
-// });
-</script>
     </body>
+    <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./app.js"></script>
 </html>
