@@ -145,6 +145,7 @@
                                 "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
                                 "name": "Prod",
                                 "subdomain": "pcfaws-02",
+                                "state": "prod",
                                 "services": [
                                     "abap",
                                     "hana",
