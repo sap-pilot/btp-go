@@ -11,7 +11,7 @@
                     "region": "us10",
                     "subaccounts": [
                         {
-                            "subaccountId": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                            "subaccountId": "6731c1b4-a33a-44b2-b3e7-e492bcf4e250",
                             "name": "Sandbox",
                             "subdomain": "ncfaws-17",
                             "services": [
@@ -20,23 +20,149 @@
                                 "launchpad",
                                 "int",
                                 "spa",
-                                "workflow"
+                                "wfm"
                             ],
                             "params": {
                                 "abap": {
                                     "instance": "41081360-6b0c-4b04-9bbc-5e72b14e7876"
                                 },
                                 "hana": {
-                                    "spaceId": "23f5586c-36b9-4424-b597-5f201e9ff217",
+                                    "instance": "XX"
                                 },
                                 "int": {
                                     "instance": "cpi003"
                                 },
                                 "launchpad": {
-                                    "site": "dcore-sandbox"
+                                    "sites": [
+                                        "dcore-sandbox"
+                                    ]
                                 },
                                 "job": {
                                     "instance": "b1b794bd-7d35-4e02-bb74-95931e2f01a4"
+                                }
+                            }
+                        },
+                        {
+                            "subaccountId": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                            "name": "Dev",
+                            "subdomain": "ncfaws-05",
+                            "services": [
+                                "abap",
+                                "launchpad",
+                                "int",
+                                "spa",
+                                "wfm"
+                            ],
+                            "params": {
+                                "abap": {
+                                    "instance": "4d4c043c-2af0-42b9-9406-dfb3ba323a5b"
+                                },
+                                "hana": {
+                                    "instance": "XX"
+                                },
+                                "int": {
+                                    "instance": "cpi003"
+                                },
+                                "launchpad": {
+                                    "sites": [
+                                        "dcore-dev"
+                                    ]
+                                },
+                                "job": {
+                                    "instance": "60b3ed6d-ffe0-4c78-ad90-db467483ce72"
+                                }
+                            }
+                        },
+                        {
+                            "subaccountId": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                            "name": "Staging",
+                            "subdomain": "ncfaws-11",
+                            "services": [
+                                "abap",
+                                "launchpad",
+                                "int",
+                                "spa",
+                                "wfm"
+                            ],
+                            "params": {
+                                "abap": {
+                                    "instance": "3bfa7d2d-5397-41c7-be16-28067f03b5c1"
+                                },
+                                "hana": {
+                                    "instance": "xxx"
+                                },
+                                "int": {
+                                    "instance": "cpi003"
+                                },
+                                "launchpad": {
+                                    "sites": [
+                                        "dcore-stg"
+                                    ]
+                                },
+                                "job": {
+                                    "instance": "60b3ed6d-ffe0-4c78-ad90-db467483ce72"
+                                }
+                            }
+                        },
+                        {
+                            "subaccountId": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                            "name": "Pre-Prod",
+                            "subdomain": "ncfaws-11",
+                            "services": [
+                                "abap",
+                                "launchpad",
+                                "int",
+                                "spa",
+                                "wfm"
+                            ],
+                            "params": {
+                                "abap": {
+                                    "instance": "c29f7640-680f-4ada-8f0f-14630d9790ae"
+                                },
+                                "hana": {
+                                    "instance": "457b23d3-0fa5-410b-8ad2-7b708c6d1260"
+                                },
+                                "int": {
+                                    "instance": "cpi003"
+                                },
+                                "launchpad": {
+                                    "sites": [
+                                        "dcore-pre"
+                                    ]
+                                },
+                                "job": {
+                                    "instance": "6508ef60-a569-4467-acb9-113463f7e7fb"
+                                }
+                            }
+                        },
+                        {
+                            "subaccountId": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                            "name": "Prod",
+                            "subdomain": "pcfaws-02",
+                            "services": [
+                                "abap",
+                                "launchpad",
+                                "int",
+                                "spa",
+                                "wfm"
+                            ],
+                            "params": {
+                                "abap": {
+                                    "instance": "0f5f8d08-c6d7-4a0c-badb-a2d8babadeb4"
+                                },
+                                "hana": {
+                                    "instance": "babb2315-a009-45a3-9fe0-2a79a82587c0"
+                                },
+                                "int": {
+                                    "instance": "cpi003"
+                                },
+                                "launchpad": {
+                                    "sites": [
+                                        "dcore-prod"
+                                    ]
+                                },
+                                "job": {
+                                    "instance": "c3c05fea-561d-4d1c-b0f0-868c3a6d827a"
                                 }
                             }
                         }
@@ -49,6 +175,10 @@
         "abap": {
             "name": "ABAP Cloud",
             "url": "https://{instance}.abap-web.{region}.hana.ondemand.com/ui#Shell-home"
+        },
+        "auto-pi": {
+            "name": "Automation Pilot",
+            "url": "https://ncfgcp-01.autopilot.cfapps.us30.hana.ondemand.com/#/"
         },
         "bas": {
             "name": "BAS",
@@ -121,6 +251,14 @@
                 }
             ]
         },
+        "dqm": {
+            "name": "DQM",
+            "url": "https://{subdomain}.ui.dqmmicro.cfapps.{region}.hana.ondemand.com/webapp/index.html"
+        },
+        "adobe": {
+            "name": "Adobe Forms",
+            "url": "https://{subdomain}-ads.formsprocessing.cfapps.{region}.hana.ondemand.com/ui/customer/index.html"
+        },
         "hana": {
             "name": "HANA Cockpit",
             "url": "https://hana-cockpit.cfapps.{region}.hana.ondemand.com/hcs/sap/hana/cloud/index.html#/org/{subaccountId}/space/{spaceId}/databases"
@@ -157,18 +295,34 @@
         },
         "launchpad": {
             "name": "Launchpad",
-            "url": "https://{subdomain}.launchpad.cfapps.{region}.hana.ondemand.com/site/{site}"
+            "url": "https://{subdomain}.launchpad.cfapps.{region}.hana.ondemand.com/",
+            "children": [
+                {
+                    "repeatOn": "sites",
+                    "name": "{site}",
+                    "url": "https://{subdomain}.launchpad.cfapps.{region}.hana.ondemand.com/site/{site}"
+                },
+                {},
+                {
+                    "name": "Site Directory",
+                    "url": "https://{subdomain}.dt.launchpad.cfapps.{region}.hana.ondemand.com/sites#Site-Directory"
+                }
+            ]
         },
-        "launchpad-manager": {
-            "name": "Launchpad Manager",
-            "url": "https://{subdomain}.dt.launchpad.cfapps.{region}.hana.ondemand.com/sites#Site-Directory"
+        "mrm": {
+            "name": "Market Rate",
+            "url": "http://{subdomain}.mrm.cfapps.{region}.hana.ondemand.com/"
         },
         "spa": {
-            "name": "SPA",
+            "name": "Process Automation",
             "url": "https://{subdomain}.{region}.build.cloud.sap/lobby"
         },
-        "workflow": {
-            "name": "Workflow",
+        "tms": {
+            "name": "TMS",
+            "url": "https://{subdomain}.ts.cfapps.{region}.hana.ondemand.com/main/webapp/index.html"
+        },
+        "wfm": {
+            "name": "Workflow Mgmt",
             "url": "https://{subdomain}.cockpit.workflowmanagement.cfapps.{region}.hana.ondemand.com/cp.portal/site"
         }
     }
