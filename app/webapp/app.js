@@ -5,17 +5,43 @@ const POST = (cmd,data) => axios.post('/data'+cmd,data)
 
 // replace variables in url
 const interpolateUrl = (string, values) => string.replace(/{(.*?)}/g, (match, offset) => values[offset]);
-const renderService = function(template, valueMap) {
-    const renderedService = {name:template.name, url:template.url?interpolateUrl(template.url, valueMap):null, fullName: template.fullName? template.fullName : template.name};
-    if (template.children) {
+
+// render service url and name by template and valueMap
+const renderService = function(srvKey, srv, tpl, valueMap) {
+    if (!srv.url && tpl.url) // service url overwrites template url (likewise for below name and fullname)
+        srv.url = interpolateUrl(tpl.url, valueMap)
+    if (!srv.name && tpl.name)
+        srv.name = tpl.name;
+    if (!srv.fullName && tpl.fullName)
+        srv.fullName = tpl.fullName;
+    if (tpl.children) {
         // also render children
-        renderedService.children = [];
-        for (const templateChild of template.children) {
-            const renderedChild = templateChild.name?renderService(templateChild, valueMap):{divider:true}; // render menu item or divider
-            renderedService.children.push(renderedChild); // rendered children
+        srv.children = srv.children?srv.children:[];
+        for (const tplChild of tpl.children) {
+            if (tplChild.repeatOn == "instances") {
+                // apply this tplChild to all srv instances  
+                if (!srv.instances)
+                    continue;
+                for (const srvInst of srv.instances) {
+                    const instChild = {};
+                    // build instValueMap
+                    const instValueMap = Object.assign({},valueMap);
+                    for (const pk in srvInst) {
+                        if (pk != "instances") 
+                            instValueMap[srvKey+"-"+pk] = srvInst[pk]; // add service instance params, note service param with same name will be overwriten
+                    }
+                    // render service instance
+                    renderService(srvKey, instChild, tplChild, instValueMap);
+                    srv.children.push(instChild);
+                }
+            } else {
+                // render single item (not related to instances)
+                const srvChild = {};
+                renderService(srvKey, srvChild, tplChild, valueMap); // render as menu item 
+                srv.children.push(srvChild); 
+            }
         }
     }
-    return renderedService;
 };
 
 const app = Vue.createApp ({
@@ -37,7 +63,6 @@ const app = Vue.createApp ({
             for (const ga of app.btp.globalAccounts) {
                 for (const dir of ga.directories) {
                     for (const sa of dir.subaccounts) {
-                        sa.renderedServices = [];
                         const valueMap = {
                             globalAccountId: ga.id,
                             cockpitRegion: ga.cockpitRegion,
@@ -45,21 +70,25 @@ const app = Vue.createApp ({
                             subdomain: sa.subdomain,
                             region: sa.region? sa.region:dir.region,
                         };
-                        for (const pk in sa.params) {
-                            for (const vk in sa.params[pk]) {
-                                valueMap[pk+"-"+vk] = sa.params[pk][vk]; // add service params into value map
+                        for (const sk in sa.services) {
+                            const srv = sa.services[sk];
+                            const tpl = app.templates[sk];
+                            // loop through service parameters and add them to value map
+                            for (const pk in srv) {
+                                if (pk != "instances") 
+                                   valueMap[sk+"-"+pk] = srv[pk]; // add service params into value map
                             }
-                        }
-                        for (const srv of sa.services) {
-                            const t = app.templates[srv];
-                            const rs = renderService(t, valueMap);
-                            sa.renderedServices.push(rs);
+                            // render service
+                            renderService(sk, srv, tpl, valueMap);
                         }
                         // render cockpit
-                        sa.cockpit = renderService(app.templates["cockpit"], valueMap);
-                    }
-                }
-            } // end of ga
+                        if (app.templates["cockpit"]) {
+                            sa.cockpit = {};
+                            renderService("cockpit", sa.cockpit, app.templates["cockpit"], valueMap);
+                        }
+                    } // end of subaccounts (sa)
+                } // end of directories (dir)
+            } // end of global account (ga)
         }
     }
 }).mount('#app')

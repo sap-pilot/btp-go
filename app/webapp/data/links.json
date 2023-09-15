@@ -185,7 +185,7 @@
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/service-instances"
                 },
                 {
-                    "name": "-"
+                    "divider": {}
                 },
                 {
                     "name": "Spaces",
@@ -196,14 +196,14 @@
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/users"
                 },
                 {
-                    "name": "-"
+                    "divider": {}
                 },
                 {
                     "name": "HTML5 Apps",
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/html5applications"
                 },
                 {
-                    "name": "-"
+                    "divider": {}
                 },
                 {
                     "name": "Destinations",
@@ -214,7 +214,7 @@
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/connectivity"
                 },
                 {
-                    "name": "-"
+                    "divider": {}
                 },
                 {
                     "name": "Users",
@@ -233,7 +233,7 @@
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/trustConfiguration"
                 },
                 {
-                    "name": "-"
+                    "divider": {}
                 },
                 {
                     "name": "Entitlements",
@@ -293,12 +293,12 @@
                     "url": "https://{subdomain}.dt.launchpad.cfapps.{region}.hana.ondemand.com/sites#Site-Directory"
                 },
                 {
-                    "name": "-"
+                    "divider": {}
                 },
                 {
                     "repeatOn": "instances",
                     "name": "{launchpad-name}",
-                    "url": "https://{subdomain}.launchpad.cfapps.{region}.hana.ondemand.com/site/{launchpad-site}"
+                    "url": "https://{subdomain}.launchpad.cfapps.{region}.hana.ondemand.com/site/{launchpad-alias}"
                 }
             ]
         },
