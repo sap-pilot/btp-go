@@ -6,7 +6,7 @@ const POST = (cmd,data) => axios.post('/data'+cmd,data)
 // replace variables in url
 const interpolateUrl = (string, values) => string.replace(/{(.*?)}/g, (match, offset) => values[offset]);
 
-// render service url and name by template and valueMap
+/**  render service url and name by template and valueMap */
 const renderService = function(srvKey, srv, tpl, valueMap) {
     if (!srv.url && tpl.url) // service url overwrites template url (likewise for below name and fullname)
         srv.url = interpolateUrl(tpl.url, valueMap)
@@ -14,6 +14,8 @@ const renderService = function(srvKey, srv, tpl, valueMap) {
         srv.name = tpl.name;
     if (!srv.fullName && tpl.fullName)
         srv.fullName = tpl.fullName;
+    else
+        srv.fullName = srv.name;
     if (tpl.children) {
         // also render children
         srv.children = srv.children?srv.children:[];
@@ -48,6 +50,31 @@ const renderService = function(srvKey, srv, tpl, valueMap) {
             srv.children.shift();
     }
 };
+
+/** populate service table in specified directory (dir) like this: 
+ *     allServices[] -> {serviceName,serviceInSubaccounts[]}  */
+const populateServiceTable = function(dir) {
+    const allServices = []; // rows of all serivces in this dir like {serviceName:<serviceName>,serviceInSubaccount:[]}
+    const serviceMap = {}; // temporary map of serviceType-> above service row
+    for (const [saIdx, sa] of Object.entries(dir.subaccounts)) {
+        for (const [srvType, srv] of Object.entries(sa.services)) {
+            if (!serviceMap[srvType]) {
+                // initialize row as empty array
+                const srvRow = {serviceName:srv.fullName, serviceInSubaccounts:[]};
+                serviceMap[srvType] = srvRow; 
+                allServices.push(srvRow);
+                // first time seeing this service, prefill null ref for all subaccounts
+                for (var i = 0; i < dir.subaccounts.length; i++) {
+                    srvRow.serviceInSubaccounts.push(null); 
+                }
+            } 
+            serviceMap[srvType].serviceInSubaccounts[saIdx] = srv;
+        }
+    }
+    allServices.sort((a,b) => (a.serviceName > b.serviceName) ? 1 : ((b.serviceName > a.serviceName) ? -1 : 0))
+    dir.allServices = allServices;
+};
+
 
 const app = Vue.createApp ({
 
@@ -92,6 +119,8 @@ const app = Vue.createApp ({
                             renderService("cockpit", sa.cockpit, app.templates["cockpit"], valueMap);
                         }
                     } // end of subaccounts (sa)
+                    // populate services table within dir
+                    populateServiceTable(dir);
                 } // end of directories (dir)
             } // end of global account (ga)
         }
