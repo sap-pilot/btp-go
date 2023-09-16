@@ -20,10 +20,10 @@ const renderService = function(srvKey, srv, tpl, valueMap) {
         for (const tplChild of tpl.children) {
             if (tplChild.repeatOn == "instances") {
                 // apply this tplChild to all srv instances  
-                if (!srv.instances)
+                if (!srv.instances) 
                     continue;
                 for (const srvInst of srv.instances) {
-                    const instChild = {};
+                    const instChild = Object.assign({},srvInst);
                     // build instValueMap
                     const instValueMap = Object.assign({},valueMap);
                     for (const pk in srvInst) {
@@ -41,6 +41,11 @@ const renderService = function(srvKey, srv, tpl, valueMap) {
                 srv.children.push(srvChild); 
             }
         }
+        // remove first or last divider if they present
+        if (srv.children.length > 0 && srv.children[srv.children.length-1].name == '-') 
+            srv.children.pop();
+        if (srv.children.length > 0 && srv.children[0].name == '-') 
+            srv.children.shift();
     }
 };
 

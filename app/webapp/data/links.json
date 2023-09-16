@@ -185,7 +185,7 @@
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/service-instances"
                 },
                 {
-                    "divider": {}
+                    "name": "-"
                 },
                 {
                     "name": "Spaces",
@@ -196,14 +196,14 @@
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/users"
                 },
                 {
-                    "divider": {}
+                    "name": "-"
                 },
                 {
                     "name": "HTML5 Apps",
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/html5applications"
                 },
                 {
-                    "divider": {}
+                    "name": "-"
                 },
                 {
                     "name": "Destinations",
@@ -214,7 +214,7 @@
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/connectivity"
                 },
                 {
-                    "divider": {}
+                    "name": "-"
                 },
                 {
                     "name": "Users",
@@ -233,7 +233,7 @@
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/trustConfiguration"
                 },
                 {
-                    "divider": {}
+                    "name": "-"
                 },
                 {
                     "name": "Entitlements",
@@ -293,7 +293,7 @@
                     "url": "https://{subdomain}.dt.launchpad.cfapps.{region}.hana.ondemand.com/sites#Site-Directory"
                 },
                 {
-                    "divider": {}
+                    "name": "-"
                 },
                 {
                     "repeatOn": "instances",

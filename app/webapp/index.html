@@ -170,7 +170,7 @@
                           </a>
                           <ul class="dropdown-menu">
                             <li v-for="sc in srv.children">
-                              <template v-if="sc.divider">
+                              <template v-if="sc.name === '-'">
                                 <hr class="dropdown-divider">
                               </template>
                               <template v-else>
@@ -194,8 +194,8 @@
                       </button>
                       <ul class="dropdown-menu">
                         <li v-for="rs in sa.cockpit.children">
-                          <template v-if="rs.divider">
-                            <li><hr class="dropdown-divider"></li>
+                          <template v-if="rs.name === '-'">
+                            <hr class="dropdown-divider">
                           </template>
                           <template v-else>
                             <a target="_blank" class="dropdown-item" v-bind:href="rs.url">{{rs.name}}</a></li>
