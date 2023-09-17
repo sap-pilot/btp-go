@@ -126,7 +126,7 @@
                                 "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
                                 "name": "Prod",
                                 "subdomain": "pcfaws-02",
-                                "state": "prod",
+                                "usage": "prod",
                                 "services": {
                                     "abap": {
                                         "id": "0f5f8d08-c6d7-4a0c-badb-a2d8babadeb4"
@@ -144,6 +144,108 @@
                                         "alias": "dcore-prod"
                                     },
                                     "spa": {},
+                                    "wfm": {}
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Digital Core / CIRCA - US West",
+                        "short": "USW",
+                        "region": "us20",
+                        "subaccounts": [
+                            {
+                                "id": "6731c1b4-a33a-44b2-b3e7-e492bcf4e250",
+                                "name": "Sandbox",
+                                "subdomain": "ncfazu-06",
+                                "services": {
+                                    "hana": {
+                                        "id": "XX"
+                                    },
+                                    "jsh": {
+                                        "id": "b1b794bd-7d35-4e02-bb74-95931e2f01a4"
+                                    },
+                                    "launchpad": {
+                                        "alias": "dcore-sandbox"
+                                    },
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "name": "Dev",
+                                "subdomain": "ncfaws-05",
+                                "services": {                                  
+                                    "bas": {},
+                                    "hana": {
+                                        "id": "XX"
+                                    },                                   
+                                    "jsh": {
+                                        "id": "60b3ed6d-ffe0-4c78-ad90-db467483ce72"
+                                    },
+                                    "launchpad": {
+                                        "alias": "circa-dev",
+                                        "instances": [
+                                            {
+                                                "alias": "circa-dev",
+                                                "name": "CIRCA Development"
+                                            }
+                                        ]
+                                    },
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "name": "Staging",
+                                "subdomain": "ncfaws-11",
+                                "services": {                                    
+                                    "hana": {
+                                        "id": "XX"
+                                    },
+                                    "jsh": {
+                                        "id": "XX"
+                                    },
+                                    "launchpad": {
+                                        "alias": "circa-staging"
+                                    },
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "name": "PreProd",
+                                "subdomain": "ncfaws-11",
+                                "services": {                                   
+                                    "hana": {
+                                        "id": "457b23d3-0fa5-410b-8ad2-7b708c6d1260"
+                                    },
+                                    "jsh": {
+                                        "id": "6508ef60-a569-4467-acb9-113463f7e7fb"
+                                    },
+                                    "launchpad": {
+                                        "alias": "circa-preprod"
+                                    },
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "name": "Prod",
+                                "subdomain": "pcfaws-02",
+                                "usage": "prod",
+                                "state": "na",
+                                "note": "Q4`23",
+                                "services": {
+                                    "hana": {
+                                        "id": "babb2315-a009-45a3-9fe0-2a79a82587c0"
+                                    },                                  
+                                    "jsh": {
+                                        "id": "c3c05fea-561d-4d1c-b0f0-868c3a6d827a"
+                                    },
+                                    "launchpad": {
+                                        "alias": "circa-prod"
+                                    },
                                     "wfm": {}
                                 }
                             }
