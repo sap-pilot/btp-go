@@ -3,15 +3,15 @@ const $ = sel => document.querySelector(sel)
 const GET = (url) => axios.get('./data'+url)
 const POST = (cmd,data) => axios.post('/data'+cmd,data)
 
-// replace variables in url
-const interpolateUrl = (string, values) => string.replace(/{(.*?)}/g, (match, offset) => values[offset]);
+// replace variables in string
+const interpolateStr = (string, values) => string.replace(/{(.*?)}/g, (match, offset) => values[offset]);
 
-/**  render service url and name by template and valueMap */
+/**  render service/s4  url and name by template and valueMap */
 const renderService = function(srvKey, srv, tpl, valueMap) {
     if (!srv.url && tpl.url) // service url overwrites template url (likewise for below name and fullname)
-        srv.url = interpolateUrl(tpl.url, valueMap)
+        srv.url = interpolateStr(tpl.url, valueMap)
     if (!srv.name && tpl.name)
-        srv.name = tpl.name;
+        srv.name = interpolateStr(tpl.name, valueMap);
     if (!srv.fullName && tpl.fullName)
         srv.fullName = tpl.fullName;
     else
@@ -75,6 +75,35 @@ const populateServiceTable = function(dir) {
     dir.allServices = allServices;
 };
 
+const populateS4Table = function(s4, tpl) {
+    const s4ValueMap = Object.assign({},s4.params); // temporary map of serviceType-> above service row
+    for (const prj of s4.projects) {
+        for (const prd of prj.products) {
+            prd.tieredSystems = [];
+            // first time seeing this product, prefill null ref for all tiers
+            for (var i = 0; i < prj.tiers.length; i++) {
+                prd.tieredSystems.push(null); 
+            }
+            for (const sys of prd.systems) {
+                const tierIndex = prj.tiers.indexOf(sys.tier); 
+                if (tierIndex < 0) {
+                    console.log("# tier ['"+sys.tier+"'] not found");          
+                }
+                if (!prd.tieredSystems[tierIndex]) {
+                    prd.tieredSystems[tierIndex] = [];
+                }
+                const sysValueMap = Object.assign({},s4ValueMap);
+                for (const pk in sys) {
+                    if (pk != "instances") 
+                        sysValueMap[pk] = sys[pk]; // add sys params, note s4 param with same name will be overwriten
+                }
+                renderService("s4",sys,tpl,sysValueMap);
+                prd.tieredSystems[tierIndex].push(sys);
+            }
+        }
+    }
+};
+
 
 const app = Vue.createApp ({
 
@@ -91,6 +120,7 @@ const app = Vue.createApp ({
             const {data} = await GET(`/links.json`);
             app.btp = data.btp;
             app.templates = data.templates;
+            app.s4 = data.s4;
             // apply template to services
             for (const ga of app.btp.globalAccounts) {
                 for (const dir of ga.directories) {
@@ -123,7 +153,26 @@ const app = Vue.createApp ({
                     populateServiceTable(dir);
                 } // end of directories (dir)
             } // end of global account (ga)
+            populateS4Table(app.s4,app.templates["s4"]);
         }
+        
+    },
+    mounted: function () {
+        this.$nextTick(function () {
+            // table handling functions
+            const tabBtns = document.querySelectorAll("ul.nav-pills > li > a");
+            tabBtns.forEach(btn => {
+                btn.addEventListener('shown.bs.tab', function(e) {
+                    var id = e.target.getAttribute("data-bs-target").substr(6);
+                    window.location.hash = id;
+                });
+            });
+            const hash = window.location.hash ? window.location.hash.substr(1) : "";
+            const tabBtn = document.querySelector('a[data-bs-target="#pane-' + hash + '"]');
+            if (tabBtn) {
+                tabBtn.click();
+            }
+        })
     }
 }).mount('#app')
 

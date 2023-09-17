@@ -175,11 +175,11 @@
                                 "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
                                 "name": "Dev",
                                 "subdomain": "ncfaws-05",
-                                "services": {                                  
+                                "services": {
                                     "bas": {},
                                     "hana": {
                                         "id": "XX"
-                                    },                                   
+                                    },
                                     "jsh": {
                                         "id": "60b3ed6d-ffe0-4c78-ad90-db467483ce72"
                                     },
@@ -199,7 +199,7 @@
                                 "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
                                 "name": "Staging",
                                 "subdomain": "ncfaws-11",
-                                "services": {                                    
+                                "services": {
                                     "hana": {
                                         "id": "XX"
                                     },
@@ -216,7 +216,7 @@
                                 "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
                                 "name": "PreProd",
                                 "subdomain": "ncfaws-11",
-                                "services": {                                   
+                                "services": {
                                     "hana": {
                                         "id": "457b23d3-0fa5-410b-8ad2-7b708c6d1260"
                                     },
@@ -239,7 +239,7 @@
                                 "services": {
                                     "hana": {
                                         "id": "babb2315-a009-45a3-9fe0-2a79a82587c0"
-                                    },                                  
+                                    },
                                     "jsh": {
                                         "id": "c3c05fea-561d-4d1c-b0f0-868c3a6d827a"
                                     },
@@ -248,6 +248,248 @@
                                     },
                                     "wfm": {}
                                 }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "s4": {
+        "params": {
+            "domain": "sap.chevron.com",
+            "port": "44300"
+        },
+        "projects": [
+            {
+                "name": "Digital Core S/4HANA (R1)",
+                "tiers": [
+                    "Sandbox",
+                    "Dev",
+                    "Staging",
+                    "PreProd",
+                    "Prod"
+                ],
+                "products": [
+                    {
+                        "name": "S/4HANA",
+                        "systems": [
+                            {
+                                "sid": "BR2",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "BR2",
+                                "client": "200",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "BR3",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "DR1",
+                                "client": "100",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "SR1",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QR1",
+                                "client": "100",
+                                "tier": "PreProd"
+                            },
+                            {
+                                "sid": "PR1",
+                                "client": "100",
+                                "host": "wpf1",
+                                "port": "44380",
+                                "tier": "Prod"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "MDG",
+                        "systems": [
+                            {
+                                "sid": "BRG",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "BRG",
+                                "client": "200",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "DRG",
+                                "client": "100",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "DRG",
+                                "client": "200",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "SRG",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QRG",
+                                "client": "100",
+                                "tier": "PreProd"
+                            },
+                            {
+                                "sid": "PRG",
+                                "client": "100",
+                                "host": "mdgprg",
+                                "port": "433",
+                                "tier": "Prod"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "GRC",
+                        "systems": [
+                            {
+                                "sid": "DHC",
+                                "client": "100",
+                                "port": "99396",
+                                "tier": "Dev"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Solution Manaer",
+                        "systems": [
+                            {
+                                "sid": "DRA",
+                                "client": "100",
+                                "port": "50001",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "PRA",
+                                "client": "100",
+                                "port": "50001",
+                                "tier": "Prod"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Digital Core S/4HANA (R2)",
+                "tiers": [
+                    "Sandbox",
+                    "Dev",
+                    "Staging",
+                    "PreProd",
+                    "Prod"
+                ],
+                "products": [
+                    {
+                        "name": "S/4HANA (R2)",
+                        "systems": [
+                            {
+                                "sid": "BR4",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "DR2",
+                                "client": "100",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "SR2",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QR2",
+                                "client": "100",
+                                "tier": "PreProd"
+                            },
+                            {
+                                "sid": "PR1",
+                                "client": "100",
+                                "tier": "Prod"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Project Maui/Nobel",
+                "tiers": [
+                    "Sandbox",
+                    "Dev",
+                    "Staging",
+                    "PreProd",
+                    "Prod"
+                ],
+                "products": [
+                    {
+                        "name": "S/4HANA (Nobel)",
+                        "systems": [                    
+                            {
+                                "sid": "DN1",
+                                "client": "100",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "SN1",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QN1",
+                                "client": "100",
+                                "tier": "PreProd"
+                            },
+                            {
+                                "sid": "PN1",
+                                "client": "100",
+                                "tier": "Prod"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Central Finance (CFIN)",
+                "tiers": [
+                    "Sandbox",
+                    "Dev",
+                    "Staging",
+                    "Prod"
+                ],
+                "products": [
+                    {
+                        "name": "S/4HANA (Nobel)",
+                        "systems": [                    
+                            {
+                                "sid": "DU1",
+                                "client": "100",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "QU1",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "PS1",
+                                "client": "100",
+                                "tier": "Prod"
                             }
                         ]
                     }
@@ -358,7 +600,7 @@
         },
         "int": {
             "name": "Integration",
-            "url": "https://{subdomain}.it-{int-instance}.cfapps.{region}.hana.ondemand.com/itspaces/shell/discover",
+            "url": "https://{subdomain}.it-{int-tenant}.cfapps.{region}.hana.ondemand.com/itspaces/shell/discover",
             "children": [
                 {
                     "name": "API Portal",
@@ -407,6 +649,10 @@
         "mrm": {
             "name": "Market Rate",
             "url": "http://{subdomain}.mrm.cfapps.{region}.hana.ondemand.com/"
+        },
+        "s4": {
+            "name": "{sid}:{client}",
+            "url": "https://{sid}:{domain}:{port}/sap/bc/ui2/flp?sap-client={client}"
         },
         "spa": {
             "name": "SBPA",
