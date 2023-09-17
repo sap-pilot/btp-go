@@ -62,7 +62,7 @@
                                             },
                                             {
                                                 "alias": "dcore-r2-dev",
-                                                "name": "DCore Development"
+                                                "name": "DCore R2 Development"
                                             },
                                             {
                                                 "alias": "POBO",
@@ -317,6 +317,7 @@
         },
         "wfm": {
             "name": "Workflow Mgmt",
+            "fullName": "Workflow Management",
             "url": "https://{subdomain}.cockpit.workflowmanagement.cfapps.{region}.hana.ondemand.com/cp.portal/site"
         }
     }
