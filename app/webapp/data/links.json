@@ -29,7 +29,8 @@
                                         "id": "b1b794bd-7d35-4e02-bb74-95931e2f01a4"
                                     },
                                     "launchpad": {
-                                        "alias": "dcore-sandbox"
+                                        "alias": "dcore-sandbox",
+                                        "url": "https://launchpad.sbx.cvx.one"
                                     },
                                     "spa": {},
                                     "wfm": {}
@@ -166,7 +167,8 @@
                                         "id": "b1b794bd-7d35-4e02-bb74-95931e2f01a4"
                                     },
                                     "launchpad": {
-                                        "alias": "dcore-sandbox"
+                                        "alias": "dcore-sandbox",
+                                        "url": "https://launchpad.sbx.cvx.one"
                                     },
                                     "wfm": {}
                                 }
