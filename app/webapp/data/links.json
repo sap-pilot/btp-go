@@ -2,147 +2,136 @@
     "btp": {
         "globalAccounts": [
             {
-                "id": "CA160438TID000000000740787196",
-                "name": "Chevron",
+                "id": "<YOUR_GLOBAL_ACCOUNT_ID>",
+                "name": "<YOUR_CUSTOMER_NAME>",
                 "cockpitRegion": "amer",
                 "directories": [
                     {
-                        "name": "Digital Core - US East",
+                        "name": "<YOUR_SUBACCOUNT_DIRECTORY_NAME}",
                         "short": "USE",
                         "region": "us10",
                         "subaccounts": [
                             {
-                                "id": "6731c1b4-a33a-44b2-b3e7-e492bcf4e250",
+                                "id": "<SUBACCOUNT_ID>",
                                 "name": "Sandbox",
-                                "subdomain": "ncfaws-17",
+                                "subdomain": "<SUBDOMAIN>",
                                 "services": {
                                     "abap": {
-                                        "id": "41081360-6b0c-4b04-9bbc-5e72b14e7876"
+                                        "id": "<ABAP_INSTANCE_ID>"
                                     },
                                     "hana": {
-                                        "id": "XX"
+                                        "id": "<HANA_INSTANCE_ID>"
                                     },
                                     "int": {
                                         "tenant": "cpi003"
                                     },
                                     "jsh": {
-                                        "id": "b1b794bd-7d35-4e02-bb74-95931e2f01a4"
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
                                     "launchpad": {
-                                        "alias": "dcore-sandbox",
-                                        "url": "https://launchpad.sbx.cvx.one"
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
                                     },
                                     "spa": {},
                                     "wfm": {}
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "<SUBACCOUNT_ID>",
                                 "name": "Dev",
-                                "subdomain": "ncfaws-05",
+                                "subdomain": "<SUBDOMAIN>",
                                 "services": {
                                     "abap": {
-                                        "id": "4d4c043c-2af0-42b9-9406-dfb3ba323a5b"
+                                        "id": "<ABAP_INSTANCE_ID>"
                                     },
                                     "bas": {},
                                     "hana": {
-                                        "id": "XX"
+                                        "id": "<ABAP_INSTANCE_ID>"
                                     },
                                     "int": {
                                         "tenant": "cpi003"
                                     },
                                     "jsh": {
-                                        "id": "60b3ed6d-ffe0-4c78-ad90-db467483ce72"
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
                                     "launchpad": {
-                                        "alias": "dcore-dev",
-                                        "instances": [
-                                            {
-                                                "alias": "dcore-dev",
-                                                "name": "DCore Development"
-                                            },
-                                            {
-                                                "alias": "dcore-r2-dev",
-                                                "name": "DCore R2 Development"
-                                            },
-                                            {
-                                                "alias": "POBO",
-                                                "name": "CFIN POBO Development"
-                                            }
-                                        ]
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
                                     },
                                     "spa": {},
                                     "wfm": {}
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "<SUBACCOUNT_ID>",
                                 "name": "Staging",
-                                "subdomain": "ncfaws-11",
+                                "subdomain": "<SUBDOMAIN>",
                                 "services": {
                                     "abap": {
-                                        "id": "3bfa7d2d-5397-41c7-be16-28067f03b5c1"
+                                        "id": "<ABAP_INSTANCE_ID>"
                                     },
                                     "hana": {
-                                        "id": "XX"
+                                        "id": "<HANA_INSTANCE_ID>"
                                     },
                                     "int": {
                                         "tenant": "cpi003"
                                     },
                                     "jsh": {
-                                        "id": "XX"
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
                                     "launchpad": {
-                                        "alias": "dcore-stg"
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
                                     },
                                     "spa": {},
                                     "wfm": {}
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "<SUBACCOUNT_ID>",
                                 "name": "PreProd",
-                                "subdomain": "ncfaws-11",
+                                "subdomain": "<SUBDOMAIN>",
                                 "services": {
                                     "abap": {
-                                        "id": "c29f7640-680f-4ada-8f0f-14630d9790ae"
+                                        "id": "<ABAP_INSTANCE_ID>"
                                     },
                                     "hana": {
-                                        "id": "457b23d3-0fa5-410b-8ad2-7b708c6d1260"
+                                        "id": "<ABAP_INSTANCE_ID>"
                                     },
                                     "int": {
                                         "tenant": "cpi003"
                                     },
                                     "jsh": {
-                                        "id": "6508ef60-a569-4467-acb9-113463f7e7fb"
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
                                     "launchpad": {
-                                        "alias": "dcore-preprod"
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
                                     },
                                     "spa": {},
                                     "wfm": {}
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "<SUBACCOUNT_ID>",
                                 "name": "Prod",
-                                "subdomain": "pcfaws-02",
-                                "usage": "prod",
+                                "subdomain": "<SUBDOMAIN>",
                                 "services": {
                                     "abap": {
-                                        "id": "0f5f8d08-c6d7-4a0c-badb-a2d8babadeb4"
+                                        "id": "<ABAP_INSTANCE_ID>"
                                     },
                                     "hana": {
-                                        "id": "babb2315-a009-45a3-9fe0-2a79a82587c0"
+                                        "id": "<HANA_INSTANCE_ID>"
                                     },
                                     "int": {
                                         "tenant": "cpi003"
                                     },
                                     "jsh": {
-                                        "id": "c3c05fea-561d-4d1c-b0f0-868c3a6d827a"
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
                                     "launchpad": {
-                                        "alias": "dcore-prod"
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
                                     },
                                     "spa": {},
                                     "wfm": {}
@@ -151,102 +140,100 @@
                         ]
                     },
                     {
-                        "name": "Digital Core / CIRCA - US West",
+                        "name": "<YOUR_SUB_ACCOUNT_DIRECTORY_NAME>ß",
                         "short": "USW",
                         "region": "us20",
                         "subaccounts": [
                             {
-                                "id": "6731c1b4-a33a-44b2-b3e7-e492bcf4e250",
+                                "id": "<SUBACCOUNT_ID>",
                                 "name": "Sandbox",
-                                "subdomain": "ncfazu-06",
+                                "subdomain": "<SUBDOMAIN>",
                                 "services": {
                                     "hana": {
-                                        "id": "XX"
+                                        "id": "<HANA_INSTANCE_ID>"
                                     },
                                     "jsh": {
-                                        "id": "b1b794bd-7d35-4e02-bb74-95931e2f01a4"
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
                                     "launchpad": {
-                                        "alias": "dcore-sandbox",
-                                        "url": "https://launchpad.sbx.cvx.one"
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
                                     },
                                     "wfm": {}
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "<SUBACCOUNT_ID>",
                                 "name": "Dev",
-                                "subdomain": "ncfaws-05",
+                                "subdomain": "<SUBDOMAIN>",
                                 "services": {
                                     "bas": {},
                                     "hana": {
-                                        "id": "XX"
+                                        "id": "<HANA_INSTANCE_ID>"
                                     },
                                     "jsh": {
-                                        "id": "60b3ed6d-ffe0-4c78-ad90-db467483ce72"
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
                                     "launchpad": {
-                                        "alias": "circa-dev",
-                                        "instances": [
-                                            {
-                                                "alias": "circa-dev",
-                                                "name": "CIRCA Development"
-                                            }
-                                        ]
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
                                     },
                                     "wfm": {}
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "<SUBACCOUNT_ID>",
                                 "name": "Staging",
-                                "subdomain": "ncfaws-11",
+                                "subdomain": "<SUBDOMAIN>",
                                 "services": {
                                     "hana": {
-                                        "id": "XX"
+                                        "id": "<HANA_INSTANCE_ID>"
                                     },
                                     "jsh": {
-                                        "id": "XX"
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
                                     "launchpad": {
-                                        "alias": "circa-staging"
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
                                     },
                                     "wfm": {}
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "<SUBACCOUNT_ID>",
                                 "name": "PreProd",
-                                "subdomain": "ncfaws-11",
+                                "subdomain": "<SUBDOMAIN>",
                                 "services": {
                                     "hana": {
-                                        "id": "457b23d3-0fa5-410b-8ad2-7b708c6d1260"
+                                        "id": "<HANA_INSTANCE_ID>"
                                     },
                                     "jsh": {
-                                        "id": "6508ef60-a569-4467-acb9-113463f7e7fb"
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
                                     "launchpad": {
-                                        "alias": "circa-preprod"
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
                                     },
                                     "wfm": {}
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "<SUBACCOUNT_ID>",
                                 "name": "Prod",
-                                "subdomain": "pcfaws-02",
+                                "subdomain": "<SUBDOMAIN>",
                                 "usage": "prod",
                                 "state": "na",
                                 "note": "Q4`23",
                                 "services": {
                                     "hana": {
-                                        "id": "babb2315-a009-45a3-9fe0-2a79a82587c0"
+                                        "id": "<HANA_INSTANCE_ID>"
                                     },
                                     "jsh": {
-                                        "id": "c3c05fea-561d-4d1c-b0f0-868c3a6d827a"
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
                                     "launchpad": {
-                                        "alias": "circa-prod"
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
                                     },
                                     "wfm": {}
                                 }
@@ -259,12 +246,12 @@
     },
     "s4": {
         "params": {
-            "domain": "sap.chevron.com",
+            "domain": "<YOUR_S4_HOST_DOMAIN>",
             "port": "44300"
         },
         "projects": [
             {
-                "name": "Digital Core S/4HANA (R1)",
+                "name": "<YOUR_S4_PROJECT_NAME>",
                 "tiers": [
                     "Sandbox",
                     "Dev",
@@ -277,39 +264,39 @@
                         "name": "S/4HANA",
                         "systems": [
                             {
-                                "sid": "BR2",
+                                "sid": "SB1",
                                 "client": "100",
                                 "tier": "Sandbox"
                             },
                             {
-                                "sid": "BR2",
+                                "sid": "SB2",
                                 "client": "200",
                                 "tier": "Sandbox"
                             },
                             {
-                                "sid": "BR3",
+                                "sid": "SB3",
                                 "client": "100",
                                 "tier": "Sandbox"
                             },
                             {
-                                "sid": "DR1",
+                                "sid": "DE1",
                                 "client": "100",
                                 "tier": "Dev"
                             },
                             {
-                                "sid": "SR1",
+                                "sid": "ST1",
                                 "client": "100",
                                 "tier": "Staging"
                             },
                             {
-                                "sid": "QR1",
+                                "sid": "QA1",
                                 "client": "100",
                                 "tier": "PreProd"
                             },
                             {
-                                "sid": "PR1",
+                                "sid": "PD1",
                                 "client": "100",
-                                "host": "wpf1",
+                                "host": "s4production",
                                 "port": "44380",
                                 "tier": "Prod"
                             }
@@ -319,178 +306,40 @@
                         "name": "MDG",
                         "systems": [
                             {
-                                "sid": "BRG",
+                                "sid": "SBG",
                                 "client": "100",
                                 "tier": "Sandbox"
                             },
                             {
-                                "sid": "BRG",
+                                "sid": "SBG",
                                 "client": "200",
                                 "tier": "Sandbox"
                             },
                             {
-                                "sid": "DRG",
+                                "sid": "DDG",
                                 "client": "100",
                                 "tier": "Dev"
                             },
                             {
-                                "sid": "DRG",
+                                "sid": "DDG",
                                 "client": "200",
                                 "tier": "Dev"
                             },
                             {
-                                "sid": "SRG",
+                                "sid": "SDG",
                                 "client": "100",
                                 "tier": "Staging"
                             },
                             {
-                                "sid": "QRG",
+                                "sid": "QDG",
                                 "client": "100",
                                 "tier": "PreProd"
                             },
                             {
-                                "sid": "PRG",
+                                "sid": "PDG",
                                 "client": "100",
-                                "host": "mdgprg",
-                                "port": "433",
-                                "tier": "Prod"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "GRC",
-                        "systems": [
-                            {
-                                "sid": "DHC",
-                                "client": "100",
-                                "port": "99396",
-                                "tier": "Dev"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Solution Manaer",
-                        "systems": [
-                            {
-                                "sid": "DRA",
-                                "client": "100",
-                                "port": "50001",
-                                "tier": "Dev"
-                            },
-                            {
-                                "sid": "PRA",
-                                "client": "100",
-                                "port": "50001",
-                                "tier": "Prod"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "name": "Digital Core S/4HANA (R2)",
-                "tiers": [
-                    "Sandbox",
-                    "Dev",
-                    "Staging",
-                    "PreProd",
-                    "Prod"
-                ],
-                "products": [
-                    {
-                        "name": "S/4HANA (R2)",
-                        "systems": [
-                            {
-                                "sid": "BR4",
-                                "client": "100",
-                                "tier": "Sandbox"
-                            },
-                            {
-                                "sid": "DR2",
-                                "client": "100",
-                                "tier": "Dev"
-                            },
-                            {
-                                "sid": "SR2",
-                                "client": "100",
-                                "tier": "Staging"
-                            },
-                            {
-                                "sid": "QR2",
-                                "client": "100",
-                                "tier": "PreProd"
-                            },
-                            {
-                                "sid": "PR1",
-                                "client": "100",
-                                "tier": "Prod"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "name": "Project Maui/Nobel",
-                "tiers": [
-                    "Sandbox",
-                    "Dev",
-                    "Staging",
-                    "PreProd",
-                    "Prod"
-                ],
-                "products": [
-                    {
-                        "name": "S/4HANA (Nobel)",
-                        "systems": [                    
-                            {
-                                "sid": "DN1",
-                                "client": "100",
-                                "tier": "Dev"
-                            },
-                            {
-                                "sid": "SN1",
-                                "client": "100",
-                                "tier": "Staging"
-                            },
-                            {
-                                "sid": "QN1",
-                                "client": "100",
-                                "tier": "PreProd"
-                            },
-                            {
-                                "sid": "PN1",
-                                "client": "100",
-                                "tier": "Prod"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "name": "Central Finance (CFIN)",
-                "tiers": [
-                    "Sandbox",
-                    "Dev",
-                    "Staging",
-                    "Prod"
-                ],
-                "products": [
-                    {
-                        "name": "S/4HANA (Nobel)",
-                        "systems": [                    
-                            {
-                                "sid": "DU1",
-                                "client": "100",
-                                "tier": "Dev"
-                            },
-                            {
-                                "sid": "QU1",
-                                "client": "100",
-                                "tier": "Staging"
-                            },
-                            {
-                                "sid": "PS1",
-                                "client": "100",
+                                "host": "prodmdg",
+                                "port": "43300",
                                 "tier": "Prod"
                             }
                         ]
@@ -505,33 +354,16 @@
             "links": [
                 {
                     "name": "BTP Overview",
-                    "url": "https://chevron.sharepoint.com/:p:/r/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7B1D7D28F9-196D-4F12-9C3D-702FB0EF46D3%7D&file=SAP%20BTP%20Overview%20Roadshow%20(2023%20version).pptx&action=edit&mobileredirect=true"
+                    "url": "<YOUR_LINK>"
                 },
                 {
                     "name": "BTP Subaccount Landscape",
-                    "url": "https://chevron.sharepoint.com/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7BBD4B9D66-BE0D-4624-9FAA-C68286554B82%7D&file=BTP%20Sub-account%20and%20Space%20Landscape.vsdx&action=default&mobileredirect=true&cid=2706ca88-22e8-4521-8af4-aef0499131c1"
-                },
-                {
-                    "name": "BTP Subaccount Strategy",
-                    "url": "https://chevron.sharepoint.com/:p:/r/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7B73A15371-27D9-41D3-A8D3-A6887CAE0961%7D&file=BTP_SubAccount_Models.pptx&action=edit&mobileredirect=true"
+                    "url": "<YOUR_LINK>"
                 },
                 {
                     "name": "BTP Security",
-                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/41109/BTP-Security"
-                },
-                {
-                    "name": "BTP HADR",
-                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/65227/BTP-High-Availability-and-Disaster-Recovery-(HADR)"
-                },
-                {
-                    "name": "BTP Team Share Point",
-                    "url": "https://chevron.sharepoint.com/teams/SAPTechnicalPlatform"
-                },
-                {
-                    "name": "BTP Sprint Planning",
-                    "url": "https://chevron.sharepoint.com/:x:/r/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7BF74317F5-85FD-44BC-8485-5683A3815014%7D&file=SCP%20PI%20Planning.xlsx&action=default&mobileredirect=true"
+                    "url": "<YOUR_LINK>"
                 }
-
             ]
         },
         {
@@ -539,35 +371,11 @@
             "links": [
                 {
                     "name": "Extension Guidance",
-                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Governance/Extensions.html"
-                },
-                {
-                    "name": "AppDev Patterns",
-                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Application-Development-Patterns.html"
-                },
-                {
-                    "name": "Data Patterns",
-                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Data-Patterns.html"
-                },
-                {
-                    "name": "Integration Patterns",
-                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Integration-Patterns.html"
-                },
-                {
-                    "name": "Analytics Patterns",
-                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Analytics-Patterns.html"
-                },
-                {
-                    "name": "ADO Gitflow",
-                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/41154/ADO-Gitflow"
-                },
-                {
-                    "name": "ADO Pipeline User Guide",
-                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/ITC-ITSD-DigitalCore.wiki/52668/ADO-MTA-Pipeline-to-SAP-BTP-and-TMS-User-Guide"
+                    "url": "<YOUR_LINK>"
                 },
                 {
                     "name": "Developer Playbook",
-                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/41134/Digital-Core-Developer-Playbook-2.0"
+                    "url": "<YOUR_LINK>"
                 }
             ]
         },
