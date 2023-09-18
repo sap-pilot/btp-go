@@ -111,6 +111,7 @@ const app = Vue.createApp ({
       return {
         btp: [],
         s4: [],
+        footerLinks: [],
         templates: []
       }
     },
@@ -119,8 +120,9 @@ const app = Vue.createApp ({
         async fetch () {
             const {data} = await GET(`/links.json`);
             app.btp = data.btp;
-            app.templates = data.templates;
             app.s4 = data.s4;
+            app.footerLinks = data.footerLinks;
+            app.templates = data.templates;
             // apply template to services
             for (const ga of app.btp.globalAccounts) {
                 for (const dir of ga.directories) {

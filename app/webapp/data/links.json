@@ -499,6 +499,104 @@
             }
         ]
     },
+    "footerLinks": [
+        {
+            "groupName": "BTP Info",
+            "links": [
+                {
+                    "name": "BTP Overview Roadshow",
+                    "url": "https://chevron.sharepoint.com/:p:/r/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7B1D7D28F9-196D-4F12-9C3D-702FB0EF46D3%7D&file=SAP%20BTP%20Overview%20Roadshow%20(2023%20version).pptx&action=edit&mobileredirect=true"
+                },
+                {
+                    "name": "BTP Subaccount Landscape",
+                    "url": "https://chevron.sharepoint.com/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7BBD4B9D66-BE0D-4624-9FAA-C68286554B82%7D&file=BTP%20Sub-account%20and%20Space%20Landscape.vsdx&action=default&mobileredirect=true&cid=2706ca88-22e8-4521-8af4-aef0499131c1"
+                },
+                {
+                    "name": "BTP Subaccount Strategy",
+                    "url": "https://chevron.sharepoint.com/:p:/r/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7B73A15371-27D9-41D3-A8D3-A6887CAE0961%7D&file=BTP_SubAccount_Models.pptx&action=edit&mobileredirect=true"
+                },
+                {
+                    "name": "BTP Security",
+                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/41109/BTP-Security"
+                },
+                {
+                    "name": "BTP HADR",
+                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/65227/BTP-High-Availability-and-Disaster-Recovery-(HADR)"
+                },
+                {
+                    "name": "BTP Team Share (Share Point)",
+                    "url": "https://chevron.sharepoint.com/teams/SAPTechnicalPlatform"
+                },
+                {
+                    "name": "BTP Sprint Planning",
+                    "url": "https://chevron.sharepoint.com/:x:/r/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7BF74317F5-85FD-44BC-8485-5683A3815014%7D&file=SCP%20PI%20Planning.xlsx&action=default&mobileredirect=true"
+                }
+
+            ]
+        },
+        {
+            "groupName": "Developer Guidance",
+            "links": [
+                {
+                    "name": "Extension Guidance",
+                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Governance/Extensions.html"
+                },
+                {
+                    "name": "AppDev Patterns",
+                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Application-Development-Patterns.html"
+                },
+                {
+                    "name": "Data Patterns",
+                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Data-Patterns.html"
+                },
+                {
+                    "name": "Integration Patterns",
+                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Integration-Patterns.html"
+                },
+                {
+                    "name": "Analytics Patterns",
+                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Analytics-Patterns.html"
+                },
+                {
+                    "name": "ADO Gitflow",
+                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/41154/ADO-Gitflow"
+                },
+                {
+                    "name": "ADO MTA Pipeline User Guide",
+                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/ITC-ITSD-DigitalCore.wiki/52668/ADO-MTA-Pipeline-to-SAP-BTP-and-TMS-User-Guide"
+                },
+                {
+                    "name": "Developer Playbook",
+                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/41134/Digital-Core-Developer-Playbook-2.0"
+                }
+            ]
+        },
+        {
+            "groupName": "SAP Reference",
+            "links": [
+                {
+                    "name": "SAP Tutorial",
+                    "url": "https://developers.sap.com/tutorial-navigator.html"
+                },
+                {
+                    "name": "SAP Disovery Center",
+                    "url": "https://discovery-center.cloud.sap/viewServices"
+                },
+                {
+                    "name": "BTP What's New",
+                    "url": "https://help.sap.com/whats-new/cf0cb2cb149647329b5d02aa96303f56?locale=en-US"
+                },
+                {
+                    "name": "SAP Cloud Availability (CAC)",
+                    "url": "https://me.sap.com/systemsprovisioning/availability"
+                },
+                {
+                    "name": "Report Incident",
+                    "url": "https://me.sap.com/createIssue/0/overview"
+                }
+            ]
+        }
+    ],
     "templates": {
         "abap": {
             "name": "ABAP Cloud",
