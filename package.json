@@ -1,0 +1,38 @@
+{
+  "name": "btp-go",
+  "version": "0.0.1",
+  "description": "BTP home page of links to services group by directory (project) and subaccount",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bd": "mbt build -p=cf --mtar=btp-go.mtar && cf deploy mta_archives/btp-go.mtar -f",
+    "undeploy": "cf undeploy btp-go --delete-services --delete-service-keys"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sap-pilot/btp-go.git"
+  },
+  "keywords": [
+    "SAP",
+    "BTP",
+    "Homepage"
+  ],
+  "author": "Da Chen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sap-pilot/btp-go/issues"
+  },
+  "homepage": "https://github.com/sap-pilot/btp-go#readme",
+  "devDependencies": {
+    "@sap/cds-dk": "^7"
+  },
+  "dependencies": {
+    "@sap/xssec": "^3",
+    "passport": "^0"
+  },
+  "cds": {
+    "requires": {
+      "auth": "xsuaa"
+    }
+  }
+}

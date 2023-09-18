@@ -1,0 +1,19 @@
+{
+    "welcomeFile": "index.html",
+    "authenticationMethod": "route",
+    "sessionTimeout": 1440,
+    "routes": [
+        {
+            "source": "^/user-api(.*)$",
+            "target": "$1",
+            "service": "sap-approuter-userapi",
+            "authenticationType": "xsuaa"
+        },
+        {
+            "source": "^/(.*)$",
+            "target": "$1",
+            "localDir": "webapp",
+            "authenticationType": "xsuaa"
+        }
+    ]
+}

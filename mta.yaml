@@ -1,0 +1,39 @@
+_schema-version: '3.1'
+ID: btp-go
+version: 0.0.1
+description: "BTP home page of links to services group by directory (project)
+  and subaccount"
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx cds build --production
+modules:
+  - name: btp-go
+    type: approuter.nodejs
+    path: app/ # from cds.env.folders. Consider also cds.env.build.target -> gen/app
+    build-parameters:
+      builder: npm-ci
+      ignore:
+        - default-*.json
+        - .env
+        - "*node_modules*"
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: btp-go-xsuaa
+
+resources:
+  - name: btp-go-xsuaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: btp-go-${space}
+        tenant-mode: dedicated
