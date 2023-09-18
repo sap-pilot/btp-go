@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="./assets/js/color-modes.js"></script>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Links to BTP and S/4HANA">
@@ -32,6 +32,14 @@
       margin-bottom: 2px !important;
     }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3S315ELXYK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3S315ELXYK');
+    </script>
   </head>
   <body id="app">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -71,8 +79,7 @@
       </ul>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="https://github.com/sap-pilot/btp-go#readme">Readme</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="https://github.com/sap-pilot/btp-go/issues">Issues</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Welcome, {{currentUser.displayName}}</a>
         <div class="dropdown bd-mode-toggle">
           <button class="btn py-2 dropdown-toggle d-flex align-items-center"
                   id="bd-theme"
@@ -288,7 +295,7 @@
     <div class="row">
       <div class="col-12 col-md">
         <img class="mb-2" src="./assets/brand/sap-logo-svg.svg" alt="" width="65" height="34">
-        <small class="d-block mb-3 text-body-secondary">&copy; SAP America Inc.</small>
+        <small class="d-block mb-3 text-body-secondary"><a class="link-secondary" href="https://github.com/sap-pilot/btp-go#readme">BTP GO (build 20230918)</a><br />&copy; SAP America Inc.</small>
       </div>
       <div class="col col-md" v-for="group in footerLinks">
         <h5>{{group.groupName}}</h5>
@@ -300,6 +307,7 @@
   </footer>
 </div>
     </body>
+    <script src="./assets/js/color-modes.js"></script>
     <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./app.js"></script>
 </html>

@@ -1,7 +1,7 @@
 /* global Vue axios */ //> from vue.html
 const $ = sel => document.querySelector(sel)
-const GET = (url) => axios.get('./data'+url)
-const POST = (cmd,data) => axios.post('/data'+cmd,data)
+const GET = (url) => axios.get(url)
+const POST = (cmd,data) => axios.post(cmd,data)
 
 // replace variables in string
 const interpolateStr = (string, values) => string.replace(/{(.*?)}/g, (match, offset) => values[offset]);
@@ -112,13 +112,14 @@ const app = Vue.createApp ({
         btp: [],
         s4: [],
         footerLinks: [],
-        templates: []
+        templates: [],
+        currentUser: {}
       }
     },
 
     methods: {
         async fetch () {
-            const {data} = await GET(`/links.json`);
+            const {data} = await GET(`/data/links.json`);
             app.btp = data.btp;
             app.s4 = data.s4;
             app.footerLinks = data.footerLinks;
@@ -156,8 +157,11 @@ const app = Vue.createApp ({
                 } // end of directories (dir)
             } // end of global account (ga)
             populateS4Table(app.s4,app.templates["s4"]);
+        },
+        async getUserInfo() {
+            const {data} = await GET(`/user-api/currentUser`);
+            app.currentUser = data;
         }
-        
     },
     mounted: function () {
         this.$nextTick(function () {
@@ -179,3 +183,4 @@ const app = Vue.createApp ({
 }).mount('#app')
 
 app.fetch();
+app.getUserInfo();
