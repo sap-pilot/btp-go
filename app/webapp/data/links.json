@@ -1,0 +1,580 @@
+{
+    "btp": {
+        "globalAccounts": [
+            {
+                "id": "<YOUR_GLOBAL_ACCOUNT_ID>",
+                "name": "<YOUR_CUSTOMER_NAME>",
+                "cockpitRegion": "amer",
+                "directories": [
+                    {
+                        "name": "<YOUR_SUBACCOUNT_DIRECTORY_NAME}",
+                        "short": "USE",
+                        "region": "us10",
+                        "subaccounts": [
+                            {
+                                "id": "<SUBACCOUNT_ID>",
+                                "name": "Sandbox",
+                                "subdomain": "<SUBDOMAIN>",
+                                "services": {
+                                    "abap": {
+                                        "id": "<ABAP_INSTANCE_ID>"
+                                    },
+                                    "hana": {
+                                        "id": "<HANA_INSTANCE_ID>"
+                                    },
+                                    "int": {
+                                        "tenant": "cpi003"
+                                    },
+                                    "jsh": {
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
+                                    },
+                                    "launchpad": {
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
+                                    },
+                                    "spa": {},
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "<SUBACCOUNT_ID>",
+                                "name": "Dev",
+                                "subdomain": "<SUBDOMAIN>",
+                                "services": {
+                                    "abap": {
+                                        "id": "<ABAP_INSTANCE_ID>"
+                                    },
+                                    "bas": {},
+                                    "hana": {
+                                        "id": "<ABAP_INSTANCE_ID>"
+                                    },
+                                    "int": {
+                                        "tenant": "cpi003"
+                                    },
+                                    "jsh": {
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
+                                    },
+                                    "launchpad": {
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
+                                    },
+                                    "spa": {},
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "<SUBACCOUNT_ID>",
+                                "name": "Staging",
+                                "subdomain": "<SUBDOMAIN>",
+                                "services": {
+                                    "abap": {
+                                        "id": "<ABAP_INSTANCE_ID>"
+                                    },
+                                    "hana": {
+                                        "id": "<HANA_INSTANCE_ID>"
+                                    },
+                                    "int": {
+                                        "tenant": "cpi003"
+                                    },
+                                    "jsh": {
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
+                                    },
+                                    "launchpad": {
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
+                                    },
+                                    "spa": {},
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "<SUBACCOUNT_ID>",
+                                "name": "PreProd",
+                                "subdomain": "<SUBDOMAIN>",
+                                "services": {
+                                    "abap": {
+                                        "id": "<ABAP_INSTANCE_ID>"
+                                    },
+                                    "hana": {
+                                        "id": "<ABAP_INSTANCE_ID>"
+                                    },
+                                    "int": {
+                                        "tenant": "cpi003"
+                                    },
+                                    "jsh": {
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
+                                    },
+                                    "launchpad": {
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
+                                    },
+                                    "spa": {},
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "<SUBACCOUNT_ID>",
+                                "name": "Prod",
+                                "subdomain": "<SUBDOMAIN>",
+                                "services": {
+                                    "abap": {
+                                        "id": "<ABAP_INSTANCE_ID>"
+                                    },
+                                    "hana": {
+                                        "id": "<HANA_INSTANCE_ID>"
+                                    },
+                                    "int": {
+                                        "tenant": "cpi003"
+                                    },
+                                    "jsh": {
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
+                                    },
+                                    "launchpad": {
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
+                                    },
+                                    "spa": {},
+                                    "wfm": {}
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "<YOUR_SUB_ACCOUNT_DIRECTORY_NAME>ß",
+                        "short": "USW",
+                        "region": "us20",
+                        "subaccounts": [
+                            {
+                                "id": "<SUBACCOUNT_ID>",
+                                "name": "Sandbox",
+                                "subdomain": "<SUBDOMAIN>",
+                                "services": {
+                                    "hana": {
+                                        "id": "<HANA_INSTANCE_ID>"
+                                    },
+                                    "jsh": {
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
+                                    },
+                                    "launchpad": {
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
+                                    },
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "<SUBACCOUNT_ID>",
+                                "name": "Dev",
+                                "subdomain": "<SUBDOMAIN>",
+                                "services": {
+                                    "bas": {},
+                                    "hana": {
+                                        "id": "<HANA_INSTANCE_ID>"
+                                    },
+                                    "jsh": {
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
+                                    },
+                                    "launchpad": {
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
+                                    },
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "<SUBACCOUNT_ID>",
+                                "name": "Staging",
+                                "subdomain": "<SUBDOMAIN>",
+                                "services": {
+                                    "hana": {
+                                        "id": "<HANA_INSTANCE_ID>"
+                                    },
+                                    "jsh": {
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
+                                    },
+                                    "launchpad": {
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
+                                    },
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "<SUBACCOUNT_ID>",
+                                "name": "PreProd",
+                                "subdomain": "<SUBDOMAIN>",
+                                "services": {
+                                    "hana": {
+                                        "id": "<HANA_INSTANCE_ID>"
+                                    },
+                                    "jsh": {
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
+                                    },
+                                    "launchpad": {
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
+                                    },
+                                    "wfm": {}
+                                }
+                            },
+                            {
+                                "id": "<SUBACCOUNT_ID>",
+                                "name": "Prod",
+                                "subdomain": "<SUBDOMAIN>",
+                                "usage": "prod",
+                                "state": "na",
+                                "note": "Q4`23",
+                                "services": {
+                                    "hana": {
+                                        "id": "<HANA_INSTANCE_ID>"
+                                    },
+                                    "jsh": {
+                                        "id": "<JOB_SCHEDULER_INSTANCE_ID>"
+                                    },
+                                    "launchpad": {
+                                        "alias": "<LAUNCHPAD_DEFAULT_SITE_ALIAS>",
+                                        "url": "<LAUNCPAD_DEFAULT_SITE_URL>"
+                                    },
+                                    "wfm": {}
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "s4": {
+        "params": {
+            "domain": "<YOUR_S4_HOST_DOMAIN>",
+            "port": "44300"
+        },
+        "projects": [
+            {
+                "name": "<YOUR_S4_PROJECT_NAME>",
+                "tiers": [
+                    "Sandbox",
+                    "Dev",
+                    "Staging",
+                    "PreProd",
+                    "Prod"
+                ],
+                "products": [
+                    {
+                        "name": "S/4HANA",
+                        "systems": [
+                            {
+                                "sid": "SB1",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "SB2",
+                                "client": "200",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "SB3",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "DE1",
+                                "client": "100",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "ST1",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QA1",
+                                "client": "100",
+                                "tier": "PreProd"
+                            },
+                            {
+                                "sid": "PD1",
+                                "client": "100",
+                                "host": "s4production",
+                                "port": "44380",
+                                "tier": "Prod"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "MDG",
+                        "systems": [
+                            {
+                                "sid": "SBG",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "SBG",
+                                "client": "200",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "DDG",
+                                "client": "100",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "DDG",
+                                "client": "200",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "SDG",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QDG",
+                                "client": "100",
+                                "tier": "PreProd"
+                            },
+                            {
+                                "sid": "PDG",
+                                "client": "100",
+                                "host": "prodmdg",
+                                "port": "43300",
+                                "tier": "Prod"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "footerLinks": [
+        {
+            "groupName": "BTP Info",
+            "links": [
+                {
+                    "name": "BTP Overview",
+                    "url": "<YOUR_LINK>"
+                },
+                {
+                    "name": "BTP Subaccount Landscape",
+                    "url": "<YOUR_LINK>"
+                },
+                {
+                    "name": "BTP Security",
+                    "url": "<YOUR_LINK>"
+                }
+            ]
+        },
+        {
+            "groupName": "Developer Guidance",
+            "links": [
+                {
+                    "name": "Extension Guidance",
+                    "url": "<YOUR_LINK>"
+                },
+                {
+                    "name": "Developer Playbook",
+                    "url": "<YOUR_LINK>"
+                }
+            ]
+        },
+        {
+            "groupName": "SAP Reference",
+            "links": [
+                {
+                    "name": "SAP Tutorial",
+                    "url": "https://developers.sap.com/tutorial-navigator.html"
+                },
+                {
+                    "name": "SAP Disovery Center",
+                    "url": "https://discovery-center.cloud.sap/viewServices"
+                },
+                {
+                    "name": "BTP What's New",
+                    "url": "https://help.sap.com/whats-new/cf0cb2cb149647329b5d02aa96303f56?locale=en-US"
+                },
+                {
+                    "name": "SAP Cloud Availability (CAC)",
+                    "url": "https://me.sap.com/systemsprovisioning/availability"
+                },
+                {
+                    "name": "Report an Incident",
+                    "url": "https://me.sap.com/createIssue/0/overview"
+                }
+            ]
+        }
+    ],
+    "templates": {
+        "abap": {
+            "name": "ABAP Cloud",
+            "url": "https://{abap-id}.abap-web.{region}.hana.ondemand.com/ui#Shell-home"
+        },
+        "adobe": {
+            "name": "Adobe",
+            "fullName": "Forms by Adobe Service",
+            "url": "https://{subdomain}-ads.formsprocessing.cfapps.{region}.hana.ondemand.com/ui/customer/index.html"
+        },
+        "auto-pi": {
+            "name": "Automation Pilot",
+            "url": "https://{subdomain}.autopilot.cfapps.us30.hana.ondemand.com/#/"
+        },
+        "bas": {
+            "name": "BAS",
+            "fullName": "Business Application Studio",
+            "url": "https://{subdomain}.{region}cf.applicationstudio.cloud.sap/index.html"
+        },
+        "cockpit": {
+            "name": "Cockpit",
+            "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/subaccountoverview",
+            "children": [
+                {
+                    "name": "Service Market Place",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/service-marketplace"
+                },
+                {
+                    "name": "Instance and Subscriptions",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/service-instances"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "name": "Spaces",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/spaces"
+                },
+                {
+                    "name": "Org Membeers",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/users"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "name": "HTML5 Apps",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/html5applications"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "name": "Destinations",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/destinations"
+                },
+                {
+                    "name": "Cloud Connectors",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/connectivity"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "name": "Users",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/usersOverview"
+                },
+                {
+                    "name": "Role Collections",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/connectivity"
+                },
+                {
+                    "name": "Roles",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/roles"
+                },
+                {
+                    "name": "Trust Configuration",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/trustConfiguration"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "name": "Entitlements",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/entitlements"
+                },
+                {
+                    "name": "Usage Analytics",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/subaccountUsageAnalytics"
+                }
+            ]
+        },
+        "dqm": {
+            "name": "DQM",
+            "url": "https://{subdomain}.ui.dqmmicro.cfapps.{region}.hana.ondemand.com/webapp/index.html"
+        },
+        "hana": {
+            "name": "HANA Cloud",
+            "fullName": "HANA Cloud Cockpit",
+            "url": "https://hana-cockpit.cfapps.{region}.hana.ondemand.com/hpacs/sap/hana/cloud/index.html#/org/{subaccountId}/e/{spaceId}/databases"
+        },
+        "int": {
+            "name": "Integration",
+            "url": "https://{subdomain}.it-{int-tenant}.cfapps.{region}.hana.ondemand.com/itspaces/shell/discover",
+            "children": [
+                {
+                    "name": "API Portal",
+                    "url": "https://{subdomain}.apiportal.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Developer Portal",
+                    "url": "https://{subdomain}.devportal.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Event Mesh",
+                    "url": "https://{subdomain}.enterprise-messaging.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Open Connector",
+                    "url": "https://my.openconnectors.{region}.ext.hana.ondemand.com/login/sso?accountExternalId={subaccountId}&customerId=1382&orgExternalId={globalAccountId}"
+                }
+            ]
+        },
+        "jsh": {
+            "name": "Job Scheduler",
+            "url": "https://jobscheduler-dashboard.cfapps.{region}.hana.ondemand.com/manageinstances/{jsh-id}#/jobs"
+        },
+        "kibana": {
+            "name": "Kibana",
+            "url": "https://logs.cf.{region}.hana.ondemand.com/app/kibana_overview#/"
+        },
+        "launchpad": {
+            "name": "Launchpad",
+            "url": "https://{subdomain}.launchpad.cfapps.{region}.hana.ondemand.com/site/{launchpad-alias}",
+            "children": [
+                {
+                    "name": "Site Directory",
+                    "url": "https://{subdomain}.dt.launchpad.cfapps.{region}.hana.ondemand.com/sites#Site-Directory"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "repeatOn": "instances",
+                    "name": "{launchpad-name}",
+                    "url": "https://{subdomain}.launchpad.cfapps.{region}.hana.ondemand.com/site/{launchpad-alias}"
+                }
+            ]
+        },
+        "mrm": {
+            "name": "Market Rate",
+            "url": "http://{subdomain}.mrm.cfapps.{region}.hana.ondemand.com/"
+        },
+        "s4": {
+            "name": "{sid}:{client}",
+            "url": "https://{sid}:{domain}:{port}/sap/bc/ui2/flp?sap-client={client}"
+        },
+        "spa": {
+            "name": "SBPA",
+            "fullName": "SAP Build Process Automation",
+            "url": "https://{subdomain}.{region}.build.cloud.sap/lobby"
+        },
+        "tms": {
+            "name": "TMS",
+            "url": "https://{subdomain}.ts.cfapps.{region}.hana.ondemand.com/main/webapp/index.html"
+        },
+        "wfm": {
+            "name": "Workflow Mgmt",
+            "fullName": "Workflow Management",
+            "url": "https://{subdomain}.cockpit.workflowmanagement.cfapps.{region}.hana.ondemand.com/cp.portal/site"
+        }
+    }
+}

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "bd": "mbt build -p=cf --mtar=btp-go.mtar && cf deploy mta_archives/btp-go.mtar -f",
     "undeploy": "cf undeploy btp-go --delete-services --delete-service-keys"
   },
   "repository": {
