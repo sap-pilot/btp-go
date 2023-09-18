@@ -33,7 +33,7 @@
     }
     </style>
   </head>
-  <body>
+  <body id="app">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -111,7 +111,7 @@
     </div>
   </header>
 
-  <main id="app" class="tab-content" >
+  <main class="tab-content" >
     <div id="pane-btp" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
       <template v-if="btp.globalAccounts">
         <template v-for="ga in btp.globalAccounts">
@@ -290,7 +290,7 @@
         <img class="mb-2" src="./assets/brand/sap-logo-svg.svg" alt="" width="65" height="34">
         <small class="d-block mb-3 text-body-secondary">&copy; SAP America Inc.</small>
       </div>
-      <div class="col col-md" v-for="group in footerGroups">
+      <div class="col col-md" v-for="group in footerLinks">
         <h5>{{group.groupName}}</h5>
         <ul class="list-unstyled text-small">
           <li class="mb-1" v-for="link in group.links"><a class="link-secondary" target="_blank" :href="link.url">{{link.name}}</a></li>

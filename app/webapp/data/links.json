@@ -504,7 +504,7 @@
             "groupName": "BTP Info",
             "links": [
                 {
-                    "name": "BTP Overview Roadshow",
+                    "name": "BTP Overview",
                     "url": "https://chevron.sharepoint.com/:p:/r/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7B1D7D28F9-196D-4F12-9C3D-702FB0EF46D3%7D&file=SAP%20BTP%20Overview%20Roadshow%20(2023%20version).pptx&action=edit&mobileredirect=true"
                 },
                 {
@@ -524,7 +524,7 @@
                     "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/65227/BTP-High-Availability-and-Disaster-Recovery-(HADR)"
                 },
                 {
-                    "name": "BTP Team Share (Share Point)",
+                    "name": "BTP Team Share Point",
                     "url": "https://chevron.sharepoint.com/teams/SAPTechnicalPlatform"
                 },
                 {
@@ -562,7 +562,7 @@
                     "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/41154/ADO-Gitflow"
                 },
                 {
-                    "name": "ADO MTA Pipeline User Guide",
+                    "name": "ADO Pipeline User Guide",
                     "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/ITC-ITSD-DigitalCore.wiki/52668/ADO-MTA-Pipeline-to-SAP-BTP-and-TMS-User-Guide"
                 },
                 {
@@ -591,7 +591,7 @@
                     "url": "https://me.sap.com/systemsprovisioning/availability"
                 },
                 {
-                    "name": "Report Incident",
+                    "name": "Report an Incident",
                     "url": "https://me.sap.com/createIssue/0/overview"
                 }
             ]
