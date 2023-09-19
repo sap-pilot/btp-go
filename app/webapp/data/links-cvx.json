@@ -426,6 +426,42 @@
                                 "tier": "Prod"
                             }
                         ]
+                    },
+                    {
+                        "name": "MDG",
+                        "systems": [
+                            {
+                                "sid": "BG2",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "BRG",
+                                "client": "200",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "DG2",
+                                "client": "100",
+                                "port": 44380,
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "DRG",
+                                "client": "200",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "SRG",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QRG",
+                                "client": "100",
+                                "tier": "PreProd"
+                            }
+                        ]
                     }
                 ]
             },
