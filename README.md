@@ -1,73 +1,158 @@
-# btp-util
-BTP command line utilities
+# btp-go
+BTP home page of links to services group by directory (project) and subaccount
 
-## cf - Cloud Foundry
+## Quick Start
 
-### 1. gen-default-env.sh - Generate default-env.json file for specified app
+To test this app locally in VSCode or BAS, execute below command to run approuter on port 3010 (or any other unoccupied port):
 
-usage:
+```
+npm install
+cd app
+npm install
+PORT=3010 npm start
+```
 
-    1. cf login
-    2. node gen-default-env.js <CF_APP_NAME>
+To build & deploy this app to your Cloud Foundry enviornment, execute commands, this will deploy the app and create a route like https://<THIS_APP_HOSTNAME>.<YOUR_DOMAIN>
 
-or use in npm script
+```
+cf login
+npm run bd
+cf create-route <YOUR_DOMAIN> --hostname <THIS_APP_HOSTNAME>
+cf map-route btp-go <YOUR_DOMAIN> --hostname <THIS_APP_HOSTNAME>
+```
 
-    scripts: {"gen-env": "CF_APP_NAME=<CF_APP_NAME> && curl https://raw.githubusercontent.com/sap-pilot/btp-util/main/cf/gen-default-env.js | node"}
+## Customize
 
-### 2. export-service-key.sh - Export flattern service key into env variables
 
-usage: 
+### Custom Links
 
-    1. set below environment variables:
-        export CF_SERVICE_NAME=cloudTransportManagement
-        export CF_SERVICE_PREFIX=tms
-    2. source this script (to include variables into current process)
-        source ./export-service-key.sh 
+To customize the links, copy & edit /app/webapp/data/links.json, the file has below structure, update and repeat as you see fit: 
 
-### 3. export-auth-token.sh - Authenticate with above service key then export auth token
+```
+{
+    "btp": {
+        "globalAccounts": [
+            {
+                "id": "<YOUR_GLOBAL_ACCOUNT_ID>",
+                "name": "<YOUR_CUSTOMER_NAME>",
+                "cockpitRegion": "amer",
+                "directories": [
+                    {
+                        "name": "<YOUR_SUBACCOUNT_DIRECTORY_NAME}",
+                        "short": "USE",
+                        "region": "us10",
+                        "subaccounts": [
+                            {
+                                "id": "<SUBACCOUNT_ID>",
+                                "name": "Sandbox",
+                                "subdomain": "<SUBDOMAIN>",
+                                "services": {
+                                    "<SERVICE_NAME>": {
+                                        "<SERVICE_PARAM>": "<SERVICE_PARAM_VALUE>"
+                                    },
+                                    "hana": {
+                                        "id": "<HANA_INSTANCE_ID>"
+                                    },
+                                    "spa": {},
+                                    "wfm": {}
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "s4": {
+        "params": {
+            "domain": "<YOUR_S4_HOST_DOMAIN>",
+            "port": "<YOUR_S4_DEFAULT_PORT>"
+        },
+        "projects": [
+            {
+                "name": "<YOUR_S4_PROJECT_NAME>",
+                "tiers": [
+                    "Sandbox",
+                    "Dev",
+                    "Staging",
+                    "PreProd",
+                    "Prod"
+                ],
+                "products": [
+                    {
+                        "name": "S/4HANA",
+                        "systems": [
+                            {
+                                "sid": "SB1",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "DE1",
+                                "client": "100",
+                                "tier": "Dev"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }, 
+    "footerLinks": [
+        {
+            "groupName": "BTP Info",
+            "links": [
+                {
+                    "name": "BTP Overview",
+                    "url": "<YOUR_LINK>"
+                },
+                {
+                    "name": "BTP Subaccount Landscape",
+                    "url": "<YOUR_LINK>"
+                }
+            ]
+        }
+    ],
+    "template": {
+        "abap": {
+            "name": "ABAP Cloud",
+            "url": "https://{abap-id}.abap-web.{region}.hana.ondemand.com/ui#Shell-home"
+        }
+    }
+}
+```
 
-usage:
+### Customize Web Page
 
-    1. set below environment variables:
-        export CF_SERVICE_NAME=cloudTransportManagement
-        export CF_SERVICE_PREFIX=tms
-    2. source this script (to include variables into current process)
-        source ./export-auth-token.sh 
+Check /app/webapp/index.html written in [Vue](https://vuejs.org/). 
 
-## integration - Integration Suite 
+### Customize Login
 
-### 1. int-download-all.sh - Download all integration artifacts and extract it to current folder
+Check /app/xs-app.json for login setting, you can change the app to no authentication (update "authenticationMethod" to "none") and change session timeout ("sessionTimeout" in minutes, currently set to 1 day).
 
-usage:
+```
+{
+    "welcomeFile": "index.html",
+    "authenticationMethod": "route",
+    "sessionTimeout": 1440,
+    "routes": [
+        {
+            "source": "^/user-api(.*)$",
+            "target": "$1",
+            "service": "sap-approuter-userapi",
+            "authenticationType": "xsuaa"
+        },
+        {
+            "source": "^/(.*)$",
+            "target": "$1",
+            "localDir": "webapp",
+            "authenticationType": "xsuaa"
+        }
+    ]
+}
+```
 
-    1. generate then copy the service key of Process Integration Runtime instance with "api" plan (with "AuthGroup_IntegrationDeveloper" role)
-    2. condense the service key into single line for instance replaceAll("\n(\s)*',"")
-    3. run below command to export service key
-        export cpiServiceKey='<CONDENSED_CPI_SERVICE_KEY>'
-    3. run below command to download all integration artifacts into current folder
-        bash <(curl -s https://raw.githubusercontent.com/sap-pilot/btp-util/main/integration/int-download-all.sh)
+## Contact & Support
 
-result:
-
-  - All integration arfiacts will be downloaded into current folder with structure below
-      - <PACKAGE_ID>
-          - <IFLOW_NAME>
-              - <IFLOW FILES>
-
-## tms - Transport Management Service
-
-### 1. upload-file.sh - Upload mta to specified TMS node and genarate Transport Request 
-
-usage: 
-
-    1. set below environment variables:
-        export CF_SERVICE_PREFIX=tms
-        export CF_SERVICE_NAME=<YOUR_TMS_SERVICE_NAME>
-        export TMS_NODE_NAME=<YOUR_TMS_NODE_NAME>
-        export TMS_FILE_NAME=<MTA_FILE_TO_UPLOAD>
-    2. cf login
-    3. retrieve & export service key & auth token
-        source ../cf/export-service-key.sh
-        source ../cf/export-auth-token.sh
-    4. source this script (to export generated transport request $TMS_TRANSPORT_ID)
-        source ./upload-file.sh 
+Creae issue below for support. Thanks for considering this repo. 
+https://github.com/sap-pilot/btp-go/issues
