@@ -119,7 +119,7 @@ const app = Vue.createApp ({
 
     methods: {
         async fetch () {
-            const {data} = await GET(`/data/links.json`);
+            const {data} = await GET(`/data/links-cvx.json`);
             app.btp = data.btp;
             app.s4 = data.s4;
             app.footerLinks = data.footerLinks;

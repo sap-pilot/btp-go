@@ -26,7 +26,7 @@ cf map-route btp-go <YOUR_DOMAIN> --hostname <THIS_APP_HOSTNAME>
 
 ### Custom Links
 
-To customize the links, copy & edit /app/webapp/data/links.json, the file has below structure, update and repeat as you see fit: 
+To customize the links, edit /app/webapp/data/links-cvx.json, the file has below structure, update and repeat as you see fit: 
 
 ```
 {
@@ -154,5 +154,5 @@ Check /app/xs-app.json for login setting, you can change the app to no authentic
 
 ## Contact & Support
 
-Creae issue below for support. Thanks for considering this repo. 
+Create issue below for support. Thanks for considering this repo. 
 https://github.com/sap-pilot/btp-go/issues
