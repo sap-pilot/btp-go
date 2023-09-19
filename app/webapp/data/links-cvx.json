@@ -294,6 +294,8 @@
                             {
                                 "sid": "DR1",
                                 "client": "100",
+                                "host": "wdf",
+                                "port": "44361",
                                 "tier": "Dev"
                             },
                             {
@@ -304,6 +306,8 @@
                             {
                                 "sid": "QR1",
                                 "client": "100",
+                                "host": "wdf",
+                                "port": "44381",
                                 "tier": "PreProd"
                             },
                             {
@@ -788,7 +792,7 @@
         },
         "s4": {
             "name": "{sid}:{client}",
-            "url": "https://{sid}.{domain}:{port}/sap/bc/ui2/flp?sap-client={client}"
+            "url": "https://{host}.{domain}:{port}/sap/bc/ui2/flp?sap-client={client}"
         },
         "spa": {
             "name": "SBPA",

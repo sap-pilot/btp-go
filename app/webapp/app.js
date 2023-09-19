@@ -97,6 +97,8 @@ const populateS4Table = function(s4, tpl) {
                     if (pk != "instances") 
                         sysValueMap[pk] = sys[pk]; // add sys params, note s4 param with same name will be overwriten
                 }
+                if (!sysValueMap.host)
+                    sysValueMap.host = sysValueMap.sid; // by default assign sid as host name
                 renderService("s4",sys,tpl,sysValueMap);
                 prd.tieredSystems[tierIndex].push(sys);
             }
