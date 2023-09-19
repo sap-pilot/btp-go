@@ -9,7 +9,7 @@ To test this app locally in VSCode or BAS, execute below command to run approute
 npm install
 cd app
 npm install
-PORT=3010 npm start
+PORT=3010 npm run start-local
 ```
 
 To build & deploy this app to your Cloud Foundry enviornment, execute commands, this will deploy the app and create a route like https://<THIS_APP_HOSTNAME>.<YOUR_DOMAIN>
@@ -26,7 +26,7 @@ cf map-route btp-go <YOUR_DOMAIN> --hostname <THIS_APP_HOSTNAME>
 
 ### Custom Links
 
-To customize the links, edit /app/webapp/data/links-cvx.json, the file has below structure, update and repeat as you see fit: 
+To customize the links, copy & edit /app/webapp/data/links.json, the file has below structure, update and repeat as you see fit: 
 
 ```
 {
@@ -154,5 +154,5 @@ Check /app/xs-app.json for login setting, you can change the app to no authentic
 
 ## Contact & Support
 
-Create issue below for support. Thanks for considering this repo. 
+Creae issue below for support. Thanks for considering this repo. 
 https://github.com/sap-pilot/btp-go/issues
