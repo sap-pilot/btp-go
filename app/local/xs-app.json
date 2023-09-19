@@ -1,0 +1,19 @@
+{
+    "welcomeFile": "index.html",
+    "authenticationMethod": "none",
+    "sessionTimeout": 1440,
+    "routes": [
+        {
+            "source": "^/user-api(.*)$",
+            "target": "$1",
+            "service": "sap-approuter-userapi",
+            "authenticationType": "none"
+        },
+        {
+            "source": "^/(.*)$",
+            "target": "$1",
+            "localDir": "../webapp",
+            "authenticationType": "none"
+        }
+    ]
+}

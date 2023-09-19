@@ -79,7 +79,9 @@
       </ul>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Welcome, {{currentUser.displayName}}</a>
+        <template v-if="currentUser.displayName">
+          <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Welcome, {{currentUser.displayName}}</a>
+        </template>
         <div class="dropdown bd-mode-toggle">
           <button class="btn py-2 dropdown-toggle d-flex align-items-center"
                   id="bd-theme"
