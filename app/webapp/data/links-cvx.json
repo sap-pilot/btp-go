@@ -174,9 +174,9 @@
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "f76efb89-318c-4bf9-8369-9c331ea175e6",
                                 "name": "Dev",
-                                "subdomain": "ncfaws-05",
+                                "subdomain": "ncfazu-04",
                                 "services": {
                                     "bas": {},
                                     "hana": {
@@ -198,9 +198,9 @@
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "182cd859-1d06-45d3-acd7-c8a06fa086ff",
                                 "name": "Staging",
-                                "subdomain": "ncfaws-11",
+                                "subdomain": "ncfazu-05",
                                 "services": {
                                     "hana": {
                                         "id": "XX"
@@ -215,9 +215,9 @@
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "31373970-93c0-429c-acf8-6ced2aed2e03",
                                 "name": "PreProd",
-                                "subdomain": "ncfaws-11",
+                                "subdomain": "ncfazu-10",
                                 "services": {
                                     "hana": {
                                         "id": "457b23d3-0fa5-410b-8ad2-7b708c6d1260"
@@ -232,9 +232,9 @@
                                 }
                             },
                             {
-                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "id": "ef17a6b5-b1d9-4b93-8843-04874e796dd1",
                                 "name": "Prod",
-                                "subdomain": "pcfaws-02",
+                                "subdomain": "pcfazu-03",
                                 "usage": "prod",
                                 "state": "na",
                                 "note": "Q4`23",
