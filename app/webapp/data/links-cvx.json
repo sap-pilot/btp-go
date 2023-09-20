@@ -102,7 +102,7 @@
                             {
                                 "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
                                 "name": "PreProd",
-                                "subdomain": "ncfaws-11",
+                                "subdomain": "ncfaws-16",
                                 "services": {
                                     "abap": {
                                         "id": "c29f7640-680f-4ada-8f0f-14630d9790ae"
