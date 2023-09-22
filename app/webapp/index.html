@@ -142,7 +142,7 @@
                         <template v-if="srv.children">
                           <!-- render dropdown for services with children -->
                           <li class="btn-group py-0">
-                            <a class="btn link-body-emphasis py-0 pe-1 zc-dropdown" target="_blank" v-bind:title="srv.fullName" v-bind:href="srv.url">{{srv.name}}</a>
+                            <a class="btn link-body-emphasis py-0 pe-1 zc-dropdown" v-bind:title="srv.fullName" v-bind:href="srv.url" target="_blank">{{srv.name}}</a>
                             <a type="button" class="btn py-0 ps-1 zc-dropdown link-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                               <span class="visually-hidden">Toggle Dropdown</span>
                             </a>
@@ -152,7 +152,7 @@
                                   <hr class="dropdown-divider">
                                 </template>
                                 <template v-else>
-                                  <a class="dropdown-item" v-bind:title="sc.fullName" v-bind:href="sc.url">{{sc.name}}</a>
+                                  <a class="dropdown-item" v-bind:title="sc.fullName" v-bind:href="sc.url" target="_blank">{{sc.name}}</a>
                                 </template>
                               </li>
                             </ul>
@@ -160,13 +160,13 @@
                         </template>
                         <template v-else>
                           <!-- render simple link for service without children -->
-                          <li><a class="link-body-emphasis" v-bind:title="srv.fullName" v-bind:href="srv.url">{{srv.name}}</a></li>
+                          <li><a class="link-body-emphasis" v-bind:title="srv.fullName" v-bind:href="srv.url" target="_blank">{{srv.name}}</a></li>
                         </template><!-- end of v-if:children -->
                       </template>
                     </ul>
                     <template v-if="sa.cockpit">
                       <div class="btn-group w-100">
-                        <a target="_blank" type="button" class="btn btn-sm w-100" v-bind:class="(sa.state == 'prod')?'btn-primary':'btn-outline-primary'" v-bind:href="sa.cockpit.url">Cockpit</a>
+                        <a type="button" class="btn btn-sm w-100" v-bind:class="(sa.state == 'prod')?'btn-primary':'btn-outline-primary'" v-bind:href="sa.cockpit.url" target="_blank">Cockpit</a>
                         <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" v-bind:class="(sa.usage == 'prod')?'btn-primary':'btn-outline-primary'" data-bs-toggle="dropdown" aria-expanded="false">
                           <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
@@ -176,7 +176,7 @@
                               <hr class="dropdown-divider">
                             </template>
                             <template v-else>
-                              <a target="_blank" class="dropdown-item" v-bind:href="rs.url">{{rs.name}}</a></li>
+                              <a class="dropdown-item" v-bind:href="rs.url" target="_blank">{{rs.name}}</a></li>
                             </template>
                           </li>
                         </ul>
@@ -205,7 +205,7 @@
                           <template v-if="srv.children">
                             <!-- render dropdown for services with children -->
                             <div class="btn-group p-0" style="margin-left: 14px">
-                              <a class="btn link-body-emphasis py-0 pe-1 zh-24" target="_blank" v-bind:title="srv.fullName" v-bind:href="srv.url"><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></a>
+                              <a class="btn link-body-emphasis py-0 pe-1 zh-24" v-bind:title="srv.fullName" v-bind:href="srv.url" target="_blank"><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></a>
                               <a type="button" class="btn py-0 ps-1 zh-24 link-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="visually-hidden">Toggle Dropdown</span>
                               </a>
@@ -215,7 +215,7 @@
                                     <hr class="dropdown-divider">
                                   </template>
                                   <template v-else>
-                                    <a class="dropdown-item" v-bind:title="sc.fullName" v-bind:href="sc.url">{{sc.name}}</a>
+                                    <a class="dropdown-item" v-bind:title="sc.fullName" v-bind:href="sc.url" target="_blank">{{sc.name}}</a>
                                   </template>
                                 </li>
                               </ul>
@@ -259,7 +259,7 @@
                       <template v-if="sys.children">
                         <!-- render dropdown for services with children -->
                         <div class="btn-group p-0" style="margin-left: 14px">
-                          <a class="btn link-body-emphasis py-0 pe-1 zh-24" target="_blank" v-bind:title="sys.fullName" v-bind:href="sys.url">{sys.name}</a>
+                          <a class="btn link-body-emphasis py-0 pe-1 zh-24" v-bind:title="sys.fullName" v-bind:href="sys.url" target="_blank">{sys.name}</a>
                           <a type="button" class="btn py-0 ps-1 zh-24 link-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                           </a>
@@ -269,7 +269,7 @@
                                 <hr class="dropdown-divider">
                               </template>
                               <template v-else>
-                                <a class="dropdown-item" v-bind:title="sc.fullName" v-bind:href="sc.url">{{sc.name}}</a>
+                                <a class="dropdown-item" v-bind:title="sc.fullName" v-bind:href="sc.url" target="_blank">{{sc.name}}</a>
                               </template>
                             </li>
                           </ul>
@@ -295,12 +295,12 @@
     <div class="row">
       <div class="col-12 col-md">
         <img class="mb-2" src="./assets/brand/sap-logo-svg.svg" alt="" width="65" height="34">
-        <small class="d-block mb-3 text-body-secondary"><a class="link-secondary" href="https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_git/BTP-GO?version=GBcvx">BTP GO (build 20230918)</a><br />&copy; SAP America Inc.</small>
+        <small class="d-block mb-3 text-body-secondary"><a class="link-secondary" href="https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_git/BTP-GO?version=GBcvx" target="_blank">BTP GO (build 20230918)</a><br />&copy; SAP America Inc.</small>
       </div>
       <div class="col col-md" v-for="group in footerLinks">
         <h5>{{group.groupName}}</h5>
         <ul class="list-unstyled text-small">
-          <li class="mb-1" v-for="link in group.links"><a class="link-secondary" target="_blank" :href="link.url">{{link.name}}</a></li>
+          <li class="mb-1" v-for="link in group.links"><a class="link-secondary" :href="link.url" target="_blank">{{link.name}}</a></li>
         </ul>
       </div>
     </div>
