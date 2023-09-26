@@ -260,7 +260,7 @@
     "s4": {
         "params": {
             "domain": "sap.chevron.com",
-            "port": "44300"
+            "port": "43300"
         },
         "projects": [
             {
@@ -325,37 +325,31 @@
                             {
                                 "sid": "BRG",
                                 "client": "100",
-                                "port": "43300",
                                 "tier": "Sandbox"
                             },
                             {
                                 "sid": "BRG",
                                 "client": "200",
-                                "port": "43300",
                                 "tier": "Sandbox"
                             },
                             {
                                 "sid": "DRG",
                                 "client": "100",
-                                "port": "43300",
                                 "tier": "Dev"
                             },
                             {
                                 "sid": "DRG",
                                 "client": "200",
-                                "port": "43300",
                                 "tier": "Dev"
                             },
                             {
                                 "sid": "SRG",
                                 "client": "100",
-                                "port": "43300",
                                 "tier": "Staging"
                             },
                             {
                                 "sid": "QRG",
                                 "client": "100",
-                                "port": "43300",
                                 "tier": "PreProd"
                             },
                             {
