@@ -7,12 +7,13 @@
                 "cockpitRegion": "amer",
                 "directories": [
                     {
-                        "name": "<YOUR_SUBACCOUNT_DIRECTORY_NAME}",
+                        "name": "<YOUR_SUBACCOUNT_DIRECTORY_NAME>",
                         "short": "USE",
                         "region": "us10",
                         "subaccounts": [
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Sandbox",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -48,6 +49,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Dev",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -84,6 +86,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Staging",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -109,6 +112,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "PreProd",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -134,6 +138,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Prod",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -160,12 +165,13 @@
                         ]
                     },
                     {
-                        "name": "<YOUR_SUB_ACCOUNT_DIRECTORY_NAME>ß",
+                        "name": "<YOUR_SUB_ACCOUNT_DIRECTORY_NAME>",
                         "short": "USW",
                         "region": "us20",
                         "subaccounts": [
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Sandbox",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -184,6 +190,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Dev",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -203,6 +210,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Staging",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -221,6 +229,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "PreProd",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -239,6 +248,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Prod",
                                 "subdomain": "<SUBDOMAIN>",
                                 "usage": "prod",
@@ -466,51 +476,51 @@
                         {
                             "repeatOn": "spaces",
                             "name": "{spaceName}",
-                            "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/applications",
+                            "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/applications",
                             "children": [
                                 {
                                     "name": "Applications",
-                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/applications"
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/applications"
                                 },
                                 {
                                     "name": "-"
                                 },
                                 {
                                     "name": "Service Marketplace",
-                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/service-marketplace"
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/service-marketplace"
                                 },
                                 {
                                     "name": "Service Instances",
-                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/service-instances"
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/service-instances"
                                 },
                                 {
                                     "name": "SAP HANA Cloud",
-                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/hanaCloud"
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/hanaCloud"
                                 },
                                 {
                                     "name": "-"
                                 },
                                 {
                                     "name": "Routes",
-                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/routes"
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/routes"
                                 },
                                 {
                                     "name": "-"
                                 },
                                 {
                                     "name": "Security Groups",
-                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/cfsecuritygroups"
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/cfsecuritygroups"
                                 },
                                 {
                                     "name": "Events",
-                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/spaceevents"
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/spaceevents"
                                 },
                                 {
                                     "name": "-"
                                 },
                                 {
                                     "name": "Members",
-                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/users"
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/users"
                                 }
                             ]
                         }

@@ -148,6 +148,7 @@ const app = Vue.createApp ({
                             globalAccountId: ga.id,
                             cockpitRegion: ga.cockpitRegion,
                             subaccountId: sa.id,
+                            orgId: sa.orgId,
                             subdomain: sa.subdomain,
                             region: sa.region? sa.region:dir.region,
                             spaces: sa.spaces
