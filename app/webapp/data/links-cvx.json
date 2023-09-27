@@ -5,6 +5,8 @@
                 "id": "CA160438TID000000000740787196",
                 "name": "Chevron",
                 "cockpitRegion": "amer",
+                "int-regionPostfix": "",
+                "int-cpiTenant": "cpi003",
                 "directories": [
                     {
                         "name": "Digital Core - US East R1/R2",
@@ -23,9 +25,7 @@
                                     "hana": {
                                         "id": "XX"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "b1b794bd-7d35-4e02-bb74-95931e2f01a4"
                                     },
@@ -60,9 +60,7 @@
                                     "hana": {
                                         "id": "XX"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "60b3ed6d-ffe0-4c78-ad90-db467483ce72"
                                     },
@@ -114,9 +112,7 @@
                                     "hana": {
                                         "id": "XX"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "XX"
                                     },
@@ -154,7 +150,7 @@
                                         "id": "457b23d3-0fa5-410b-8ad2-7b708c6d1260"
                                     },
                                     "int": {
-                                        "tenant": "cpi003"
+                                        "regionPostfix": "-002"
                                     },
                                     "jsh": {
                                         "id": "6508ef60-a569-4467-acb9-113463f7e7fb"
@@ -189,9 +185,7 @@
                                     "hana": {
                                         "id": "babb2315-a009-45a3-9fe0-2a79a82587c0"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "c3c05fea-561d-4d1c-b0f0-868c3a6d827a"
                                     },
@@ -376,7 +370,8 @@
                                 "id": "846e26d6-a20e-4762-8992-9a867fbf3a5f",
                                 "orgId": "06fed0dc-7955-4a7d-9919-dbf603eb3709",
                                 "name": "Prod",
-                                "subdomain": "ncfaws-05",
+                                "subdomain": "pcfaws-04",
+                                "usage": "prod",
                                 "services": {
                                     "adobe": {},
                                     "dqm": {},
@@ -387,6 +382,118 @@
                                     {
                                         "spaceName": "CF_AWS_EUR_Production_Utilities_Dcore",
                                         "spaceId": "54b536dc-7f73-4878-ae8b-0df2de28a97a"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Project Maui/Nobel",
+                        "short": "NOBEL",
+                        "region": "us10",
+                        "subaccounts": [
+                            {
+                                "id": "72b1d358-7425-4d73-9a80-6e526099b655",
+                                "orgId": "808d8c62-a170-4b1b-88e6-96876ff7039a",
+                                "name": "Dev",
+                                "subdomain": "ncfaws-13",
+                                "services": {                                    
+                                    "int": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Development_Noble",
+                                        "spaceId": "e3e01a43-9799-4c02-ae68-58912fd7421a"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
+                                "name": "Staging",
+                                "subdomain": "XXX",
+                                "state": "na",
+                                "services": {
+                                    "int": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "XXX",
+                                        "spaceId": "XXX"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
+                                "name": "Prod",
+                                "subdomain": "XXX",
+                                "state": "na",
+                                "usage": "prod",
+                                "services": {
+                                    "int": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "XXX",
+                                        "spaceId": "XXX"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Central Finance (To be deprecated)",
+                        "short": "CFIN",
+                        "region": "us10",
+                        "subaccounts": [
+                            {
+                                "id": "d75c591d-aadc-46d3-9954-35f6d3678eab",
+                                "orgId": "cd6d9be2-f814-4dee-927d-401888b521c5",
+                                "name": "Non-Prod",
+                                "subdomain": "ncfaws-01",
+                                "services": {
+                                    "abap": {
+                                        "id": "41081360-6b0c-4b04-9bbc-5e72b14e7876"
+                                    },
+                                    "hana": {
+                                        "id": "XX"
+                                    }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Sandbox_CFIN",
+                                        "spaceId": "a9aecc7b-6d78-475a-ad2d-1c0676d489fb"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Development_CFIN",
+                                        "spaceId": "5c6371a5-43ae-4d9b-a20c-0d9c3e994aa7"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Staging_CFIN",
+                                        "spaceId": "1d4cf856-1792-48cf-944e-bc4cb7fcaac7"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
+                                "name": "Prod",
+                                "subdomain": "pcfaws-01",
+                                "state": "na",
+                                "usage": "prod",
+                                "services": {
+                                    "abap": {
+                                        "id": "41081360-6b0c-4b04-9bbc-5e72b14e7876"
+                                    },
+                                    "hana": {
+                                        "id": "XX"
+                                    }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Production_CFIN",
+                                        "spaceId": "XXX"
                                     }
                                 ]
                             }
@@ -935,7 +1042,7 @@
         },
         "int": {
             "name": "Integration",
-            "url": "https://{subdomain}.it-{int-tenant}.cfapps.{region}.hana.ondemand.com/itspaces/shell/discover",
+            "url": "https://{subdomain}.integrationsuite.cfapps.{region}{int-regionPostfix}.hana.ondemand.com/shell/home",
             "children": [
                 {
                     "name": "API Portal",
@@ -995,7 +1102,7 @@
             "url": "https://{subdomain}.{region}.build.cloud.sap/lobby"
         },
         "tms": {
-            "name": "Transport Mgmt",
+            "name": "TMS",
             "fullName": "Transport Management Service",
             "url": "https://{subdomain}.ts.cfapps.{region}.hana.ondemand.com/main/webapp/index.html"
         },

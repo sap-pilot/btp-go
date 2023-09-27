@@ -146,14 +146,17 @@ const app = Vue.createApp ({
             for (const ga of app.btp.globalAccounts) {
                 for (const dir of ga.directories) {
                     for (const sa of dir.subaccounts) {
+                        // add default params
                         const valueMap = {
                             globalAccountId: ga.id,
                             cockpitRegion: ga.cockpitRegion,
                             subaccountId: sa.id,
                             orgId: sa.orgId,
                             subdomain: sa.subdomain,
-                            region: sa.region? sa.region:dir.region,
-                            spaces: sa.spaces
+                            region: sa.region? sa.region:dir.region,                            
+                            spaces: sa.spaces,
+                            "int-regionPostfix": ga["int-regionPostfix"],
+                            "int-cpiTenant": ga["int-cpiTenant"]
                         };
                         for (const sk in sa.services) {
                             const srv = sa.services[sk];

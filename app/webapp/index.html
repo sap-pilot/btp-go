@@ -166,8 +166,8 @@
                     </ul>
                     <template v-if="sa.cockpit">
                       <div class="btn-group w-100">
-                        <a type="button" class="btn btn-sm w-100" v-bind:class="(sa.state == 'prod')?'btn-primary':'btn-outline-primary'" v-bind:href="sa.cockpit.url" target="_blank">Cockpit</a>
-                        <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" v-bind:class="(sa.usage == 'prod')?'btn-primary':'btn-outline-primary'" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a type="button" class="btn btn-sm w-100 btn-outline-primary" v-bind:href="sa.cockpit.url" target="_blank">Cockpit</a>
+                        <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split btn-outline-primary" data-bs-toggle="dropdown" aria-expanded="false">
                           <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu">
