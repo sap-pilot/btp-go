@@ -5,6 +5,8 @@
                 "id": "<YOUR_GLOBAL_ACCOUNT_ID>",
                 "name": "<YOUR_CUSTOMER_NAME>",
                 "cockpitRegion": "amer",
+                "int-regionPostfix": "",
+                "int-cpiTenant": "cpi003",
                 "directories": [
                     {
                         "name": "<YOUR_SUBACCOUNT_DIRECTORY_NAME>",
@@ -23,9 +25,7 @@
                                     "hana": {
                                         "id": "<HANA_INSTANCE_ID>"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
@@ -60,9 +60,7 @@
                                     "hana": {
                                         "id": "<ABAP_INSTANCE_ID>"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
@@ -96,9 +94,7 @@
                                     "hana": {
                                         "id": "<HANA_INSTANCE_ID>"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
@@ -123,7 +119,7 @@
                                         "id": "<ABAP_INSTANCE_ID>"
                                     },
                                     "int": {
-                                        "tenant": "cpi003"
+                                        "regionPostfix": "-002"
                                     },
                                     "jsh": {
                                         "id": "<JOB_SCHEDULER_INSTANCE_ID>"
@@ -148,9 +144,7 @@
                                     "hana": {
                                         "id": "<HANA_INSTANCE_ID>"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
@@ -594,7 +588,7 @@
         },
         "int": {
             "name": "Integration",
-            "url": "https://{subdomain}.it-{int-tenant}.cfapps.{region}.hana.ondemand.com/itspaces/shell/discover",
+            "url": "https://{subdomain}.integrationsuite.cfapps.{region}{int-regionPostfix}.hana.ondemand.com/shell/home",
             "children": [
                 {
                     "name": "API Portal",
