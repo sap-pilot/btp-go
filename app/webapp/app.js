@@ -36,6 +36,23 @@ const renderService = function(srvKey, srv, tpl, valueMap) {
                     renderService(srvKey, instChild, tplChild, instValueMap);
                     srv.children.push(instChild);
                 }
+            } else if (tplChild.repeatOn == "spaces") {
+                // apply this tplChild to all spaces
+                const aSpaces = valueMap['spaces'];
+                if (!aSpaces || aSpaces.length == 0)
+                    continue;
+                for (const oSpace of aSpaces) {
+                    // copy space info first 
+                    const oSpaceChild = Object.assign({},oSpace);
+                    // build instValueMap
+                    const oSpaceValueMap = Object.assign({},valueMap);
+                    for (const pk in oSpaceChild) {
+                        oSpaceValueMap[pk] = oSpace[pk]; // add space params
+                    }
+                    // render service instance
+                    renderService(srvKey, oSpaceChild, tplChild, oSpaceValueMap);
+                    srv.children.push(oSpaceChild);
+                }
             } else {
                 // render single item (not related to instances)
                 const srvChild = {};
@@ -43,7 +60,7 @@ const renderService = function(srvKey, srv, tpl, valueMap) {
                 srv.children.push(srvChild); 
             }
         }
-        // remove first or last divider if they present
+        // remove first or last dividers if they present
         if (srv.children.length > 0 && srv.children[srv.children.length-1].name == '-') 
             srv.children.pop();
         if (srv.children.length > 0 && srv.children[0].name == '-') 
@@ -106,7 +123,6 @@ const populateS4Table = function(s4, tpl) {
     }
 };
 
-
 const app = Vue.createApp ({
 
     data() {
@@ -134,8 +150,10 @@ const app = Vue.createApp ({
                             globalAccountId: ga.id,
                             cockpitRegion: ga.cockpitRegion,
                             subaccountId: sa.id,
+                            orgId: sa.orgId,
                             subdomain: sa.subdomain,
                             region: sa.region? sa.region:dir.region,
+                            spaces: sa.spaces
                         };
                         for (const sk in sa.services) {
                             const srv = sa.services[sk];
@@ -167,7 +185,7 @@ const app = Vue.createApp ({
     },
     mounted: function () {
         this.$nextTick(function () {
-            // table handling functions
+            // tab handling functions
             const tabBtns = document.querySelectorAll("ul.nav-pills > li > a");
             tabBtns.forEach(btn => {
                 btn.addEventListener('shown.bs.tab', function(e) {

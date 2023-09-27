@@ -13,6 +13,7 @@
                         "subaccounts": [
                             {
                                 "id": "6731c1b4-a33a-44b2-b3e7-e492bcf4e250",
+                                "orgId": "afad4930-5654-41d1-a21b-6c51d29506fa",
                                 "name": "Sandbox",
                                 "subdomain": "ncfaws-17",
                                 "services": {
@@ -34,10 +35,21 @@
                                     },
                                     "spa": {},
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Sandbox_DCore",
+                                        "spaceId": "ff10178d-1794-497e-a055-79a6e6d0b962"
+                                    },
+                                    {
+                                        "spaceName": "SAP Build Process Automation",
+                                        "spaceId": "2a363270-a3df-48f5-b2f1-abd63f0fbdc3"
+                                    }
+                                ]
                             },
                             {
                                 "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "orgId": "e7ad7bb6-7c64-4bde-a356-83e8c581988a",
                                 "name": "Dev",
                                 "subdomain": "ncfaws-05",
                                 "services": {
@@ -73,10 +85,25 @@
                                     },
                                     "spa": {},
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Development_DCore",
+                                        "spaceId": "23f5586c-36b9-4424-b597-5f201e9ff217"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Development_Dcore_R2",
+                                        "spaceId": "4741187a-e938-4802-8d4d-937965355fdb"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Development_DCore_CFIN",
+                                        "spaceId": "4637b366-1b7e-416f-baad-8a82096a2a6d"
+                                    }
+                                ]
                             },
                             {
                                 "id": "e22cb0af-148a-403f-8522-2acfb842929c",
+                                "orgId": "c975e97d-b9cb-4cc4-98ee-8e6ef38d8f4f",
                                 "name": "Staging",
                                 "subdomain": "ncfaws-11",
                                 "services": {
@@ -97,10 +124,25 @@
                                     },
                                     "spa": {},
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Staging_DCore",
+                                        "spaceId": "2a17e476-ae10-4787-a47e-60b99843b59d"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Staging_Dcore_R2",
+                                        "spaceId": "a7d2d241-06e5-4f69-9e28-09a8b79e17d9"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Staging_DCore_CFIN",
+                                        "spaceId": "c4029995-70fe-433a-80ae-29696505a4d7"
+                                    }
+                                ]
                             },
                             {
                                 "id": "2ddc67cc-3d81-4e6e-8b28-6fab52676f93",
+                                "orgId": "c975e97d-b9cb-4cc4-98ee-8e6ef38d8f4f",
                                 "name": "PreProd",
                                 "subdomain": "ncfaws-16",
                                 "services": {
@@ -121,10 +163,21 @@
                                     },
                                     "spa": {},
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_PreProd_DCore",
+                                        "spaceId": "1adc42f4-d2de-4e4f-8e4d-97074cecbf4b"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Preprod_DCore_CFIN",
+                                        "spaceId": "ba371f80-504a-47c9-9069-afd15364b5c5"
+                                    }
+                                ]
                             },
                             {
                                 "id": "e52dac42-313a-477a-be74-8705fc968590",
+                                "orgId": "e2cdea95-62eb-42ba-967e-8f3995fb41b5",
                                 "name": "Prod",
                                 "subdomain": "pcfaws-02",
                                 "usage": "prod",
@@ -146,7 +199,13 @@
                                     },
                                     "spa": {},
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Production_DCore",
+                                        "spaceId": "959e567f-61c4-4245-9213-92cf40443066"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -157,6 +216,7 @@
                         "subaccounts": [
                             {
                                 "id": "6731c1b4-a33a-44b2-b3e7-e492bcf4e250",
+                                "orgId": "f1158483-70de-461f-a34e-3708e8dcce71",
                                 "name": "Sandbox",
                                 "subdomain": "ncfazu-06",
                                 "services": {
@@ -171,10 +231,21 @@
                                         "url": "https://launchpad.sbx.cvx.one"
                                     },
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AZU_USW_Development_CIRCA",
+                                        "spaceId": "02bfbbe0-27cf-4c4b-af6c-8f0beecf7cbb"
+                                    },
+                                    {
+                                        "spaceName": "CF_AZU_USW_Development_CIRCA_R2",
+                                        "spaceId": "9e2e743b-6d72-4206-b721-32663e093805"
+                                    }
+                                ]
                             },
                             {
                                 "id": "f76efb89-318c-4bf9-8369-9c331ea175e6",
+                                "orgId": "06b0fd4f-af6b-4d7e-85ee-f1584ea9c3b9",
                                 "name": "Dev",
                                 "subdomain": "ncfazu-04",
                                 "services": {
@@ -195,10 +266,21 @@
                                         ]
                                     },
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AZU_USW_Development_CIRCA",
+                                        "spaceId": "02bfbbe0-27cf-4c4b-af6c-8f0beecf7cbb"
+                                    },
+                                    {
+                                        "spaceName": "CF_AZU_USW_Development_CIRCA_R2",
+                                        "spaceId": "9e2e743b-6d72-4206-b721-32663e093805"
+                                    }
+                                ]
                             },
                             {
                                 "id": "182cd859-1d06-45d3-acd7-c8a06fa086ff",
+                                "orgId": "06b0fd4f-af6b-4d7e-85ee-f1584ea9c3b9",
                                 "name": "Staging",
                                 "subdomain": "ncfazu-05",
                                 "services": {
@@ -212,10 +294,17 @@
                                         "alias": "circa-staging"
                                     },
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AZU_USW_Staging_CIRCA",
+                                        "spaceId": "c408d92d-052b-4676-b190-f70d4eda85dc"
+                                    }
+                                ]
                             },
                             {
                                 "id": "31373970-93c0-429c-acf8-6ced2aed2e03",
+                                "orgId": "06b0fd4f-af6b-4d7e-85ee-f1584ea9c3b9",
                                 "name": "PreProd",
                                 "subdomain": "ncfazu-10",
                                 "services": {
@@ -229,10 +318,17 @@
                                         "alias": "circa-preprod"
                                     },
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AZU_USW_Preprod_CIRCA",
+                                        "spaceId": "ecb19d21-62bd-4775-a41a-4d09360f3467"
+                                    }
+                                ]
                             },
                             {
                                 "id": "ef17a6b5-b1d9-4b93-8843-04874e796dd1",
+                                "orgId": "36671ca0-70dc-4a2a-80ed-861fa6c4af12",
                                 "name": "Prod",
                                 "subdomain": "pcfazu-03",
                                 "usage": "prod",
@@ -673,7 +769,63 @@
                 },
                 {
                     "name": "Spaces",
-                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/spaces"
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/spaces",
+                    "children": [
+                        {
+                            "repeatOn": "spaces",
+                            "name": "{spaceName}",
+                            "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/applications",
+                            "children": [
+                                {
+                                    "name": "Applications",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/applications"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Service Marketplace",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/service-marketplace"
+                                },
+                                {
+                                    "name": "Service Instances",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/service-instances"
+                                },
+                                {
+                                    "name": "SAP HANA Cloud",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/hanaCloud"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Routes",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/routes"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Security Groups",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/cfsecuritygroups"
+                                },
+                                {
+                                    "name": "Events",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/spaceevents"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Members",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/users"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "-"
                 },
                 {
                     "name": "Org Membeers",
