@@ -72,8 +72,13 @@ const renderService = function(srvKey, srv, tpl, valueMap) {
  *     allServices[] -> {serviceName,serviceInSubaccounts[]}  */
 const populateServiceTable = function(dir) {
     const allServices = []; // rows of all serivces in this dir like {serviceName:<serviceName>,serviceInSubaccount:[]}
+    dir.allServices = allServices;
+    if (!dir.subaccounts)
+        return;
     const serviceMap = {}; // temporary map of serviceType-> above service row
     for (const [saIdx, sa] of Object.entries(dir.subaccounts)) {
+        if (!sa.services)
+            continue;
         for (const [srvType, srv] of Object.entries(sa.services)) {
             if (!serviceMap[srvType]) {
                 // initialize row as empty array
@@ -89,7 +94,6 @@ const populateServiceTable = function(dir) {
         }
     }
     allServices.sort((a,b) => (a.serviceName > b.serviceName) ? 1 : ((b.serviceName > a.serviceName) ? -1 : 0))
-    dir.allServices = allServices;
 };
 
 const populateS4Table = function(s4, tpl) {

@@ -345,45 +345,91 @@
                         ]
                     },
                     {
-                        "name": "Digital Core - EUR Utilities",
-                        "short": "EU",
-                        "region": "eu10",
+                        "name": "Digital Core - Integration N+1 for R2",
+                        "short": "INT-R2",
+                        "region": "us10",
                         "subaccounts": [
                             {
-                                "id": "b50a993b-07e9-48b5-bffa-e72d3a564764",
-                                "orgId": "1bedfc64-543c-4760-8047-4b4763373f46",
-                                "name": "Non-Prod",
-                                "subdomain": "ncfaws-15",
-                                "services": {
-                                    "adobe": {},
-                                    "dqm": {},
-                                    "mrm": {}
+                                "id": "f067996d-3d4c-49b0-a2db-ad03c1072d24",
+                                "orgId": "38b449cf-9584-4ef9-8460-437835936a6b",
+                                "name": "Dev",
+                                "subdomain": "ncfaws-20",
+                                "services": {                                    
+                                    "int": {}
                                 },
                                 "spaces": [
                                     {
-                                        "spaceName": "CF_AWS_EUR_Sandbox_Utilities_(Dcore)",
-                                        "spaceId": "8f273d27-2969-480d-add9-8b6724b36656"
+                                        "spaceName": "CF_AWS_USE_Development_INT_DCore_R2",
+                                        "spaceId": "73b4103f-a5c1-451b-9560-4199a8266b80"
                                     }
                                 ]
+                            },                            
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
+                                "name": "PreProd",
+                                "subdomain": "XXX",
+                                "state": "na",
+                                "note": "Q4`23",
+                                "services": {                                    
+                                    "int": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_PreProd2_INT_DCore_R2",
+                                        "spaceId": "XXX"
+                                    }
+                                ]
+                            },                            
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
+                                "name": "PreProd2",
+                                "subdomain": "XXX",
+                                "state": "na",
+                                "note": "Q4`23",
+                                "services": {                                    
+                                    "int": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_PreProd2_INT_DCore_R2",
+                                        "spaceId": "XXX"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "CFIN R1A MTE/POBO",
+                        "short": "R1A MTE",
+                        "region": "us10",
+                        "subaccounts": [
+                            {
+                                "id": "72f4b8ee-c2a7-458c-87b2-4af42d5f590e",
+                                "orgId": "dfeb19ea-bd23-4963-8016-81d96516f609",
+                                "name": "Dev",
+                                "subdomain": "ncfaws-18"
                             },
                             {
-                                "id": "846e26d6-a20e-4762-8992-9a867fbf3a5f",
-                                "orgId": "06fed0dc-7955-4a7d-9919-dbf603eb3709",
+                                "id": "b30a5551-8389-4230-b373-4bb981aae076",
+                                "orgId": "4e95affb-b04c-4721-a2ae-9fe11a678168",
+                                "name": "Staging",
+                                "subdomain": "ncfaws-19"
+                            },
+                            {
+                                "id": "a2a09b78-b18b-4876-8d99-6d42b62fd48e",
+                                "orgId": "a3ed8749-c7a3-4699-bebc-0849b464a747",
+                                "name": "PreProd",
+                                "subdomain": "ncfaws-21"
+                            },
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
                                 "name": "Prod",
-                                "subdomain": "pcfaws-04",
-                                "usage": "prod",
-                                "services": {
-                                    "adobe": {},
-                                    "dqm": {},
-                                    "mrm": {},
-                                    "tms": {}
-                                },
-                                "spaces": [
-                                    {
-                                        "spaceName": "CF_AWS_EUR_Production_Utilities_Dcore",
-                                        "spaceId": "54b536dc-7f73-4878-ae8b-0df2de28a97a"
-                                    }
-                                ]
+                                "subdomain": "XXX",
+                                "state": "na",
+                                "note": "Q4`23"
                             }
                         ]
                     },
@@ -494,6 +540,49 @@
                                     {
                                         "spaceName": "CF_AWS_USE_Production_CFIN",
                                         "spaceId": "XXX"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Digital Core - EUR Utilities",
+                        "short": "EU",
+                        "region": "eu10",
+                        "subaccounts": [
+                            {
+                                "id": "b50a993b-07e9-48b5-bffa-e72d3a564764",
+                                "orgId": "1bedfc64-543c-4760-8047-4b4763373f46",
+                                "name": "Non-Prod",
+                                "subdomain": "ncfaws-15",
+                                "services": {
+                                    "adobe": {},
+                                    "dqm": {},
+                                    "mrm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_EUR_Sandbox_Utilities_(Dcore)",
+                                        "spaceId": "8f273d27-2969-480d-add9-8b6724b36656"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "846e26d6-a20e-4762-8992-9a867fbf3a5f",
+                                "orgId": "06fed0dc-7955-4a7d-9919-dbf603eb3709",
+                                "name": "Prod",
+                                "subdomain": "pcfaws-04",
+                                "usage": "prod",
+                                "services": {
+                                    "adobe": {},
+                                    "dqm": {},
+                                    "mrm": {},
+                                    "tms": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_EUR_Production_Utilities_Dcore",
+                                        "spaceId": "54b536dc-7f73-4878-ae8b-0df2de28a97a"
                                     }
                                 ]
                             }
