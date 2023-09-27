@@ -84,6 +84,7 @@
                                         ]
                                     },
                                     "spa": {},
+                                    "tms": {},
                                     "wfm": {}
                                 },
                                 "spaces": [
@@ -346,6 +347,48 @@
                                     },
                                     "wfm": {}
                                 }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Digital Core - EUR Utilities",
+                        "short": "EU",
+                        "region": "eu10",
+                        "subaccounts": [
+                            {
+                                "id": "b50a993b-07e9-48b5-bffa-e72d3a564764",
+                                "orgId": "1bedfc64-543c-4760-8047-4b4763373f46",
+                                "name": "Non-Prod",
+                                "subdomain": "ncfaws-15",
+                                "services": {
+                                    "adobe": {},
+                                    "dqm": {},
+                                    "mrm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_EUR_Sandbox_Utilities_(Dcore)",
+                                        "spaceId": "8f273d27-2969-480d-add9-8b6724b36656"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "846e26d6-a20e-4762-8992-9a867fbf3a5f",
+                                "orgId": "06fed0dc-7955-4a7d-9919-dbf603eb3709",
+                                "name": "Prod",
+                                "subdomain": "ncfaws-05",
+                                "services": {
+                                    "adobe": {},
+                                    "dqm": {},
+                                    "mrm": {},
+                                    "tms": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_EUR_Production_Utilities_Dcore",
+                                        "spaceId": "54b536dc-7f73-4878-ae8b-0df2de28a97a"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -952,7 +995,8 @@
             "url": "https://{subdomain}.{region}.build.cloud.sap/lobby"
         },
         "tms": {
-            "name": "TMS",
+            "name": "Transport Mgmt",
+            "fullName": "Transport Management Service",
             "url": "https://{subdomain}.ts.cfapps.{region}.hana.ondemand.com/main/webapp/index.html"
         },
         "wfm": {
