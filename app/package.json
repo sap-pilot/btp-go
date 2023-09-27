@@ -8,6 +8,6 @@
   },
   "scripts": {
     "start": "node node_modules/@sap/approuter/approuter.js",
-    "start-local": "node node_modules/@sap/approuter/approuter.js -w ./local"
+    "local": "PORT=3011 node node_modules/@sap/approuter/approuter.js -w ./local"
   }
 }
