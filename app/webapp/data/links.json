@@ -34,7 +34,17 @@
                                     },
                                     "spa": {},
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "<SPACE_SBX_R1>",
+                                        "spaceId": "<SPACE_ID_1>"
+                                    },
+                                    {
+                                        "spaceName": "<SPACE_SBX_R2>",
+                                        "spaceId": "<SPACE_ID_2>"
+                                    }
+                                ]
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
@@ -60,7 +70,17 @@
                                     },
                                     "spa": {},
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "<SPACE_DEV_R1>",
+                                        "spaceId": "<SPACE_ID_1>"
+                                    },
+                                    {
+                                        "spaceName": "<SPACE_DEV_R2>",
+                                        "spaceId": "<SPACE_ID_2>"
+                                    }
+                                ]
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
@@ -441,7 +461,63 @@
                 },
                 {
                     "name": "Spaces",
-                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/spaces"
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/spaces",
+                    "children": [
+                        {
+                            "repeatOn": "spaces",
+                            "name": "{spaceName}",
+                            "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/applications",
+                            "children": [
+                                {
+                                    "name": "Applications",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/applications"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Service Marketplace",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/service-marketplace"
+                                },
+                                {
+                                    "name": "Service Instances",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/service-instances"
+                                },
+                                {
+                                    "name": "SAP HANA Cloud",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/hanaCloud"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Routes",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/routes"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Security Groups",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/cfsecuritygroups"
+                                },
+                                {
+                                    "name": "Events",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/spaceevents"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Members",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/space/{spaceId}/users"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "-"
                 },
                 {
                     "name": "Org Membeers",

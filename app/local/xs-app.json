@@ -1,27 +1,27 @@
 {
     "welcomeFile": "index.html",
-    "authenticationMethod": "route",
+    "authenticationMethod": "none",
     "sessionTimeout": 1440,
     "routes": [
         {
             "source": "^/user-api(.*)$",
             "target": "$1",
             "service": "sap-approuter-userapi",
-            "authenticationType": "xsuaa"
+            "authenticationType": "none"
         },
         {
             "source": "^/assets/(.*)$",
             "target": "$1",
-            "localDir": "webapp/assets",
+            "localDir": "../webapp/assets",
             "cacheControl": "max-age=604800, must-revalidate",
             "authenticationType": "none"
         },
         {
             "source": "^/(.*)$",
             "target": "$1",
-            "localDir": "webapp",
+            "localDir": "../webapp",
             "cacheControl": "max-age=0, must-revalidate",
-            "authenticationType": "xsuaa"
+            "authenticationType": "none"
         }
     ]
 }
