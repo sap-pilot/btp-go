@@ -186,19 +186,34 @@ const app = Vue.createApp ({
     },
     mounted: function () {
         this.$nextTick(function () {
+            // add hash change listener
+            let handleHashChange = function(event) {
+                let hash = window.location.hash ? window.location.hash.substr(1) : "";
+                if (hash)
+                    hash = hash.split('-')[0]; // remove section
+                const tabBtn = document.querySelector('a[data-bs-target="#pane-' + hash + '"]');
+                if (tabBtn && !tabBtn.classList.contains("active")) {
+                    tabBtn.click();
+                }
+                const splitBtns = document.querySelectorAll("ul.nav-pills > li > a.dropdown-toggle-split");
+                splitBtns.forEach(btn => {
+                    btn.classList.remove("active");
+                });
+                if (tabBtn.nextSibling && tabBtn.nextSibling.classList.contains("dropdown-toggle-split")) {
+                    tabBtn.nextSibling.classList.add("active");
+                }
+            };
+            window.addEventListener("hashchange", handleHashChange);
             // tab handling functions
             const tabBtns = document.querySelectorAll("ul.nav-pills > li > a");
             tabBtns.forEach(btn => {
                 btn.addEventListener('shown.bs.tab', function(e) {
                     var id = e.target.getAttribute("data-bs-target").substr(6);
-                    window.location.hash = id;
+                    if (id && (!window.location.hash || window.location.hash.indexOf(id) < 0))
+                        window.location.hash = id;
                 });
             });
-            const hash = window.location.hash ? window.location.hash.substr(1) : "";
-            const tabBtn = document.querySelector('a[data-bs-target="#pane-' + hash + '"]');
-            if (tabBtn) {
-                tabBtn.click();
-            }
+            handleHashChange(); // update tab locatation base on current hash
         })
     }
 }).mount('#app')

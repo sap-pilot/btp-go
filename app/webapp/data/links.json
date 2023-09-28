@@ -276,6 +276,7 @@
         "projects": [
             {
                 "name": "<YOUR_S4_PROJECT_NAME>",
+                "short": "CFIN",
                 "tiers": [
                     "Sandbox",
                     "Dev",
