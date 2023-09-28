@@ -228,7 +228,7 @@
             </div> <!-- end of subaccounts (row) -->
 
             <!-- begin of service table -->
-            <template v-if="dir.allServices && dir.allServices.length != 0">
+            <template v-if="dir.allServices && dir.allServices.length != 0 && !dir.notable">
               <div class="table-responsive">
                 <table class="table text-center table-striped">
                   <thead>

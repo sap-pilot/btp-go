@@ -589,6 +589,84 @@
                         ]
                     }
                 ]
+            },
+            {
+                "id": "CA160438TID000000000741261347",
+                "name": "Chevron IAM SaaS Subscription",
+                "cockpitRegion": "amer",
+                "int-regionPostfix": "",
+                "int-cpiTenant": "cpi003",
+                "directories": [
+                    {
+                        "name": "Intelligent Asset Management",
+                        "short": "IAM",
+                        "region": "us20",
+                        "notable": true,
+                        "subaccounts": [
+                            {
+                                "id": "a40becc2-8d69-40a3-be19-b2a388ddc212",
+                                "orgId": "a40becc2-8d69-40a3-be19-b2a388ddc212",
+                                "name": "Sandbox",
+                                "subdomain": "ncfazu-07",
+                                "services": {
+                                    "iam": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "Sandbox",
+                                        "spaceId": "fbfebbac-49d3-44bd-a15e-957d2571d82e"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "98fd93ac-4c16-4c20-9346-8626427eb2e2",
+                                "orgId": "9ae1b540-9af1-4b0b-9b1c-7676f747746c",
+                                "name": "Dev",
+                                "subdomain": "ncfazu-02",
+                                "services": {
+                                    "iam": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "Development",
+                                        "spaceId": "9c3b4cdc-6ba3-45ca-ab15-df1266673ca0"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "addf0d84-26db-436f-b7c0-216b9d133172",
+                                "orgId": "975db45e-37bf-4bf4-b57b-f061d34a8941",
+                                "name": "Staging",
+                                "subdomain": "ncfazu-03",
+                                "services": {
+                                    "iam": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "Staging",
+                                        "spaceId": "1b56fe94-37ea-428b-8883-16a5fdaa53ac"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "4a5cbb7d-1c96-4efa-945d-f06dd7015020",
+                                "orgId": "0bc9f93e-c385-406c-ac0a-91bce2b28456",
+                                "name": "Prod",
+                                "subdomain": "pcfazu-02",                                
+                                "usage": "prod",
+                                "services": {
+                                    "iam": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "Production",
+                                        "spaceId": "96b5ac8c-2474-422f-9ad8-4bd9b325f919"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },
@@ -1148,6 +1226,28 @@
                 {
                     "name": "Open Connector",
                     "url": "https://my.openconnectors.{region}.ext.hana.ondemand.com/login/sso?accountExternalId={subaccountId}&customerId=1382&orgExternalId={globalAccountId}"
+                }
+            ]
+        },
+        "iam": {
+            "name": "IAM Launchpad",
+            "url": "https://{subdomain}.iam-prw.cfapps.{region}.hana.ondemand.com/",
+            "children": [
+                {
+                    "name": "APM",
+                    "url": "https://{subdomain}-apm-flp-live.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Data Privacy",
+                    "url": "https://{subdomain}.{region}.dpi.dpp.cloud.sap/"
+                },
+                {
+                    "name": "Event Mesh",
+                    "url": "https://{subdomain}.enterprise-messaging.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "IoT",
+                    "url": "https://{subdomain}.leonardo-iot.cfapps.{region}.hana.ondemand.com/"
                 }
             ]
         },
