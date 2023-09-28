@@ -5,8 +5,9 @@
     "routes": [
         {
             "source": "^/user-api(.*)$",
-            "target": "$1",
-            "service": "sap-approuter-userapi",
+            "target": "$1.json",
+            "localDir": "./user-api",
+            "cacheControl": "max-age=0, must-revalidate",
             "authenticationType": "none"
         },
         {
