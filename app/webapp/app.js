@@ -132,8 +132,11 @@ const fnPopulateS4Table = function(oS4, oTemplate) {
 };
 
 const fnHandleHashChange = function(event) {
-    const sHash = window.location.hash ? window.location.hash.slice(1) : "";
-    const sTab = sHash? sHash.split('/')[0] : "";
+    let sHash = window.location.hash ? window.location.hash.slice(1) : "";
+    let sTab = sHash? sHash.split('/')[0] : "";
+    if (!sTab || !sTab.match("^(BTP|S4)$")) {
+        sHash = sTab = "BTP"; // set initial tab if none specified or matched
+    }
     const oTabBtn = document.querySelector('a[data-bs-target="#pane-' + sTab + '"]');
     if (oTabBtn && !oTabBtn.classList.contains("active")) {
         oTabBtn.click();
@@ -145,9 +148,9 @@ const fnHandleHashChange = function(event) {
     if (oTabBtn && oTabBtn.nextSibling && oTabBtn.nextSibling.classList.contains("dropdown-toggle-split")) {
         oTabBtn.nextSibling.classList.add("active");
     }
-    if (sHash) {
+    if (sHash !== sTab) {
         // scroll to element
-        const oSection = document.getElementById(window.location.hash.substr(1));
+        const oSection = document.getElementById(sHash);
         if (oSection) {
             oSection.scrollIntoView();
         }
