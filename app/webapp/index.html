@@ -303,7 +303,7 @@
       <!-- begin of s4 table -->
       <template v-if="s4.projects">
         <template v-for="prj in s4.projects">
-          <h3 class="display-6 text-center mb-4">{{prj.name}}</h3> 
+          <h3 :id="'S4-' + prj.short" class="display-6 text-center mb-4">{{prj.name}}</h3> 
           <div class="table-responsive">
             <table class="table text-center table-striped">
               <thead>
