@@ -137,7 +137,7 @@ const fnHandleHashChange = function(event) {
     if (!sTab || !sTab.match("^(BTP|S4)$")) {
         sHash = sTab = "BTP"; // set initial tab if none specified or matched
     }
-    const oTabBtn = document.querySelector('a[data-bs-target="#pane-' + sTab + '"]');
+    const oTabBtn = document.querySelector('a[data-bs-target="#' + sTab + '"]');
     if (oTabBtn && !oTabBtn.classList.contains("active")) {
         oTabBtn.click();
     }
@@ -152,9 +152,24 @@ const fnHandleHashChange = function(event) {
         // scroll to element
         const oSection = document.getElementById(sHash);
         if (oSection) {
+            document.removeEventListener('scroll', fnHandleScrollUpdateHeader);
             oSection.scrollIntoView();
+            setTimeout(function(){
+                document.addEventListener('scroll', fnHandleScrollUpdateHeader);
+            },2000);
         }
     }
+};
+
+const fnHandleScrollUpdateHeader = function(event) {
+    const aHeadings = document.querySelectorAll('.nav-section');  
+    aHeadings.forEach(ha => {
+        const rect = ha.getBoundingClientRect();
+        if(rect.top > 0 && rect.top < 60) {
+            const location = window.location.toString().split('#')[0];
+            history.replaceState(null, null, location + '#' + ha.id);
+        }
+    });
 };
 
 const vApp = Vue.createApp ({
@@ -165,7 +180,8 @@ const vApp = Vue.createApp ({
         s4: [],
         footerLinks: [],
         templates: [],
-        currentUser: {}
+        currentUser: {},
+        listenerAttached: false
       }
     },
 
@@ -214,17 +230,23 @@ const vApp = Vue.createApp ({
                 } // end of oDirectories (oDir)
             } // end of global account (ga)
             fnPopulateS4Table(vApp.s4,vApp.templates["s4"]);
-
-            // update tab selection in next tick (afer rendering)
-            this.$nextTick(function () {
-                window.addEventListener("hashchange", fnHandleHashChange);
-                fnHandleHashChange();
-            });
+            this.getUserInfo(); // get user info after links got rendered
         },
         async getUserInfo() {
             const {data} = await GET(`/user-api/currentUser`);
             vApp.currentUser = data;
         }
+    },
+    updated: function() {
+        // update tab selection in next tick (afer rendering)
+        this.$nextTick(function () {
+            if (vApp.listenerAttached)
+                return; 
+            vApp.listenerAttached = true;
+            document.addEventListener('scroll', fnHandleScrollUpdateHeader);
+            window.addEventListener("hashchange", fnHandleHashChange);
+            fnHandleHashChange();
+        });
     },
     mounted: function () {
         this.$nextTick(function () {
@@ -232,7 +254,7 @@ const vApp = Vue.createApp ({
             const aTabBtns = document.querySelectorAll("ul.nav-pills > li > a");
             aTabBtns.forEach(oBtn => {
                 oBtn.addEventListener('shown.bs.tab', function(e) {
-                    var sId = e.target.getAttribute("data-bs-target").substr(6);
+                    var sId = e.target.getAttribute("data-bs-target").substr(1);
                     if (sId && (!window.location.hash || window.location.hash.indexOf(sId) < 0))
                         window.location.hash = sId;
                 });
@@ -244,4 +266,4 @@ const vApp = Vue.createApp ({
 }).mount('#app')
 
 vApp.fetch();
-vApp.getUserInfo();
+
