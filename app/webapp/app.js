@@ -137,7 +137,7 @@ const fnHandleHashChange = function(event) {
     if (!sTab || !sTab.match("^(BTP|S4)$")) {
         sHash = sTab = "BTP"; // set initial tab if none specified or matched
     }
-    const oTabBtn = document.querySelector('a[data-bs-target="#' + sTab + '"]');
+    const oTabBtn = document.querySelector('a[data-bs-target="#pane-' + sTab + '"]');
     if (oTabBtn && !oTabBtn.classList.contains("active")) {
         oTabBtn.click();
     }
@@ -156,20 +156,21 @@ const fnHandleHashChange = function(event) {
             oSection.scrollIntoView();
             setTimeout(function(){
                 document.addEventListener('scroll', fnHandleScrollUpdateHeader);
-            },2000);
+            },1000);
         }
     }
 };
 
 const fnHandleScrollUpdateHeader = function(event) {
-    const aHeadings = document.querySelectorAll('.nav-section');  
-    aHeadings.forEach(ha => {
-        const rect = ha.getBoundingClientRect();
-        if(rect.top > 0 && rect.top < 60) {
+    const aHeaders = document.querySelectorAll('.nav-section');  
+    for ( const oHeader of aHeaders) {
+        const rect = oHeader.getBoundingClientRect();
+        if(rect.top > 0 && rect.top < 100) {
             const location = window.location.toString().split('#')[0];
-            history.replaceState(null, null, location + '#' + ha.id);
+            history.replaceState(null, null, location + '#' + oHeader.getAttribute("name"));
+            break; // only update for 1st visible header
         }
-    });
+    }
 };
 
 const vApp = Vue.createApp ({
@@ -254,7 +255,7 @@ const vApp = Vue.createApp ({
             const aTabBtns = document.querySelectorAll("ul.nav-pills > li > a");
             aTabBtns.forEach(oBtn => {
                 oBtn.addEventListener('shown.bs.tab', function(e) {
-                    var sId = e.target.getAttribute("data-bs-target").substr(1);
+                    var sId = e.target.getAttribute("data-bs-target").substr(6);
                     if (sId && (!window.location.hash || window.location.hash.indexOf(sId) < 0))
                         window.location.hash = sId;
                 });
