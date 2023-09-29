@@ -4,124 +4,160 @@ const GET = (url) => axios.get(url)
 const POST = (cmd,data) => axios.post(cmd,data)
 
 // replace variables in string
-const interpolateStr = (string, values) => string.replace(/{(.*?)}/g, (match, offset) => values[offset]);
+const fnInterpolateStr = (sStr, mValueMap) => sStr.replace(/{(.*?)}/g, (match, offset) => mValueMap[offset]);
 
-/**  render service/s4  url and name by template and valueMap */
-const renderService = function(srvKey, srv, tpl, valueMap) {
-    if (!srv.url && tpl.url) // service url overwrites template url (likewise for below name and fullname)
-        srv.url = interpolateStr(tpl.url, valueMap)
-    if (!srv.name && tpl.name)
-        srv.name = interpolateStr(tpl.name, valueMap);
-    if (!srv.fullName && tpl.fullName)
-        srv.fullName = tpl.fullName;
+/**  render service/s4  url and name by template and mValueMap */
+const fnRenderService = function(sSrvKey, oSrv, oTemplate, mValueMap) {
+    if (!oSrv.url && oTemplate.url) // service url overwrites template url (likewise for below name and fullname)
+        oSrv.url = fnInterpolateStr(oTemplate.url, mValueMap)
+    if (!oSrv.name && oTemplate.name)
+        oSrv.name = fnInterpolateStr(oTemplate.name, mValueMap);
+    if (!oSrv.fullName && oTemplate.fullName)
+        oSrv.fullName = oTemplate.fullName;
     else
-        srv.fullName = srv.name;
-    if (tpl.children) {
+        oSrv.fullName = oSrv.name;
+    if (oTemplate.children) {
         // also render children
-        srv.children = srv.children?srv.children:[];
-        for (const tplChild of tpl.children) {
-            if (tplChild.repeatOn == "instances") {
-                // apply this tplChild to all srv instances  
-                if (!srv.instances) 
+        oSrv.children = oSrv.children?oSrv.children:[];
+        for (const oTemplateChild of oTemplate.children) {
+            if (oTemplateChild.repeatOn == "instances") {
+                // apply this oTemplateChild to all oSrv instances  
+                if (!oSrv.instances) 
                     continue;
-                for (const srvInst of srv.instances) {
-                    const instChild = Object.assign({},srvInst);
+                for (const oSrvInst of oSrv.instances) {
+                    const instChild = Object.assign({},oSrvInst);
                     // build instValueMap
-                    const instValueMap = Object.assign({},valueMap);
-                    for (const pk in srvInst) {
+                    const instValueMap = Object.assign({},mValueMap);
+                    for (const pk in oSrvInst) {
                         if (pk != "instances") 
-                            instValueMap[srvKey+"-"+pk] = srvInst[pk]; // add service instance params, note service param with same name will be overwriten
+                            instValueMap[sSrvKey+"-"+pk] = oSrvInst[pk]; // add service instance params, note service param with same name will be overwriten
                     }
                     // render service instance
-                    renderService(srvKey, instChild, tplChild, instValueMap);
-                    srv.children.push(instChild);
+                    fnRenderService(sSrvKey, instChild, oTemplateChild, instValueMap);
+                    oSrv.children.push(instChild);
                 }
-            } else if (tplChild.repeatOn == "spaces") {
-                // apply this tplChild to all spaces
-                const aSpaces = valueMap['spaces'];
+            } else if (oTemplateChild.repeatOn == "spaces") {
+                // apply this oTemplateChild to all spaces
+                const aSpaces = mValueMap['spaces'];
                 if (!aSpaces || aSpaces.length == 0)
                     continue;
                 for (const oSpace of aSpaces) {
                     // copy space info first 
                     const oSpaceChild = Object.assign({},oSpace);
                     // build instValueMap
-                    const oSpaceValueMap = Object.assign({},valueMap);
+                    const oSpaceValueMap = Object.assign({},mValueMap);
                     for (const pk in oSpaceChild) {
                         oSpaceValueMap[pk] = oSpace[pk]; // add space params
                     }
                     // render service instance
-                    renderService(srvKey, oSpaceChild, tplChild, oSpaceValueMap);
-                    srv.children.push(oSpaceChild);
+                    fnRenderService(sSrvKey, oSpaceChild, oTemplateChild, oSpaceValueMap);
+                    oSrv.children.push(oSpaceChild);
                 }
             } else {
                 // render single item (not related to instances)
-                const srvChild = {};
-                renderService(srvKey, srvChild, tplChild, valueMap); // render as menu item 
-                srv.children.push(srvChild); 
+                const oSrvChild = {};
+                fnRenderService(sSrvKey, oSrvChild, oTemplateChild, mValueMap); // render as menu item 
+                oSrv.children.push(oSrvChild); 
             }
         }
         // remove first or last dividers if they present
-        if (srv.children.length > 0 && srv.children[srv.children.length-1].name == '-') 
-            srv.children.pop();
-        if (srv.children.length > 0 && srv.children[0].name == '-') 
-            srv.children.shift();
+        if (oSrv.children.length > 0 && oSrv.children[oSrv.children.length-1].name == '-') 
+            oSrv.children.pop();
+        if (oSrv.children.length > 0 && oSrv.children[0].name == '-') 
+            oSrv.children.shift();
     }
 };
 
-/** populate service table in specified directory (dir) like this: 
- *     allServices[] -> {serviceName,serviceInSubaccounts[]}  */
-const populateServiceTable = function(dir) {
-    const allServices = []; // rows of all serivces in this dir like {serviceName:<serviceName>,serviceInSubaccount:[]}
-    const serviceMap = {}; // temporary map of serviceType-> above service row
-    for (const [saIdx, sa] of Object.entries(dir.subaccounts)) {
-        for (const [srvType, srv] of Object.entries(sa.services)) {
-            if (!serviceMap[srvType]) {
+/** populate service table in specified directory (oDir) like this: 
+ *     aAllServices[] -> {serviceName,serviceInSubaccounts[]}  */
+const fnPopulateServiceTable = function(oDir) {
+    const aAllServices = []; // rows of all serivces in this oDir like {serviceName:<serviceName>,serviceInSubaccount:[]}
+    oDir.allServices = aAllServices;
+    if (!oDir.subaccounts)
+        return;
+    const mServiceMap = {}; // temporary map of serviceType-> above service row
+    for (const [iSaIndex, oSubaccount] of Object.entries(oDir.subaccounts)) {
+        if (!oSubaccount.services)
+            continue;
+        for (const [sSrvType, oSrv] of Object.entries(oSubaccount.services)) {
+            if (!mServiceMap[sSrvType]) {
                 // initialize row as empty array
-                const srvRow = {serviceName:srv.fullName, serviceInSubaccounts:[]};
-                serviceMap[srvType] = srvRow; 
-                allServices.push(srvRow);
+                const oSrvRow = {serviceName:oSrv.fullName, serviceInSubaccounts:[]};
+                mServiceMap[sSrvType] = oSrvRow; 
+                aAllServices.push(oSrvRow);
                 // first time seeing this service, prefill null ref for all subaccounts
-                for (var i = 0; i < dir.subaccounts.length; i++) {
-                    srvRow.serviceInSubaccounts.push(null); 
+                for (var i = 0; i < oDir.subaccounts.length; i++) {
+                    oSrvRow.serviceInSubaccounts.push(null); 
                 }
             } 
-            serviceMap[srvType].serviceInSubaccounts[saIdx] = srv;
+            mServiceMap[sSrvType].serviceInSubaccounts[iSaIndex] = oSrv;
         }
     }
-    allServices.sort((a,b) => (a.serviceName > b.serviceName) ? 1 : ((b.serviceName > a.serviceName) ? -1 : 0))
-    dir.allServices = allServices;
+    aAllServices.sort((a,b) => (a.serviceName > b.serviceName) ? 1 : ((b.serviceName > a.serviceName) ? -1 : 0))
 };
 
-const populateS4Table = function(s4, tpl) {
-    const s4ValueMap = Object.assign({},s4.params); // temporary map of serviceType-> above service row
-    for (const prj of s4.projects) {
-        for (const prd of prj.products) {
-            prd.tieredSystems = [];
+
+/**
+ * populate links json s4 systems into s4 table 
+ */
+const fnPopulateS4Table = function(oS4, oTemplate) {
+    const mS4ValueMap = Object.assign({},oS4.params); // temporary map of serviceType-> above service row
+    for (const oPrject of oS4.projects) {
+        for (const oProduct of oPrject.products) {
+            oProduct.tieredSystems = [];
             // first time seeing this product, prefill null ref for all tiers
-            for (var i = 0; i < prj.tiers.length; i++) {
-                prd.tieredSystems.push(null); 
+            for (var i = 0; i < oPrject.tiers.length; i++) {
+                oProduct.tieredSystems.push(null); 
             }
-            for (const sys of prd.systems) {
-                const tierIndex = prj.tiers.indexOf(sys.tier); 
-                if (tierIndex < 0) {
-                    console.log("# tier ['"+sys.tier+"'] not found");          
+            for (const oSystem of oProduct.systems) {
+                const iTierIndex = oPrject.tiers.indexOf(oSystem.tier); 
+                if (iTierIndex < 0) {
+                    console.log("# tier ['"+oSystem.tier+"'] not found");          
                 }
-                if (!prd.tieredSystems[tierIndex]) {
-                    prd.tieredSystems[tierIndex] = [];
+                if (!oProduct.tieredSystems[iTierIndex]) {
+                    oProduct.tieredSystems[iTierIndex] = [];
                 }
-                const sysValueMap = Object.assign({},s4ValueMap);
-                for (const pk in sys) {
-                    if (pk != "instances") 
-                        sysValueMap[pk] = sys[pk]; // add sys params, note s4 param with same name will be overwriten
+                const mSysValueMap = Object.assign({},mS4ValueMap);
+                for (const sKey in oSystem) {
+                    if (sKey != "instances") 
+                        mSysValueMap[sKey] = oSystem[sKey]; // add sys params, note s4 param with same name will be overwriten
                 }
-                renderService("s4",sys,tpl,sysValueMap);
-                prd.tieredSystems[tierIndex].push(sys);
+                if (!mSysValueMap.host)
+                    mSysValueMap.host = mSysValueMap.sid; // by default assign sid as host name
+                fnRenderService("s4",oSystem,oTemplate,mSysValueMap);
+                oProduct.tieredSystems[iTierIndex].push(oSystem);
             }
         }
     }
 };
 
-const app = Vue.createApp ({
+const fnHandleHashChange = function(event) {
+    let sHash = window.location.hash ? window.location.hash.slice(1) : "";
+    let sTab = sHash? sHash.split('/')[0] : "";
+    if (!sTab || !sTab.match("^(BTP|S4)$")) {
+        sHash = sTab = "BTP"; // set initial tab if none specified or matched
+    }
+    const oTabBtn = document.querySelector('a[data-bs-target="#pane-' + sTab + '"]');
+    if (oTabBtn && !oTabBtn.classList.contains("active")) {
+        oTabBtn.click();
+    }
+    const aSplitBtns = document.querySelectorAll("ul.nav-pills > li > a.dropdown-toggle-split");
+    aSplitBtns.forEach(oBtn => {
+        oBtn.classList.remove("active");
+    });
+    if (oTabBtn && oTabBtn.nextSibling && oTabBtn.nextSibling.classList.contains("dropdown-toggle-split")) {
+        oTabBtn.nextSibling.classList.add("active");
+    }
+    if (sHash !== sTab) {
+        // scroll to element
+        const oSection = document.getElementById(sHash);
+        if (oSection) {
+            oSection.scrollIntoView();
+        }
+    }
+};
+
+const vApp = Vue.createApp ({
 
     data() {
       return {
@@ -135,73 +171,77 @@ const app = Vue.createApp ({
 
     methods: {
         async fetch () {
-            const {data} = await GET(`/data/links.json`);
-            app.btp = data.btp;
-            app.s4 = data.s4;
-            app.footerLinks = data.footerLinks;
-            app.templates = data.templates;
+            const {data} = await GET(`/data/links-cvx.json`);
+            vApp.btp = data.btp;
+            vApp.s4 = data.s4;
+            vApp.footerLinks = data.footerLinks;
+            vApp.templates = data.templates;
             // apply template to services
-            for (const ga of app.btp.globalAccounts) {
-                for (const dir of ga.directories) {
-                    for (const sa of dir.subaccounts) {
+            for (const ga of vApp.btp.globalAccounts) {
+                for (const oDir of ga.directories) {
+                    for (const oSubaccount of oDir.subaccounts) {
                         // add default params
-                        const valueMap = {
+                        const mValueMap = {
                             globalAccountId: ga.id,
                             cockpitRegion: ga.cockpitRegion,
-                            subaccountId: sa.id,
-                            orgId: sa.orgId,
-                            subdomain: sa.subdomain,
-                            region: sa.region? sa.region:dir.region,
-                            spaces: sa.spaces,
+                            subaccountId: oSubaccount.id,
+                            orgId: oSubaccount.orgId,
+                            subdomain: oSubaccount.subdomain,
+                            region: oSubaccount.region? oSubaccount.region:oDir.region,
+                            spaces: oSubaccount.spaces,
                             "int-regionPostfix": ga["int-regionPostfix"],
                             "int-cpiTenant": ga["int-cpiTenant"]
                         };
-                        for (const sk in sa.services) {
-                            const srv = sa.services[sk];
-                            const tpl = app.templates[sk];
+                        for (const sServiceKey in oSubaccount.services) {
+                            const oSrv = oSubaccount.services[sServiceKey];
+                            const oTemplate = vApp.templates[sServiceKey];
                             // loop through service parameters and add them to value map
-                            for (const pk in srv) {
-                                if (pk != "instances") 
-                                   valueMap[sk+"-"+pk] = srv[pk]; // add service params into value map
+                            for (const sParamKey in oSrv) {
+                                if (sParamKey != "instances") 
+                                   mValueMap[sServiceKey+"-"+sParamKey] = oSrv[sParamKey]; // add service params into value map
                             }
                             // render service
-                            renderService(sk, srv, tpl, valueMap);
+                            fnRenderService(sServiceKey, oSrv, oTemplate, mValueMap);
                         }
                         // render cockpit
-                        if (app.templates["cockpit"]) {
-                            sa.cockpit = {};
-                            renderService("cockpit", sa.cockpit, app.templates["cockpit"], valueMap);
+                        if (vApp.templates["cockpit"]) {
+                            oSubaccount.cockpit = {};
+                            fnRenderService("cockpit", oSubaccount.cockpit, vApp.templates["cockpit"], mValueMap);
                         }
-                    } // end of subaccounts (sa)
-                    // populate services table within dir
-                    populateServiceTable(dir);
-                } // end of directories (dir)
+                    } // end of subaccounts (oSubaccount)
+                    // populate services table within oDir
+                    fnPopulateServiceTable(oDir);
+                } // end of oDirectories (oDir)
             } // end of global account (ga)
-            populateS4Table(app.s4,app.templates["s4"]);
+            fnPopulateS4Table(vApp.s4,vApp.templates["s4"]);
+
+            // update tab selection in next tick (afer rendering)
+            this.$nextTick(function () {
+                window.addEventListener("hashchange", fnHandleHashChange);
+                fnHandleHashChange();
+            });
         },
         async getUserInfo() {
             const {data} = await GET(`/user-api/currentUser`);
-            app.currentUser = data;
+            vApp.currentUser = data;
         }
     },
     mounted: function () {
         this.$nextTick(function () {
-            // tab handling functions
-            const tabBtns = document.querySelectorAll("ul.nav-pills > li > a");
-            tabBtns.forEach(btn => {
-                btn.addEventListener('shown.bs.tab', function(e) {
-                    var id = e.target.getAttribute("data-bs-target").substr(6);
-                    window.location.hash = id;
+            // add tab handling functions
+            const aTabBtns = document.querySelectorAll("ul.nav-pills > li > a");
+            aTabBtns.forEach(oBtn => {
+                oBtn.addEventListener('shown.bs.tab', function(e) {
+                    var sId = e.target.getAttribute("data-bs-target").substr(6);
+                    if (sId && (!window.location.hash || window.location.hash.indexOf(sId) < 0))
+                        window.location.hash = sId;
                 });
             });
-            const hash = window.location.hash ? window.location.hash.substr(1) : "";
-            const tabBtn = document.querySelector('a[data-bs-target="#pane-' + hash + '"]');
-            if (tabBtn) {
-                tabBtn.click();
-            }
-        })
+            // initial update of tab selectioin
+            fnHandleHashChange();
+        });
     }
 }).mount('#app')
 
-app.fetch();
-app.getUserInfo();
+vApp.fetch();
+vApp.getUserInfo();
