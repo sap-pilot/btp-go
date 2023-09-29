@@ -678,6 +678,7 @@
         "projects": [
             {
                 "name": "Digital Core S/4HANA (R1)",
+                "short": "R1",
                 "tiers": [
                     "Sandbox",
                     "Dev",
@@ -806,6 +807,7 @@
             },
             {
                 "name": "Digital Core S/4HANA (R2)",
+                "short": "R2",
                 "tiers": [
                     "Sandbox",
                     "Dev",
@@ -884,6 +886,7 @@
             },
             {
                 "name": "Project Maui/Nobel",
+                "short": "Nobel",
                 "tiers": [
                     "Sandbox",
                     "Dev",
@@ -921,6 +924,7 @@
             },
             {
                 "name": "Central Finance (CFIN)",
+                "short": "CFIN",
                 "tiers": [
                     "Sandbox",
                     "Dev",

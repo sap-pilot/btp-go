@@ -4,7 +4,7 @@
     "email": "user@chevron.com",
     "name": "user@chevron.com",
     "scopes": [
-      "openid"
+        "openid"
     ],
     "displayName": "John Smith (user@chevron.com)"
-  }
+}

@@ -70,14 +70,33 @@
   <header>
     <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
       <ul class="nav nav-pills">
-        <li class="nav-item">
-          <a class="nav-link active" id="btp-tab" data-bs-toggle="tab" data-bs-target="#pane-btp" type="button" role="tab" aria-controls="btp-tab-pane" aria-selected="true">BTP</a>
+        <li class="btn-group">
+          <a class="btn nav-link pe-0" id="btp-tab" data-bs-toggle="tab" data-bs-target="#pane-BTP" role="tab" aria-controls="pane-BTP" data-bs-toggle="dropdown" aria-expanded="false">
+            BTP
+          </a>
+          <a class="btn nav-link dropdown-toggle dropdown-toggle-split" role="tab" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </a>
+          <ul class="dropdown-menu">
+            <template v-if="btp.globalAccounts">
+              <template v-for="ga in btp.globalAccounts">
+                <template v-for="dir in ga.directories">
+                  <li><a class="dropdown-item" :href="'#BTP-' + dir.short">{{dir.name}} ({{dir.short}})</a></li>
+                </template>
+              </template>
+            </template>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="s4-tab" data-bs-toggle="tab" data-bs-target="#pane-s4" type="button" role="tab" aria-controls="s4-tab-pane" aria-selected="false">S/4HANA</a>
+        <li class="btn-group">
+          <a class="btn nav-link pe-0" id="s4-tab" data-bs-toggle="tab" data-bs-target="#pane-S4" role="tab" aria-controls="pane-S4">S/4HANA</a>
+          <a class="btn nav-link dropdown-toggle dropdown-toggle-split" role="tab" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li v-for="prj in s4.projects"><a class="dropdown-item" :href="'#S4-' + prj.short">{{prj.name}} ({{prj.short}})</a></li>
+          </ul>
         </li>
       </ul>
-
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Welcome, {{currentUser.displayName}}</a>
         <div class="dropdown bd-mode-toggle">
@@ -119,11 +138,11 @@
   </header>
 
   <main class="tab-content" >
-    <div id="pane-btp" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+    <div id="pane-BTP" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
       <template v-if="btp.globalAccounts">
         <template v-for="ga in btp.globalAccounts">
           <template v-for="dir in ga.directories">
-            <h3 class="display-6 text-center mb-4">{{dir.name}} ({{dir.short}})</h3> 
+            <h3 :id="'BTP-' + dir.short" class="display-6 text-center mb-4">{{dir.name}} ({{dir.short}})</h3> 
             <div class="row text-center" >
               <div class="col" v-for="sa in dir.subaccounts">
                 <div class="card mb-4 rounded-3 shadow-sm" :class="{ 'border-primary': sa.usage == 'prod', 'opacity-50': sa.state == 'na'}">
@@ -278,7 +297,7 @@
         </template> <!-- end of global accounts-->
       </template>
     </div><!-- end of btp-tab-pane -->
-    <div id="pane-s4" class="tab-pane fade" role="tabpanel" aria-labelledby="s4-tab" tabindex="0">
+    <div id="pane-S4" class="tab-pane fade" role="tabpanel" aria-labelledby="s4-tab" tabindex="1">
       <!-- begin of s4 table -->
       <template v-if="s4.projects">
         <template v-for="prj in s4.projects">
