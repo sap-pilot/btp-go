@@ -150,13 +150,11 @@ const fnHandleHashChange = function(event) {
     }
     if (sHash !== sTab) {
         // scroll to element
-        const oSection = document.getElementById(sHash);
+        const oSection = document.querySelector("h3[name='"+sHash+"']");
         if (oSection) {
             document.removeEventListener('scroll', fnHandleScrollUpdateHeader);
             oSection.scrollIntoView();
-            setTimeout(function(){
-                document.addEventListener('scroll', fnHandleScrollUpdateHeader);
-            },1000);
+            document.addEventListener("scrollend",fnHandleScrollEnd); // add fnScrollUpdateHeader after scrollend
         }
     }
 };
@@ -171,6 +169,11 @@ const fnHandleScrollUpdateHeader = function(event) {
             break; // only update for 1st visible header
         }
     }
+};
+
+const fnHandleScrollEnd = function(event) {
+    document.removeEventListener('scrollend', fnHandleScrollEnd);
+    document.addEventListener('scroll', fnHandleScrollUpdateHeader);
 };
 
 const vApp = Vue.createApp ({

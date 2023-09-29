@@ -140,7 +140,7 @@
       <template v-if="btp.globalAccounts">
         <template v-for="globalAccount in btp.globalAccounts">
           <template v-for="dir in globalAccount.directories">
-            <h3 :id="'BTP/' + dir.short" :name="'BTP/' + dir.short" class="display-6 text-center mb-4 nav-section">{{dir.name}} ({{dir.short}})</h3> 
+            <h3 :name="'BTP/' + dir.short" class="display-6 text-center mb-4 nav-section">{{dir.name}} ({{dir.short}})</h3> 
             <div class="row text-center" >
               <div class="col" v-for="subaccount in dir.subaccounts">
                 <div class="card mb-4 rounded-3 shadow-sm" :class="{ 'border-primary': subaccount.usage == 'prod', 'opacity-50': subaccount.state == 'na'}">
@@ -298,7 +298,7 @@
       <!-- begin of s4 table -->
       <template v-if="s4.projects">
         <template v-for="prj in s4.projects">
-          <h3 :id="'S4/' + prj.short" :name="'S4/' + prj.short" class="display-6 text-center mb-4 nav-section">{{prj.name}}</h3> 
+          <h3 :name="'S4/' + prj.short" class="display-6 text-center mb-4 nav-section">{{prj.name}}</h3> 
           <div class="table-responsive">
             <table class="table text-center table-striped">
               <thead>
