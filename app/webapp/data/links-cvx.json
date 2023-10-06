@@ -355,7 +355,9 @@
                                 "name": "Dev",
                                 "subdomain": "ncfaws-20",
                                 "services": {                                    
-                                    "int": {}
+                                    "int": {
+                                        "regionPostfix":"-002"
+                                    }
                                 },
                                 "spaces": [
                                     {
