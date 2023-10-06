@@ -1,4 +1,4 @@
-# btp-go
+# BTP-Home
 BTP home page of links to services group by directory (project) and subaccount
 
 ## Quick Start
@@ -18,7 +18,7 @@ To build & deploy this app to your Cloud Foundry enviornment, execute commands, 
 cf login
 npm run bd
 cf create-route <YOUR_DOMAIN> --hostname <THIS_APP_HOSTNAME>
-cf map-route btp-go <YOUR_DOMAIN> --hostname <THIS_APP_HOSTNAME>
+cf map-route BTP-Home-app <YOUR_DOMAIN> --hostname <THIS_APP_HOSTNAME>
 ```
 
 ## Customize
@@ -155,4 +155,4 @@ Check /app/xs-app.json for login setting, you can change the app to no authentic
 ## Contact & Support
 
 Creae issue below for support. Thanks for considering this repo. 
-https://github.com/sap-pilot/btp-go/issues
+https://github.com/sap-pilot/btp-home/issues
