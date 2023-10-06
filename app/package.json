@@ -1,5 +1,5 @@
 {
-  "name": "approuter",
+  "name": "BTP-Home-app",
   "dependencies": {
     "@sap/approuter": "^14.0.0"
   },

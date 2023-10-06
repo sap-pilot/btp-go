@@ -155,9 +155,11 @@ const fnHandleHashChange = function(event) {
             document.removeEventListener('scroll', fnHandleScrollUpdateHeader);
             oSection.scrollIntoView();
             document.addEventListener("scrollend",fnHandleScrollEnd); // add fnScrollUpdateHeader after scrollend
+
         }
     }
 };
+
 
 const fnHandleScrollUpdateHeader = function(event) {
     const aHeaders = document.querySelectorAll('.nav-section');  
@@ -175,6 +177,7 @@ const fnHandleScrollEnd = function(event) {
     document.removeEventListener('scrollend', fnHandleScrollEnd);
     document.addEventListener('scroll', fnHandleScrollUpdateHeader);
 };
+
 
 const vApp = Vue.createApp ({
 
@@ -270,4 +273,3 @@ const vApp = Vue.createApp ({
 }).mount('#app')
 
 vApp.fetch();
-

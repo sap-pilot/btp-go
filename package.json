@@ -1,16 +1,18 @@
 {
-  "name": "btp-go",
+  "name": "BTP-Home",
   "version": "0.0.1",
   "description": "BTP home page of links to services group by directory (project) and subaccount",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bd": "mbt build -p=cf --mtar=btp-go.mtar && cf deploy mta_archives/btp-go.mtar -f",
-    "undeploy": "cf undeploy btp-go --delete-services --delete-service-keys"
+    "build": "mbt build -p=cf --mtar=BTP-Home.mtar",
+    "deploy": "cf deploy mta_archives/BTP-Home.mtar -f --retries 1",
+    "bd": "mbt build -p=cf --mtar=BTP-Home.mtar && cf deploy mta_archives/BTP-Home.mtar -f --retries 1",
+    "undeploy": "cf undeploy BTP-Home --delete-services --delete-service-keys"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sap-pilot/btp-go.git"
+    "url": "git+https://github.com/sap-pilot/btp-home.git"
   },
   "keywords": [
     "SAP",
@@ -20,9 +22,9 @@
   "author": "Da Chen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sap-pilot/btp-go/issues"
+    "url": "https://github.com/sap-pilot/btp-home/issues"
   },
-  "homepage": "https://github.com/sap-pilot/btp-go#readme",
+  "homepage": "https://github.com/sap-pilot/btp-home#readme",
   "devDependencies": {
     "@sap/cds-dk": "^7"
   },

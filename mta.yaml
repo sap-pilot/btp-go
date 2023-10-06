@@ -1,5 +1,5 @@
 _schema-version: '3.1'
-ID: btp-go
+ID: BTP-Home
 version: 0.0.1
 description: "BTP home page of links to services group by directory (project)
   and subaccount"
@@ -11,7 +11,7 @@ build-parameters:
       commands:
         - npx cds build --production
 modules:
-  - name: btp-go
+  - name: BTP-Home-app
     type: approuter.nodejs
     path: app/ # from cds.env.folders. Consider also cds.env.build.target -> gen/app
     build-parameters:
@@ -22,18 +22,19 @@ modules:
         - "*node_modules*"
     parameters:
       keep-existing-routes: true
+      host: btp-home-${org}-${space}
       disk-quota: 256M
       memory: 256M
     requires:
-      - name: btp-go-xsuaa
+      - name: BTP-Home-xsuaa
 
 resources:
-  - name: btp-go-xsuaa
+  - name: BTP-Home-xsuaa
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
       path: ./xs-security.json
       config:
-        xsappname: btp-go-${space}
+        xsappname: BTP-Home-${space}
         tenant-mode: dedicated
