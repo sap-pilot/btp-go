@@ -136,11 +136,11 @@
   </header>
 
   <main class="tab-content" >
-    <div id="pane-BTP" class="tab-pane fade" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+    <div id="pane-BTP" name="BTP" class="tab-pane fade nav-section" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
       <template v-if="btp.globalAccounts">
         <template v-for="globalAccount in btp.globalAccounts">
           <template v-for="dir in globalAccount.directories">
-            <h3 :id="'BTP/' + dir.short" class="display-6 text-center mb-4">{{dir.name}} ({{dir.short}})</h3> 
+            <h3 :name="'BTP/' + dir.short" class="display-6 text-center mb-4 nav-section">{{dir.name}} ({{dir.short}})</h3> 
             <div class="row text-center" >
               <div class="col" v-for="subaccount in dir.subaccounts">
                 <div class="card mb-4 rounded-3 shadow-sm" :class="{ 'border-primary': subaccount.usage == 'prod', 'opacity-50': subaccount.state == 'na'}">
@@ -294,11 +294,11 @@
         </template> <!-- end of global accounts-->
       </template>
     </div><!-- end of btp-tab-pane -->
-    <div id="pane-S4" class="tab-pane fade hide" role="tabpanel" aria-labelledby="s4-tab" tabindex="1">
+    <div id="pane-S4" name="S4" class="tab-pane fade hide nav-section" role="tabpanel" aria-labelledby="s4-tab" tabindex="1">
       <!-- begin of s4 table -->
       <template v-if="s4.projects">
         <template v-for="prj in s4.projects">
-          <h3 :id="'S4/' + prj.short" class="display-6 text-center mb-4">{{prj.name}}</h3> 
+          <h3 :name="'S4/' + prj.short" class="display-6 text-center mb-4 nav-section">{{prj.name}}</h3> 
           <div class="table-responsive">
             <table class="table text-center table-striped">
               <thead>
@@ -351,14 +351,16 @@
     <div class="row">
       <div class="col-12 col-md">
         <img class="mb-2" src="./assets/brand/sap-logo-svg.svg" alt="" width="65" height="34">
-        <small class="d-block mb-3 text-body-secondary"><a class="link-secondary" href="https://github.com/sap-pilot/btp-home#readme" target="_blank">BTP-Home (build 20231006)</a><br />&copy; SAP America Inc.</small>
+        <small class="d-block mb-3 text-body-secondary"><a class="link-secondary" href="https://github.com/sap-pilot/btp-home#readme" target="_blank">BTP GO (build 20231006)</a><br />&copy; SAP America Inc.</small>
       </div>
-      <div class="col col-md" v-for="group in footerLinks">
-        <h5>{{group.groupName}}</h5>
-        <ul class="list-unstyled text-small">
-          <li class="mb-1" v-for="link in group.links"><a class="link-secondary" :href="link.url" target="_blank">{{link.name}}</a></li>
-        </ul>
-      </div>
+      <template v-if="footerLinks">
+        <div class="col col-md" v-for="group in footerLinks">
+          <h5>{{group.groupName}}</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1" v-for="link in group.links"><a class="link-secondary" :href="link.url" target="_blank">{{link.name}}</a></li>
+          </ul>
+        </div>
+      </template>
     </div>
   </footer>
 </div>

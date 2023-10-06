@@ -150,12 +150,34 @@ const fnHandleHashChange = function(event) {
     }
     if (sHash !== sTab) {
         // scroll to element
-        const oSection = document.getElementById(sHash);
+        const oSection = document.querySelector("h3[name='"+sHash+"']");
         if (oSection) {
+            document.removeEventListener('scroll', fnHandleScrollUpdateHeader);
             oSection.scrollIntoView();
+            document.addEventListener("scrollend",fnHandleScrollEnd); // add fnScrollUpdateHeader after scrollend
+
         }
     }
 };
+
+
+const fnHandleScrollUpdateHeader = function(event) {
+    const aHeaders = document.querySelectorAll('.nav-section');  
+    for ( const oHeader of aHeaders) {
+        const rect = oHeader.getBoundingClientRect();
+        if(rect.top > 0 && rect.top < 100) {
+            const location = window.location.toString().split('#')[0];
+            history.replaceState(null, null, location + '#' + oHeader.getAttribute("name"));
+            break; // only update for 1st visible header
+        }
+    }
+};
+
+const fnHandleScrollEnd = function(event) {
+    document.removeEventListener('scrollend', fnHandleScrollEnd);
+    document.addEventListener('scroll', fnHandleScrollUpdateHeader);
+};
+
 
 const vApp = Vue.createApp ({
 
@@ -165,7 +187,8 @@ const vApp = Vue.createApp ({
         s4: [],
         footerLinks: [],
         templates: [],
-        currentUser: {}
+        currentUser: {},
+        listenerAttached: false
       }
     },
 
@@ -214,17 +237,23 @@ const vApp = Vue.createApp ({
                 } // end of oDirectories (oDir)
             } // end of global account (ga)
             fnPopulateS4Table(vApp.s4,vApp.templates["s4"]);
-
-            // update tab selection in next tick (afer rendering)
-            this.$nextTick(function () {
-                window.addEventListener("hashchange", fnHandleHashChange);
-                fnHandleHashChange();
-            });
+            this.getUserInfo(); // get user info after links got rendered
         },
         async getUserInfo() {
             const {data} = await GET(`/user-api/currentUser`);
             vApp.currentUser = data;
         }
+    },
+    updated: function() {
+        // update tab selection in next tick (afer rendering)
+        this.$nextTick(function () {
+            if (vApp.listenerAttached)
+                return; 
+            vApp.listenerAttached = true;
+            document.addEventListener('scroll', fnHandleScrollUpdateHeader);
+            window.addEventListener("hashchange", fnHandleHashChange);
+            fnHandleHashChange();
+        });
     },
     mounted: function () {
         this.$nextTick(function () {
@@ -244,4 +273,3 @@ const vApp = Vue.createApp ({
 }).mount('#app')
 
 vApp.fetch();
-vApp.getUserInfo();
