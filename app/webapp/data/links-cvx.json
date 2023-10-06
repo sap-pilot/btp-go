@@ -987,8 +987,11 @@
                 {
                     "name": "BTP Sprint Planning",
                     "url": "https://chevron.sharepoint.com/:x:/r/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7BF74317F5-85FD-44BC-8485-5683A3815014%7D&file=SCP%20PI%20Planning.xlsx&action=default&mobileredirect=true"
+                },
+                {
+                    "name":"User Access Request",
+                    "url": "https://go.chevron.com/useraccessrequest"
                 }
-
             ]
         },
         {

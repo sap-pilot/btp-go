@@ -351,14 +351,16 @@
     <div class="row">
       <div class="col-12 col-md">
         <img class="mb-2" src="./assets/brand/sap-logo-svg.svg" alt="" width="65" height="34">
-        <small class="d-block mb-3 text-body-secondary"><a class="link-secondary" href="https://github.com/sap-pilot/btp-go#readme" target="_blank">BTP GO (build 20230928)</a><br />&copy; SAP America Inc.</small>
+        <small class="d-block mb-3 text-body-secondary"><a class="link-secondary" href="https://github.com/sap-pilot/btp-go#readme" target="_blank">BTP GO (build 20231006)</a><br />&copy; SAP America Inc.</small>
       </div>
-      <div class="col col-md" v-for="group in footerLinks">
-        <h5>{{group.groupName}}</h5>
-        <ul class="list-unstyled text-small">
-          <li class="mb-1" v-for="link in group.links"><a class="link-secondary" :href="link.url" target="_blank">{{link.name}}</a></li>
-        </ul>
-      </div>
+      <template v-if="footerLinks">
+        <div class="col col-md" v-for="group in footerLinks">
+          <h5>{{group.groupName}}</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1" v-for="link in group.links"><a class="link-secondary" :href="link.url" target="_blank">{{link.name}}</a></li>
+          </ul>
+        </div>
+      </template>
     </div>
   </footer>
 </div>
