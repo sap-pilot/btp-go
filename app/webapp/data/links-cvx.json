@@ -1,0 +1,1313 @@
+{
+    "btp": {
+        "globalAccounts": [
+            {
+                "id": "CA160438TID000000000740787196",
+                "name": "Chevron",
+                "cockpitRegion": "amer",
+                "int-regionPostfix": "",
+                "int-cpiTenant": "cpi003",
+                "directories": [
+                    {
+                        "name": "Digital Core - US East R1/R2",
+                        "short": "USE",
+                        "region": "us10",
+                        "subaccounts": [
+                            {
+                                "id": "6731c1b4-a33a-44b2-b3e7-e492bcf4e250",
+                                "orgId": "afad4930-5654-41d1-a21b-6c51d29506fa",
+                                "name": "Sandbox",
+                                "subdomain": "ncfaws-17",
+                                "services": {
+                                    "abap": {
+                                        "id": "41081360-6b0c-4b04-9bbc-5e72b14e7876"
+                                    },
+                                    "hana": {
+                                        "id": "XX"
+                                    },
+                                    "int": {},
+                                    "jsh": {
+                                        "id": "b1b794bd-7d35-4e02-bb74-95931e2f01a4"
+                                    },
+                                    "launchpad": {
+                                        "alias": "dcore-sandbox",
+                                        "url": "https://launchpad.sbx.cvx.one"
+                                    },
+                                    "spa": {},
+                                    "wfm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Sandbox_DCore",
+                                        "spaceId": "ff10178d-1794-497e-a055-79a6e6d0b962"
+                                    },
+                                    {
+                                        "spaceName": "SAP Build Process Automation",
+                                        "spaceId": "2a363270-a3df-48f5-b2f1-abd63f0fbdc3"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "238a0b8a-fb33-4727-87b3-c47d4a8f7f75",
+                                "orgId": "e7ad7bb6-7c64-4bde-a356-83e8c581988a",
+                                "name": "Dev",
+                                "subdomain": "ncfaws-05",
+                                "services": {
+                                    "abap": {
+                                        "id": "4d4c043c-2af0-42b9-9406-dfb3ba323a5b"
+                                    },
+                                    "bas": {},
+                                    "hana": {
+                                        "id": "XX"
+                                    },
+                                    "int": {},
+                                    "jsh": {
+                                        "id": "60b3ed6d-ffe0-4c78-ad90-db467483ce72"
+                                    },
+                                    "launchpad": {
+                                        "alias": "dcore-dev",
+                                        "instances": [
+                                            {
+                                                "alias": "dcore-dev",
+                                                "name": "DCore Development"
+                                            },
+                                            {
+                                                "alias": "dcore-r2-dev",
+                                                "name": "DCore R2 Development"
+                                            },
+                                            {
+                                                "alias": "POBO",
+                                                "name": "CFIN POBO Development"
+                                            }
+                                        ]
+                                    },
+                                    "spa": {},
+                                    "tms": {},
+                                    "wfm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Development_DCore",
+                                        "spaceId": "23f5586c-36b9-4424-b597-5f201e9ff217"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Development_Dcore_R2",
+                                        "spaceId": "4741187a-e938-4802-8d4d-937965355fdb"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Development_DCore_CFIN",
+                                        "spaceId": "4637b366-1b7e-416f-baad-8a82096a2a6d"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "e22cb0af-148a-403f-8522-2acfb842929c",
+                                "orgId": "c975e97d-b9cb-4cc4-98ee-8e6ef38d8f4f",
+                                "name": "Staging",
+                                "subdomain": "ncfaws-11",
+                                "services": {
+                                    "abap": {
+                                        "id": "3bfa7d2d-5397-41c7-be16-28067f03b5c1"
+                                    },
+                                    "hana": {
+                                        "id": "XX"
+                                    },
+                                    "int": {},
+                                    "jsh": {
+                                        "id": "XX"
+                                    },
+                                    "launchpad": {
+                                        "alias": "dcore-stg"
+                                    },
+                                    "spa": {},
+                                    "wfm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Staging_DCore",
+                                        "spaceId": "2a17e476-ae10-4787-a47e-60b99843b59d"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Staging_Dcore_R2",
+                                        "spaceId": "a7d2d241-06e5-4f69-9e28-09a8b79e17d9"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Staging_DCore_CFIN",
+                                        "spaceId": "c4029995-70fe-433a-80ae-29696505a4d7"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "2ddc67cc-3d81-4e6e-8b28-6fab52676f93",
+                                "orgId": "c975e97d-b9cb-4cc4-98ee-8e6ef38d8f4f",
+                                "name": "PreProd",
+                                "subdomain": "ncfaws-16",
+                                "services": {
+                                    "abap": {
+                                        "id": "c29f7640-680f-4ada-8f0f-14630d9790ae"
+                                    },
+                                    "hana": {
+                                        "id": "457b23d3-0fa5-410b-8ad2-7b708c6d1260"
+                                    },
+                                    "int": {
+                                        "regionPostfix": "-002"
+                                    },
+                                    "jsh": {
+                                        "id": "6508ef60-a569-4467-acb9-113463f7e7fb"
+                                    },
+                                    "launchpad": {
+                                        "alias": "dcore-preprod"
+                                    },
+                                    "spa": {},
+                                    "wfm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_PreProd_DCore",
+                                        "spaceId": "1adc42f4-d2de-4e4f-8e4d-97074cecbf4b"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Preprod_DCore_CFIN",
+                                        "spaceId": "ba371f80-504a-47c9-9069-afd15364b5c5"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "e52dac42-313a-477a-be74-8705fc968590",
+                                "orgId": "e2cdea95-62eb-42ba-967e-8f3995fb41b5",
+                                "name": "Prod",
+                                "subdomain": "pcfaws-02",
+                                "usage": "prod",
+                                "services": {
+                                    "abap": {
+                                        "id": "0f5f8d08-c6d7-4a0c-badb-a2d8babadeb4"
+                                    },
+                                    "hana": {
+                                        "id": "babb2315-a009-45a3-9fe0-2a79a82587c0"
+                                    },
+                                    "int": {},
+                                    "jsh": {
+                                        "id": "c3c05fea-561d-4d1c-b0f0-868c3a6d827a"
+                                    },
+                                    "launchpad": {
+                                        "alias": "dcore-production"
+                                    },
+                                    "spa": {},
+                                    "wfm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Production_DCore",
+                                        "spaceId": "959e567f-61c4-4245-9213-92cf40443066"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Digital Core / CIRCA - US West",
+                        "short": "USW",
+                        "region": "us20",
+                        "subaccounts": [
+                            {
+                                "id": "6731c1b4-a33a-44b2-b3e7-e492bcf4e250",
+                                "orgId": "f1158483-70de-461f-a34e-3708e8dcce71",
+                                "name": "Sandbox",
+                                "subdomain": "ncfazu-06",
+                                "services": {
+                                    "hana": {
+                                        "id": "XX"
+                                    },
+                                    "jsh": {
+                                        "id": "b1b794bd-7d35-4e02-bb74-95931e2f01a4"
+                                    },
+                                    "launchpad": {
+                                        "alias": "dcore-sandbox",
+                                        "url": "https://launchpad.sbx.cvx.one"
+                                    },
+                                    "wfm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AZU_USW_Development_CIRCA",
+                                        "spaceId": "02bfbbe0-27cf-4c4b-af6c-8f0beecf7cbb"
+                                    },
+                                    {
+                                        "spaceName": "CF_AZU_USW_Development_CIRCA_R2",
+                                        "spaceId": "9e2e743b-6d72-4206-b721-32663e093805"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "f76efb89-318c-4bf9-8369-9c331ea175e6",
+                                "orgId": "06b0fd4f-af6b-4d7e-85ee-f1584ea9c3b9",
+                                "name": "Dev",
+                                "subdomain": "ncfazu-04",
+                                "services": {
+                                    "bas": {},
+                                    "hana": {
+                                        "id": "XX"
+                                    },
+                                    "jsh": {
+                                        "id": "60b3ed6d-ffe0-4c78-ad90-db467483ce72"
+                                    },
+                                    "launchpad": {
+                                        "alias": "circa-dev",
+                                        "instances": [
+                                            {
+                                                "alias": "circa-dev",
+                                                "name": "CIRCA Development"
+                                            }
+                                        ]
+                                    },
+                                    "wfm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AZU_USW_Development_CIRCA",
+                                        "spaceId": "02bfbbe0-27cf-4c4b-af6c-8f0beecf7cbb"
+                                    },
+                                    {
+                                        "spaceName": "CF_AZU_USW_Development_CIRCA_R2",
+                                        "spaceId": "9e2e743b-6d72-4206-b721-32663e093805"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "182cd859-1d06-45d3-acd7-c8a06fa086ff",
+                                "orgId": "06b0fd4f-af6b-4d7e-85ee-f1584ea9c3b9",
+                                "name": "Staging",
+                                "subdomain": "ncfazu-05",
+                                "services": {
+                                    "hana": {
+                                        "id": "XX"
+                                    },
+                                    "jsh": {
+                                        "id": "XX"
+                                    },
+                                    "launchpad": {
+                                        "alias": "circa-staging"
+                                    },
+                                    "wfm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AZU_USW_Staging_CIRCA",
+                                        "spaceId": "c408d92d-052b-4676-b190-f70d4eda85dc"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "31373970-93c0-429c-acf8-6ced2aed2e03",
+                                "orgId": "06b0fd4f-af6b-4d7e-85ee-f1584ea9c3b9",
+                                "name": "PreProd",
+                                "subdomain": "ncfazu-10",
+                                "services": {
+                                    "hana": {
+                                        "id": "457b23d3-0fa5-410b-8ad2-7b708c6d1260"
+                                    },
+                                    "jsh": {
+                                        "id": "6508ef60-a569-4467-acb9-113463f7e7fb"
+                                    },
+                                    "launchpad": {
+                                        "alias": "circa-preprod"
+                                    },
+                                    "wfm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AZU_USW_Preprod_CIRCA",
+                                        "spaceId": "ecb19d21-62bd-4775-a41a-4d09360f3467"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "ef17a6b5-b1d9-4b93-8843-04874e796dd1",
+                                "orgId": "36671ca0-70dc-4a2a-80ed-861fa6c4af12",
+                                "name": "Prod",
+                                "subdomain": "pcfazu-03",
+                                "usage": "prod",
+                                "state": "na",
+                                "note": "Q4`23",
+                                "services": {
+                                    "hana": {
+                                        "id": "babb2315-a009-45a3-9fe0-2a79a82587c0"
+                                    },
+                                    "jsh": {
+                                        "id": "c3c05fea-561d-4d1c-b0f0-868c3a6d827a"
+                                    },
+                                    "launchpad": {
+                                        "alias": "circa-prod"
+                                    },
+                                    "wfm": {}
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Digital Core - Integration N+1 for R2",
+                        "short": "INT-R2",
+                        "region": "us10",
+                        "subaccounts": [
+                            {
+                                "id": "f067996d-3d4c-49b0-a2db-ad03c1072d24",
+                                "orgId": "38b449cf-9584-4ef9-8460-437835936a6b",
+                                "name": "Dev",
+                                "subdomain": "ncfaws-20",
+                                "services": {                                    
+                                    "int": {
+                                        "regionPostfix":"-002"
+                                    }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Development_INT_DCore_R2",
+                                        "spaceId": "73b4103f-a5c1-451b-9560-4199a8266b80"
+                                    }
+                                ]
+                            },                            
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
+                                "name": "PreProd",
+                                "subdomain": "XXX",
+                                "state": "na",
+                                "note": "Q4`23",
+                                "services": {                                    
+                                    "int": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_PreProd2_INT_DCore_R2",
+                                        "spaceId": "XXX"
+                                    }
+                                ]
+                            },                            
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
+                                "name": "PreProd2",
+                                "subdomain": "XXX",
+                                "state": "na",
+                                "note": "Q4`23",
+                                "services": {                                    
+                                    "int": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_PreProd2_INT_DCore_R2",
+                                        "spaceId": "XXX"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "CFIN R1A MTE/POBO",
+                        "short": "R1A-MTE",
+                        "region": "us10",
+                        "subaccounts": [
+                            {
+                                "id": "72f4b8ee-c2a7-458c-87b2-4af42d5f590e",
+                                "orgId": "dfeb19ea-bd23-4963-8016-81d96516f609",
+                                "name": "Dev",
+                                "subdomain": "ncfaws-18"
+                            },
+                            {
+                                "id": "b30a5551-8389-4230-b373-4bb981aae076",
+                                "orgId": "4e95affb-b04c-4721-a2ae-9fe11a678168",
+                                "name": "Staging",
+                                "subdomain": "ncfaws-19"
+                            },
+                            {
+                                "id": "a2a09b78-b18b-4876-8d99-6d42b62fd48e",
+                                "orgId": "a3ed8749-c7a3-4699-bebc-0849b464a747",
+                                "name": "PreProd",
+                                "subdomain": "ncfaws-21"
+                            },
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
+                                "name": "Prod",
+                                "subdomain": "XXX",
+                                "state": "na",
+                                "note": "Q4`23"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Project Maui/Nobel",
+                        "short": "NOBEL",
+                        "region": "us10",
+                        "subaccounts": [
+                            {
+                                "id": "72b1d358-7425-4d73-9a80-6e526099b655",
+                                "orgId": "808d8c62-a170-4b1b-88e6-96876ff7039a",
+                                "name": "Dev",
+                                "subdomain": "ncfaws-13",
+                                "services": {                                    
+                                    "int": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Development_Noble",
+                                        "spaceId": "e3e01a43-9799-4c02-ae68-58912fd7421a"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
+                                "name": "Staging",
+                                "subdomain": "XXX",
+                                "state": "na",
+                                "services": {
+                                    "int": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "XXX",
+                                        "spaceId": "XXX"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
+                                "name": "Prod",
+                                "subdomain": "XXX",
+                                "state": "na",
+                                "usage": "prod",
+                                "services": {
+                                    "int": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "XXX",
+                                        "spaceId": "XXX"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Central Finance (To be deprecated)",
+                        "short": "CFIN",
+                        "region": "us10",
+                        "subaccounts": [
+                            {
+                                "id": "d75c591d-aadc-46d3-9954-35f6d3678eab",
+                                "orgId": "cd6d9be2-f814-4dee-927d-401888b521c5",
+                                "name": "Non-Prod",
+                                "subdomain": "ncfaws-01",
+                                "services": {
+                                    "abap": {
+                                        "id": "41081360-6b0c-4b04-9bbc-5e72b14e7876"
+                                    },
+                                    "hana": {
+                                        "id": "XX"
+                                    }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Sandbox_CFIN",
+                                        "spaceId": "a9aecc7b-6d78-475a-ad2d-1c0676d489fb"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Development_CFIN",
+                                        "spaceId": "5c6371a5-43ae-4d9b-a20c-0d9c3e994aa7"
+                                    },
+                                    {
+                                        "spaceName": "CF_AWS_USE_Staging_CFIN",
+                                        "spaceId": "1d4cf856-1792-48cf-944e-bc4cb7fcaac7"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "XXX",
+                                "orgId": "XXX",
+                                "name": "Prod",
+                                "subdomain": "pcfaws-01",
+                                "state": "na",
+                                "usage": "prod",
+                                "services": {
+                                    "abap": {
+                                        "id": "41081360-6b0c-4b04-9bbc-5e72b14e7876"
+                                    },
+                                    "hana": {
+                                        "id": "XX"
+                                    }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_USE_Production_CFIN",
+                                        "spaceId": "XXX"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Digital Core - EUR Utilities",
+                        "short": "EU",
+                        "region": "eu10",
+                        "subaccounts": [
+                            {
+                                "id": "b50a993b-07e9-48b5-bffa-e72d3a564764",
+                                "orgId": "1bedfc64-543c-4760-8047-4b4763373f46",
+                                "name": "Non-Prod",
+                                "subdomain": "ncfaws-15",
+                                "services": {
+                                    "adobe": {},
+                                    "dqm": {},
+                                    "mrm": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_EUR_Sandbox_Utilities_(Dcore)",
+                                        "spaceId": "8f273d27-2969-480d-add9-8b6724b36656"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "846e26d6-a20e-4762-8992-9a867fbf3a5f",
+                                "orgId": "06fed0dc-7955-4a7d-9919-dbf603eb3709",
+                                "name": "Prod",
+                                "subdomain": "pcfaws-04",
+                                "usage": "prod",
+                                "services": {
+                                    "adobe": {},
+                                    "dqm": {},
+                                    "mrm": {},
+                                    "tms": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "CF_AWS_EUR_Production_Utilities_Dcore",
+                                        "spaceId": "54b536dc-7f73-4878-ae8b-0df2de28a97a"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "CA160438TID000000000741261347",
+                "name": "Chevron IAM SaaS Subscription",
+                "cockpitRegion": "amer",
+                "int-regionPostfix": "",
+                "int-cpiTenant": "cpi003",
+                "directories": [
+                    {
+                        "name": "Intelligent Asset Management",
+                        "short": "IAM",
+                        "region": "us20",
+                        "notable": true,
+                        "subaccounts": [
+                            {
+                                "id": "a40becc2-8d69-40a3-be19-b2a388ddc212",
+                                "orgId": "a40becc2-8d69-40a3-be19-b2a388ddc212",
+                                "name": "Sandbox",
+                                "subdomain": "ncfazu-07",
+                                "services": {
+                                    "iam": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "Sandbox",
+                                        "spaceId": "fbfebbac-49d3-44bd-a15e-957d2571d82e"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "98fd93ac-4c16-4c20-9346-8626427eb2e2",
+                                "orgId": "9ae1b540-9af1-4b0b-9b1c-7676f747746c",
+                                "name": "Dev",
+                                "subdomain": "ncfazu-02",
+                                "services": {
+                                    "iam": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "Development",
+                                        "spaceId": "9c3b4cdc-6ba3-45ca-ab15-df1266673ca0"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "addf0d84-26db-436f-b7c0-216b9d133172",
+                                "orgId": "975db45e-37bf-4bf4-b57b-f061d34a8941",
+                                "name": "Staging",
+                                "subdomain": "ncfazu-03",
+                                "services": {
+                                    "iam": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "Staging",
+                                        "spaceId": "1b56fe94-37ea-428b-8883-16a5fdaa53ac"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "4a5cbb7d-1c96-4efa-945d-f06dd7015020",
+                                "orgId": "0bc9f93e-c385-406c-ac0a-91bce2b28456",
+                                "name": "Prod",
+                                "subdomain": "pcfazu-02",                                
+                                "usage": "prod",
+                                "services": {
+                                    "iam": {}
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "Production",
+                                        "spaceId": "96b5ac8c-2474-422f-9ad8-4bd9b325f919"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "s4": {
+        "params": {
+            "domain": "sap.chevron.com",
+            "port": "43300"
+        },
+        "projects": [
+            {
+                "name": "Digital Core S/4HANA (R1)",
+                "short": "R1",
+                "tiers": [
+                    "Sandbox",
+                    "Dev",
+                    "Staging",
+                    "PreProd",
+                    "Prod"
+                ],
+                "products": [
+                    {
+                        "name": "S/4HANA",
+                        "systems": [
+                            {
+                                "sid": "BR2",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "BR2",
+                                "client": "200",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "BR3",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "DR1",
+                                "client": "100",
+                                "host": "wdf",
+                                "port": "44361",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "SR1",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QR1",
+                                "client": "100",
+                                "host": "wdf",
+                                "port": "44381",
+                                "tier": "PreProd"
+                            },
+                            {
+                                "sid": "PR1",
+                                "client": "100",
+                                "host": "wpf1",
+                                "port": "44380",
+                                "tier": "Prod"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "MDG",
+                        "systems": [
+                            {
+                                "sid": "BRG",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "BRG",
+                                "client": "200",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "DRG",
+                                "client": "100",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "DRG",
+                                "client": "200",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "SRG",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QRG",
+                                "client": "100",
+                                "tier": "PreProd"
+                            },
+                            {
+                                "sid": "PRG",
+                                "client": "100",
+                                "host": "mdgprg",
+                                "port": "433",
+                                "tier": "Prod"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "GRC",
+                        "systems": [
+                            {
+                                "sid": "DHC",
+                                "client": "100",
+                                "port": "99396",
+                                "tier": "Dev"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Solution Manaer",
+                        "systems": [
+                            {
+                                "sid": "DRA",
+                                "client": "100",
+                                "port": "50001",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "PRA",
+                                "client": "100",
+                                "port": "50001",
+                                "tier": "Prod"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Digital Core S/4HANA (R2)",
+                "short": "R2",
+                "tiers": [
+                    "Sandbox",
+                    "Dev",
+                    "Staging",
+                    "PreProd",
+                    "Prod"
+                ],
+                "products": [
+                    {
+                        "name": "S/4HANA (R2)",
+                        "systems": [
+                            {
+                                "sid": "BR4",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "DR2",
+                                "client": "100",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "SR2",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QR2",
+                                "client": "100",
+                                "tier": "PreProd"
+                            },
+                            {
+                                "sid": "PR1",
+                                "client": "100",
+                                "tier": "Prod"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "MDG",
+                        "systems": [
+                            {
+                                "sid": "BG2",
+                                "client": "100",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "BRG",
+                                "client": "200",
+                                "tier": "Sandbox"
+                            },
+                            {
+                                "sid": "DG2",
+                                "client": "100",
+                                "port": 44380,
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "DRG",
+                                "client": "200",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "SRG",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QRG",
+                                "client": "100",
+                                "tier": "PreProd"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Project Maui/Nobel",
+                "short": "Nobel",
+                "tiers": [
+                    "Sandbox",
+                    "Dev",
+                    "Staging",
+                    "PreProd",
+                    "Prod"
+                ],
+                "products": [
+                    {
+                        "name": "S/4HANA (Nobel)",
+                        "systems": [                    
+                            {
+                                "sid": "DN1",
+                                "client": "100",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "SN1",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "QN1",
+                                "client": "100",
+                                "tier": "PreProd"
+                            },
+                            {
+                                "sid": "PN1",
+                                "client": "100",
+                                "tier": "Prod"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Central Finance (CFIN)",
+                "short": "CFIN",
+                "tiers": [
+                    "Sandbox",
+                    "Dev",
+                    "Staging",
+                    "Prod"
+                ],
+                "products": [
+                    {
+                        "name": "S/4HANA (Nobel)",
+                        "systems": [                    
+                            {
+                                "sid": "DU1",
+                                "client": "100",
+                                "tier": "Dev"
+                            },
+                            {
+                                "sid": "QU1",
+                                "client": "100",
+                                "tier": "Staging"
+                            },
+                            {
+                                "sid": "PS1",
+                                "client": "100",
+                                "tier": "Prod"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "footerLinks": [
+        {
+            "groupName": "BTP Info",
+            "links": [
+                {
+                    "name": "BTP Overview",
+                    "url": "https://chevron.sharepoint.com/:p:/r/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7B1D7D28F9-196D-4F12-9C3D-702FB0EF46D3%7D&file=SAP%20BTP%20Overview%20Roadshow%20(2023%20version).pptx&action=edit&mobileredirect=true"
+                },
+                {
+                    "name": "BTP Subaccount Landscape",
+                    "url": "https://chevron.sharepoint.com/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7BBD4B9D66-BE0D-4624-9FAA-C68286554B82%7D&file=BTP%20Sub-account%20and%20Space%20Landscape.vsdx&action=default&mobileredirect=true&cid=2706ca88-22e8-4521-8af4-aef0499131c1"
+                },
+                {
+                    "name": "BTP Subaccount Strategy",
+                    "url": "https://chevron.sharepoint.com/:p:/r/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7B73A15371-27D9-41D3-A8D3-A6887CAE0961%7D&file=BTP_SubAccount_Models.pptx&action=edit&mobileredirect=true"
+                },
+                {
+                    "name": "BTP Security",
+                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/41109/BTP-Security"
+                },
+                {
+                    "name": "BTP HADR",
+                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/65227/BTP-High-Availability-and-Disaster-Recovery-(HADR)"
+                },
+                {
+                    "name": "BTP Team Share Point",
+                    "url": "https://chevron.sharepoint.com/teams/SAPTechnicalPlatform"
+                },
+                {
+                    "name": "BTP Sprint Planning",
+                    "url": "https://chevron.sharepoint.com/:x:/r/teams/SAPTechnicalPlatform/_layouts/15/Doc.aspx?sourcedoc=%7BF74317F5-85FD-44BC-8485-5683A3815014%7D&file=SCP%20PI%20Planning.xlsx&action=default&mobileredirect=true"
+                },
+                {
+                    "name":"User Access Request",
+                    "url": "https://go.chevron.com/useraccessrequest"
+                }
+            ]
+        },
+        {
+            "groupName": "Developer Guidance",
+            "links": [
+                {
+                    "name": "Extension Guidance",
+                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Governance/Extensions.html"
+                },
+                {
+                    "name": "AppDev Patterns",
+                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Application-Development-Patterns.html"
+                },
+                {
+                    "name": "Data Patterns",
+                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Data-Patterns.html"
+                },
+                {
+                    "name": "Integration Patterns",
+                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Integration-Patterns.html"
+                },
+                {
+                    "name": "Analytics Patterns",
+                    "url": "https://cdas.azure.chevron.com/Digital-Core.wiki/Architecture-Patterns/Analytics-Patterns.html"
+                },
+                {
+                    "name": "ADO Gitflow",
+                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/41154/ADO-Gitflow"
+                },
+                {
+                    "name": "ADO Pipeline User Guide",
+                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/ITC-ITSD-DigitalCore.wiki/52668/ADO-MTA-Pipeline-to-SAP-BTP-and-TMS-User-Guide"
+                },
+                {
+                    "name": "Developer Playbook",
+                    "url": "https://dev.azure.com/chevron/ITC-ITSD-DigitalCore/_wiki/wikis/Digital%20Core%20-%20BTP/41134/Digital-Core-Developer-Playbook-2.0"
+                }
+            ]
+        },
+        {
+            "groupName": "SAP Reference",
+            "links": [
+                {
+                    "name": "SAP Tutorial",
+                    "url": "https://developers.sap.com/tutorial-navigator.html"
+                },
+                {
+                    "name": "SAP Disovery Center",
+                    "url": "https://discovery-center.cloud.sap/viewServices"
+                },
+                {
+                    "name": "BTP What's New",
+                    "url": "https://help.sap.com/whats-new/cf0cb2cb149647329b5d02aa96303f56?locale=en-US"
+                },
+                {
+                    "name": "SAP Cloud Availability (CAC)",
+                    "url": "https://me.sap.com/systemsprovisioning/availability"
+                },
+                {
+                    "name": "Report an Incident",
+                    "url": "https://me.sap.com/createIssue/0/overview"
+                }
+            ]
+        }
+    ],
+    "templates": {
+        "abap": {
+            "name": "ABAP Cloud",
+            "url": "https://{abap-id}.abap-web.{region}.hana.ondemand.com/ui#Shell-home"
+        },
+        "adobe": {
+            "name": "Adobe",
+            "fullName": "Forms by Adobe Service",
+            "url": "https://{subdomain}-ads.formsprocessing.cfapps.{region}.hana.ondemand.com/ui/customer/index.html"
+        },
+        "auto-pi": {
+            "name": "Automation Pilot",
+            "url": "https://{subdomain}.autopilot.cfapps.us30.hana.ondemand.com/#/"
+        },
+        "bas": {
+            "name": "BAS",
+            "fullName": "Business Application Studio",
+            "url": "https://{subdomain}.{region}cf.applicationstudio.cloud.sap/index.html"
+        },
+        "cockpit": {
+            "name": "Cockpit",
+            "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/subaccountoverview",
+            "children": [
+                {
+                    "name": "Service Market Place",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/service-marketplace"
+                },
+                {
+                    "name": "Instance and Subscriptions",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/service-instances"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "name": "Spaces",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/spaces",
+                    "children": [
+                        {
+                            "repeatOn": "spaces",
+                            "name": "{spaceName}",
+                            "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/applications",
+                            "children": [
+                                {
+                                    "name": "Applications",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/applications"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Service Marketplace",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/service-marketplace"
+                                },
+                                {
+                                    "name": "Service Instances",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/service-instances"
+                                },
+                                {
+                                    "name": "SAP HANA Cloud",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/hanaCloud"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Routes",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/routes"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Security Groups",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/cfsecuritygroups"
+                                },
+                                {
+                                    "name": "Events",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/spaceevents"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Members",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/users"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "name": "Org Membeers",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/users"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "name": "HTML5 Apps",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/html5applications"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "name": "Destinations",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/destinations"
+                },
+                {
+                    "name": "Cloud Connectors",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/connectivity"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "name": "Users",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/usersOverview"
+                },
+                {
+                    "name": "Role Collections",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/connectivity"
+                },
+                {
+                    "name": "Roles",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/roles"
+                },
+                {
+                    "name": "Trust Configuration",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/trustConfiguration"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "name": "Entitlements",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/entitlements"
+                },
+                {
+                    "name": "Usage Analytics",
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/subaccountUsageAnalytics"
+                }
+            ]
+        },
+        "dqm": {
+            "name": "DQM",
+            "url": "https://{subdomain}.ui.dqmmicro.cfapps.{region}.hana.ondemand.com/webapp/index.html"
+        },
+        "hana": {
+            "name": "HANA Cloud",
+            "fullName": "HANA Cloud Cockpit",
+            "url": "https://hana-cockpit.cfapps.{region}.hana.ondemand.com/hpacs/sap/hana/cloud/index.html#/org/{subaccountId}/e/{spaceId}/databases"
+        },
+        "int": {
+            "name": "Integration",
+            "url": "https://{subdomain}.integrationsuite.cfapps.{region}{int-regionPostfix}.hana.ondemand.com/shell/home",
+            "children": [
+                {
+                    "name": "API Portal",
+                    "url": "https://{subdomain}.apiportal.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Developer Portal",
+                    "url": "https://{subdomain}.devportal.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Event Mesh",
+                    "url": "https://{subdomain}.enterprise-messaging.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Open Connector",
+                    "url": "https://my.openconnectors.{region}.ext.hana.ondemand.com/login/sso?accountExternalId={subaccountId}&customerId=1382&orgExternalId={globalAccountId}"
+                }
+            ]
+        },
+        "iam": {
+            "name": "IAM Launchpad",
+            "url": "https://{subdomain}.iam-prw.cfapps.{region}.hana.ondemand.com/",
+            "children": [
+                {
+                    "name": "APM",
+                    "url": "https://{subdomain}-apm-flp-live.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Data Privacy",
+                    "url": "https://{subdomain}.{region}.dpi.dpp.cloud.sap/"
+                },
+                {
+                    "name": "Event Mesh",
+                    "url": "https://{subdomain}.enterprise-messaging.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "IoT",
+                    "url": "https://{subdomain}.leonardo-iot.cfapps.{region}.hana.ondemand.com/"
+                }
+            ]
+        },
+        "jsh": {
+            "name": "Job Scheduler",
+            "url": "https://jobscheduler-dashboard.cfapps.{region}.hana.ondemand.com/manageinstances/{jsh-id}#/jobs"
+        },
+        "kibana": {
+            "name": "Kibana",
+            "url": "https://logs.cf.{region}.hana.ondemand.com/app/kibana_overview#/"
+        },
+        "launchpad": {
+            "name": "Launchpad",
+            "url": "https://{subdomain}.launchpad.cfapps.{region}.hana.ondemand.com/site/{launchpad-alias}",
+            "children": [
+                {
+                    "name": "Site Directory",
+                    "url": "https://{subdomain}.dt.launchpad.cfapps.{region}.hana.ondemand.com/sites#Site-Directory"
+                },
+                {
+                    "name": "-"
+                },
+                {
+                    "repeatOn": "instances",
+                    "name": "{launchpad-name}",
+                    "url": "https://{subdomain}.launchpad.cfapps.{region}.hana.ondemand.com/site/{launchpad-alias}"
+                }
+            ]
+        },
+        "mrm": {
+            "name": "Market Rate",
+            "url": "http://{subdomain}.mrm.cfapps.{region}.hana.ondemand.com/"
+        },
+        "s4": {
+            "name": "{sid}:{client}",
+            "url": "https://{host}.{domain}:{port}/sap/bc/ui2/flp?sap-client={client}"
+        },
+        "spa": {
+            "name": "SBPA",
+            "fullName": "SAP Build Process Automation",
+            "url": "https://{subdomain}.{region}.build.cloud.sap/lobby"
+        },
+        "tms": {
+            "name": "TMS",
+            "fullName": "Transport Management Service",
+            "url": "https://{subdomain}.ts.cfapps.{region}.hana.ondemand.com/main/webapp/index.html"
+        },
+        "wfm": {
+            "name": "Workflow Mgmt",
+            "fullName": "Workflow Management",
+            "url": "https://{subdomain}.cockpit.workflowmanagement.cfapps.{region}.hana.ondemand.com/cp.portal/site"
+        }
+    }
+}
