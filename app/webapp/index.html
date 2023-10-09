@@ -165,11 +165,11 @@
                             </a>
                             <ul class="dropdown-menu">
                               <li v-for="serviceChild in service.children">
-                                <template v-if="serviceChildname === '-'">
+                                <template v-if="serviceChild.name === '-'">
                                   <hr class="dropdown-divider">
                                 </template>
                                 <template v-else>
-                                  <a class="dropdown-item" v-bind:title="serviceChildfullName" v-bind:href="serviceChildurl" target="_blank">{{serviceChildname}}</a>
+                                  <a class="dropdown-item" v-bind:title="serviceChild.fullName" v-bind:href="serviceChild.url" target="_blank">{{serviceChild.name}}</a>
                                 </template>
                               </li>
                             </ul>
