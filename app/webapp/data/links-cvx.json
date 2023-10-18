@@ -23,7 +23,7 @@
                                         "id": "41081360-6b0c-4b04-9bbc-5e72b14e7876"
                                     },
                                     "hana": {
-                                        "id": "XX"
+                                        "id": "96c4e438-a2c7-41ad-8d80-ebb784441b01"
                                     },
                                     "int": {},
                                     "jsh": {
@@ -210,7 +210,7 @@
                         "region": "us20",
                         "subaccounts": [
                             {
-                                "id": "6731c1b4-a33a-44b2-b3e7-e492bcf4e250",
+                                "id": "e110642f-1932-4757-9e56-d4c76c347f12",
                                 "orgId": "f1158483-70de-461f-a34e-3708e8dcce71",
                                 "name": "Sandbox",
                                 "subdomain": "ncfazu-06",
@@ -1118,6 +1118,9 @@
                                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/service-instances"
                                 },
                                 {
+                                    "name": "-"
+                                },
+                                {
                                     "name": "SAP HANA Cloud",
                                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/hanaCloud"
                                 },
@@ -1154,7 +1157,7 @@
                     "name": "-"
                 },
                 {
-                    "name": "Org Membeers",
+                    "name": "Org Members",
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/users"
                 },
                 {
@@ -1213,8 +1216,8 @@
         },
         "hana": {
             "name": "HANA Cloud",
-            "fullName": "HANA Cloud Cockpit",
-            "url": "https://hana-cockpit.cfapps.{region}.hana.ondemand.com/hpacs/sap/hana/cloud/index.html#/org/{subaccountId}/e/{spaceId}/databases"
+            "fullName": "HANA Cloud Central",
+            "url": "https://hana-cockpit.cfapps.{region}.hana.ondemand.com/hcs/sap/hana/cloud/index.html#/databases/screen/manageconfiguration/instance/{hana-id}/?sectionTitle=general"
         },
         "int": {
             "name": "Integration",
