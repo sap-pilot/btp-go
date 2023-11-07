@@ -3,7 +3,7 @@ const $ = sel => document.querySelector(sel);
 const GET = (url) => axios.get(url);
 const POST = (cmd,data) => axios.post(cmd,data);
 const CUSTOM_LINKS_PATH = `{{{CUSTOM_LINKS_PATH}}}`;
-const LINKS_PATH = CUSTOM_LINKS_PATH? CUSTOM_LINKS_PATH : "/data/links-template.json";
+const LINKS_PATH = CUSTOM_LINKS_PATH? CUSTOM_LINKS_PATH : "/assets/links-template.json";
 
 // replace variables in string
 const fnInterpolateStr = (sStr, mValueMap) => sStr.replace(/{(.*?)}/g, (match, offset) => mValueMap[offset]);

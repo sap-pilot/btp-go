@@ -33,7 +33,7 @@ cf set-env BTP-Home-app CUSTOM_LINKS_PATH "/custom/my-links.json"
 
 ### Custom Links
 
-To customize the links, copy /app/webapp/data/links-template.json to /app/webapp/custom/<YOUR_LINKS>.json, update and repeat below structure as you see fit: 
+To customize the links, copy /app/webapp/assets/links-template.json to /app/webapp/custom/<YOUR_LINKS>.json, update and repeat below structure as you see fit: 
 
 ```
 {
