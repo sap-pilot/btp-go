@@ -131,4 +131,4 @@ out
 
 mta_archives/
 tmp/
-default-env.json
+custom/
