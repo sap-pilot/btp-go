@@ -58,7 +58,7 @@
                                     },
                                     "bas": {},
                                     "hana": {
-                                        "id": "XX"
+                                        "id": "1f4648b6-e14f-4d67-8a09-054b85734a53"
                                     },
                                     "int": {},
                                     "jsh": {
@@ -1217,7 +1217,7 @@
         "hana": {
             "name": "HANA Cloud",
             "fullName": "HANA Cloud Central",
-            "url": "https://hana-cockpit.cfapps.{region}.hana.ondemand.com/hcs/sap/hana/cloud/index.html#/databases/screen/manageconfiguration/instance/{hana-id}/?sectionTitle=general"
+            "url": "https://hana-cockpit.cfapps.{region}.hana.ondemand.com/hcs/sap/hana/cloud/index.html#/&/databases/org/{subaccountId}/"
         },
         "int": {
             "name": "Integration",
