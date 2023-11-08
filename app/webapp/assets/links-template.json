@@ -492,6 +492,9 @@
                                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/service-instances"
                                 },
                                 {
+                                    "name": "-"
+                                },
+                                {
                                     "name": "SAP HANA Cloud",
                                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/hanaCloud"
                                 },
@@ -528,7 +531,7 @@
                     "name": "-"
                 },
                 {
-                    "name": "Org Membeers",
+                    "name": "Org Members",
                     "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/users"
                 },
                 {
@@ -587,8 +590,8 @@
         },
         "hana": {
             "name": "HANA Cloud",
-            "fullName": "HANA Cloud Cockpit",
-            "url": "https://hana-cockpit.cfapps.{region}.hana.ondemand.com/hpacs/sap/hana/cloud/index.html#/org/{subaccountId}/e/{spaceId}/databases"
+            "fullName": "HANA Cloud Central",
+            "url": "https://hana-cockpit.cfapps.{region}.hana.ondemand.com/hcs/sap/hana/cloud/index.html#/&/databases/org/{subaccountId}/"
         },
         "int": {
             "name": "Integration",
@@ -609,6 +612,28 @@
                 {
                     "name": "Open Connector",
                     "url": "https://my.openconnectors.{region}.ext.hana.ondemand.com/login/sso?accountExternalId={subaccountId}&customerId=1382&orgExternalId={globalAccountId}"
+                }
+            ]
+        },
+        "iam": {
+            "name": "IAM Launchpad",
+            "url": "https://{subdomain}.iam-prw.cfapps.{region}.hana.ondemand.com/",
+            "children": [
+                {
+                    "name": "APM",
+                    "url": "https://{subdomain}-apm-flp-live.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "Data Privacy",
+                    "url": "https://{subdomain}.{region}.dpi.dpp.cloud.sap/"
+                },
+                {
+                    "name": "Event Mesh",
+                    "url": "https://{subdomain}.enterprise-messaging.cfapps.{region}.hana.ondemand.com/"
+                },
+                {
+                    "name": "IoT",
+                    "url": "https://{subdomain}.leonardo-iot.cfapps.{region}.hana.ondemand.com/"
                 }
             ]
         },
@@ -644,7 +669,7 @@
         },
         "s4": {
             "name": "{sid}:{client}",
-            "url": "https://{sid}:{domain}:{port}/sap/bc/ui2/flp?sap-client={client}"
+            "url": "https://{host}.{domain}:{port}/sap/bc/ui2/flp?sap-client={client}"
         },
         "spa": {
             "name": "SBPA",
@@ -653,6 +678,7 @@
         },
         "tms": {
             "name": "TMS",
+            "fullName": "Transport Management Service",
             "url": "https://{subdomain}.ts.cfapps.{region}.hana.ondemand.com/main/webapp/index.html"
         },
         "wfm": {
