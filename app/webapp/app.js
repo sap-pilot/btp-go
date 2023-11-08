@@ -1,4 +1,6 @@
 /* global Vue axios */ //> from vue.html
+import HomeIcons from './components/HomeIcons.js'
+
 const $ = sel => document.querySelector(sel);
 const GET = (url) => axios.get(url);
 const POST = (cmd,data) => axios.post(cmd,data);
@@ -21,6 +23,10 @@ const app = Vue.createApp ({
         currentUser: {},
         listenerAttached: false
       }
+    },
+
+    components: {
+        HomeIcons
     },
 
     methods: {
