@@ -35,7 +35,7 @@ cf set-env BTP-Home-app CUSTOM_LINKS_PATH "/custom/my-links.json"
 
 To customize the links, copy /app/webapp/assets/links-template.json to /app/webapp/custom/<YOUR_LINKS>.json, update and repeat below structure as you see fit: 
 
-```
+```json
 {
     "btp": {
         "globalAccounts": [
@@ -137,7 +137,7 @@ Check /app/webapp/index.html written in [Vue](https://vuejs.org/).
 
 Check /app/xs-app.json for login setting, you can change the app to no authentication (update "authenticationMethod" to "none") and change session timeout ("sessionTimeout" in minutes, currently set to 1 day).
 
-```
+```json
 {
     "welcomeFile": "index.html",
     "authenticationMethod": "route",
