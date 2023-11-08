@@ -1,7 +1,10 @@
 /* global Vue axios */ //> from vue.html
-const $ = sel => document.querySelector(sel)
-const GET = (url) => axios.get(url)
-const POST = (cmd,data) => axios.post(cmd,data)
+const $ = sel => document.querySelector(sel);
+const GET = (url) => axios.get(url);
+const POST = (cmd,data) => axios.post(cmd,data);
+const CUSTOM_LINKS_PATH = `{{{CUSTOM_LINKS_PATH}}}`;
+const LINKS_PATH = CUSTOM_LINKS_PATH? CUSTOM_LINKS_PATH : "/assets/links-template.json";
+const APP_VERSION = "v0.1";
 
 // replace variables in string
 const fnInterpolateStr = (sStr, mValueMap) => sStr.replace(/{(.*?)}/g, (match, offset) => mValueMap[offset]);
@@ -183,6 +186,8 @@ const vApp = Vue.createApp ({
 
     data() {
       return {
+        appVer: APP_VERSION,
+        linksVer: "N/A",
         btp: [],
         s4: [],
         footerLinks: [],
@@ -194,7 +199,8 @@ const vApp = Vue.createApp ({
 
     methods: {
         async fetch () {
-            const {data} = await GET(`/data/links.json`);
+            const {data} = await GET(LINKS_PATH);
+            vApp.linksVer = data.linksVer;
             vApp.btp = data.btp;
             vApp.s4 = data.s4;
             vApp.footerLinks = data.footerLinks;

@@ -1,5 +1,7 @@
 {
+    "linksVer": "231107",
     "btp": {
+        "title": "BTP Links",
         "globalAccounts": [
             {
                 "id": "<YOUR_GLOBAL_ACCOUNT_ID>",
@@ -269,6 +271,7 @@
         ]
     },
     "s4": {
+        "title": "S/4HANA Links",
         "params": {
             "domain": "<YOUR_S4_HOST_DOMAIN>",
             "port": "44300"
