@@ -23,7 +23,7 @@
             "localDir": "../webapp",
             "cacheControl": "max-age=0, must-revalidate",
             "authenticationType": "none",
-                "replace": {
+            "replace": {
                 "pathSuffixes": ["app.js"],
                 "vars": ["CUSTOM_LINKS_PATH", "CUSTOM_LINKS_PATH"]
             }
