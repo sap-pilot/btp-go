@@ -1,0 +1,32 @@
+{
+    "welcomeFile": "index.html",
+    "authenticationMethod": "none",
+    "sessionTimeout": 1440,
+    "routes": [
+        {
+            "source": "^/user-api(.*)$",
+            "target": "$1.json",
+            "localDir": "./user-api",
+            "cacheControl": "max-age=0, must-revalidate",
+            "authenticationType": "none"
+        },
+        {
+            "source": "^/assets/(.*)$",
+            "target": "$1",
+            "localDir": "../webapp/assets",
+            "cacheControl": "max-age=604800, must-revalidate",
+            "authenticationType": "none"
+        },
+        {
+            "source": "^/(.*)$",
+            "target": "$1",
+            "localDir": "../webapp",
+            "cacheControl": "max-age=0, must-revalidate",
+            "authenticationType": "none",
+                "replace": {
+                "pathSuffixes": ["app.js"],
+                "vars": ["CUSTOM_LINKS_PATH", "CUSTOM_LINKS_PATH"]
+            }
+        }
+    ]
+}

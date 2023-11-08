@@ -1,18 +1,23 @@
 {
+    "linksVer": "231107",
     "btp": {
+        "title": "BTP Links",
         "globalAccounts": [
             {
                 "id": "<YOUR_GLOBAL_ACCOUNT_ID>",
                 "name": "<YOUR_CUSTOMER_NAME>",
                 "cockpitRegion": "amer",
+                "int-regionPostfix": "",
+                "int-cpiTenant": "cpi003",
                 "directories": [
                     {
-                        "name": "<YOUR_SUBACCOUNT_DIRECTORY_NAME}",
+                        "name": "<YOUR_SUBACCOUNT_DIRECTORY_NAME>",
                         "short": "USE",
                         "region": "us10",
                         "subaccounts": [
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Sandbox",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -22,9 +27,7 @@
                                     "hana": {
                                         "id": "<HANA_INSTANCE_ID>"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
@@ -34,10 +37,21 @@
                                     },
                                     "spa": {},
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "<SPACE_SBX_R1>",
+                                        "spaceId": "<SPACE_ID_1>"
+                                    },
+                                    {
+                                        "spaceName": "<SPACE_SBX_R2>",
+                                        "spaceId": "<SPACE_ID_2>"
+                                    }
+                                ]
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Dev",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -48,9 +62,7 @@
                                     "hana": {
                                         "id": "<ABAP_INSTANCE_ID>"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
@@ -60,10 +72,21 @@
                                     },
                                     "spa": {},
                                     "wfm": {}
-                                }
+                                },
+                                "spaces": [
+                                    {
+                                        "spaceName": "<SPACE_DEV_R1>",
+                                        "spaceId": "<SPACE_ID_1>"
+                                    },
+                                    {
+                                        "spaceName": "<SPACE_DEV_R2>",
+                                        "spaceId": "<SPACE_ID_2>"
+                                    }
+                                ]
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Staging",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -73,9 +96,7 @@
                                     "hana": {
                                         "id": "<HANA_INSTANCE_ID>"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
@@ -89,6 +110,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "PreProd",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -99,7 +121,7 @@
                                         "id": "<ABAP_INSTANCE_ID>"
                                     },
                                     "int": {
-                                        "tenant": "cpi003"
+                                        "regionPostfix": "-002"
                                     },
                                     "jsh": {
                                         "id": "<JOB_SCHEDULER_INSTANCE_ID>"
@@ -114,6 +136,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Prod",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -123,9 +146,7 @@
                                     "hana": {
                                         "id": "<HANA_INSTANCE_ID>"
                                     },
-                                    "int": {
-                                        "tenant": "cpi003"
-                                    },
+                                    "int": {},
                                     "jsh": {
                                         "id": "<JOB_SCHEDULER_INSTANCE_ID>"
                                     },
@@ -140,12 +161,13 @@
                         ]
                     },
                     {
-                        "name": "<YOUR_SUB_ACCOUNT_DIRECTORY_NAME>ß",
+                        "name": "<YOUR_SUB_ACCOUNT_DIRECTORY_NAME>",
                         "short": "USW",
                         "region": "us20",
                         "subaccounts": [
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Sandbox",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -164,6 +186,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Dev",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -183,6 +206,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Staging",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -201,6 +225,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "PreProd",
                                 "subdomain": "<SUBDOMAIN>",
                                 "services": {
@@ -219,6 +244,7 @@
                             },
                             {
                                 "id": "<SUBACCOUNT_ID>",
+                                "orgId": "XXX",
                                 "name": "Prod",
                                 "subdomain": "<SUBDOMAIN>",
                                 "usage": "prod",
@@ -245,6 +271,7 @@
         ]
     },
     "s4": {
+        "title": "S/4HANA Links",
         "params": {
             "domain": "<YOUR_S4_HOST_DOMAIN>",
             "port": "44300"
@@ -252,6 +279,7 @@
         "projects": [
             {
                 "name": "<YOUR_S4_PROJECT_NAME>",
+                "short": "CFIN",
                 "tiers": [
                     "Sandbox",
                     "Dev",
@@ -441,7 +469,63 @@
                 },
                 {
                     "name": "Spaces",
-                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/spaces"
+                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/spaces",
+                    "children": [
+                        {
+                            "repeatOn": "spaces",
+                            "name": "{spaceName}",
+                            "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/applications",
+                            "children": [
+                                {
+                                    "name": "Applications",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/applications"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Service Marketplace",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/service-marketplace"
+                                },
+                                {
+                                    "name": "Service Instances",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/service-instances"
+                                },
+                                {
+                                    "name": "SAP HANA Cloud",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/hanaCloud"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Routes",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/routes"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Security Groups",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/cfsecuritygroups"
+                                },
+                                {
+                                    "name": "Events",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/spaceevents"
+                                },
+                                {
+                                    "name": "-"
+                                },
+                                {
+                                    "name": "Members",
+                                    "url": "https://{cockpitRegion}.cockpit.btp.cloud.sap/cockpit/#/globalaccount/{globalAccountId}/subaccount/{subaccountId}/org/{orgId}/space/{spaceId}/users"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "-"
                 },
                 {
                     "name": "Org Membeers",
@@ -508,7 +592,7 @@
         },
         "int": {
             "name": "Integration",
-            "url": "https://{subdomain}.it-{int-tenant}.cfapps.{region}.hana.ondemand.com/itspaces/shell/discover",
+            "url": "https://{subdomain}.integrationsuite.cfapps.{region}{int-regionPostfix}.hana.ondemand.com/shell/home",
             "children": [
                 {
                     "name": "API Portal",

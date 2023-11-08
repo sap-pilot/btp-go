@@ -1,0 +1,10 @@
+{
+    "firstname": "John",
+    "lastname": "Smith",
+    "email": "john@sap-test.de",
+    "name": "john@sap-test.de",
+    "scopes": [
+        "openid"
+    ],
+    "displayName": "John Smith (john@sap-test.de)"
+}

@@ -10,9 +10,17 @@
             "authenticationType": "xsuaa"
         },
         {
+            "source": "^/assets/(.*)$",
+            "target": "$1",
+            "localDir": "webapp/assets",
+            "cacheControl": "max-age=604800, must-revalidate",
+            "authenticationType": "none"
+        },
+        {
             "source": "^/(.*)$",
             "target": "$1",
             "localDir": "webapp",
+            "cacheControl": "max-age=0, must-revalidate",
             "authenticationType": "xsuaa"
         }
     ]

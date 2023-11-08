@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Links to BTP and S/4HANA">
-    <title>SAP @ {YOUR_CUSTOMER}</title>
+    <title>BTP-Home</title>
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico"/>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="./assets/css/style.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
     <style>
     h3 {
       font-size: 2rem !important;
@@ -70,14 +70,31 @@
   <header>
     <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
       <ul class="nav nav-pills">
-        <li class="nav-item">
-          <a class="nav-link active" id="btp-tab" data-bs-toggle="tab" data-bs-target="#pane-btp" type="button" role="tab" aria-controls="btp-tab-pane" aria-selected="true">BTP</a>
+        <li class="btn-group">
+          <a class="btn nav-link pe-0" id="btp-tab" data-bs-toggle="tab" data-bs-target="#pane-BTP" role="tab" aria-controls="pane-BTP">BTP</a>
+          <a class="btn nav-link dropdown-toggle dropdown-toggle-split" role="tab" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </a>
+          <ul class="dropdown-menu">
+            <template v-if="btp.globalAccounts">
+              <template v-for="globalAccount in btp.globalAccounts">
+                <template v-for="dir in globalAccount.directories">
+                  <li><a class="dropdown-item" :href="'#BTP/' + dir.short">{{dir.name}} ({{dir.short}})</a></li>
+                </template>
+              </template>
+            </template>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="s4-tab" data-bs-toggle="tab" data-bs-target="#pane-s4" type="button" role="tab" aria-controls="s4-tab-pane" aria-selected="false">S/4HANA</a>
+        <li class="btn-group">
+          <a class="btn nav-link pe-0" id="s4-tab" data-bs-toggle="tab" data-bs-target="#pane-S4" role="tab" aria-controls="pane-S4">S/4HANA</a>
+          <a class="btn nav-link dropdown-toggle dropdown-toggle-split" role="tab" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li v-for="prj in s4.projects"><a class="dropdown-item" :href="'#S4/' + prj.short">{{prj.name}} ({{prj.short}})</a></li>
+          </ul>
         </li>
       </ul>
-
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Welcome, {{currentUser.displayName}}</a>
         <div class="dropdown bd-mode-toggle">
@@ -119,40 +136,40 @@
   </header>
 
   <main class="tab-content" >
-    <div id="pane-btp" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+    <div id="pane-BTP" name="BTP" class="tab-pane fade nav-section" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
       <template v-if="btp.globalAccounts">
-        <template v-for="ga in btp.globalAccounts">
-          <template v-for="dir in ga.directories">
-            <h3 class="display-6 text-center mb-4">{{dir.name}} ({{dir.short}})</h3> 
+        <template v-for="globalAccount in btp.globalAccounts">
+          <template v-for="dir in globalAccount.directories">
+            <h3 :name="'BTP/' + dir.short" class="display-6 text-center mb-4 nav-section">{{dir.name}} ({{dir.short}})</h3> 
             <div class="row text-center" >
-              <div class="col" v-for="sa in dir.subaccounts">
-                <div class="card mb-4 rounded-3 shadow-sm" :class="{ 'border-primary': sa.usage == 'prod', 'opacity-50': sa.state == 'na'}">
-                  <template v-if="sa.note">
+              <div class="col" v-for="subaccount in dir.subaccounts">
+                <div class="card mb-4 rounded-3 shadow-sm" :class="{ 'border-primary': subaccount.usage == 'prod', 'opacity-50': subaccount.state == 'na'}">
+                  <template v-if="subaccount.note">
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
-                      {{sa.note}}
+                      {{subaccount.note}}
                       <span class="visually-hidden">planned</span>
                     </span>
                   </template>
-                  <div class="card-header py-3" :class="{ 'text-bg-primary border-primary': sa.usage == 'prod'}">
-                    <h4 class="my-0 fw-normal">{{dir.short}} {{sa.name}}</h4>
+                  <div class="card-header py-3" :class="{ 'text-bg-primary border-primary': subaccount.usage == 'prod'}">
+                    <h4 class="my-0 fw-normal">{{dir.short}} {{subaccount.name}}</h4>
                   </div>
                   <div class="card-body">
                     <ul class="list-unstyled mb-2">
-                      <template v-for="srv in sa.services">
-                        <template v-if="srv.children">
+                      <template v-for="service in subaccount.services">
+                        <template v-if="service.children">
                           <!-- render dropdown for services with children -->
                           <li class="btn-group py-0">
-                            <a class="btn link-body-emphasis py-0 pe-1 zc-dropdown" target="_blank" v-bind:title="srv.fullName" v-bind:href="srv.url">{{srv.name}}</a>
+                            <a class="btn link-body-emphasis py-0 pe-1 zc-dropdown" v-bind:title="service.fullName" v-bind:href="service.url" target="_blank">{{service.name}}</a>
                             <a type="button" class="btn py-0 ps-1 zc-dropdown link-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                               <span class="visually-hidden">Toggle Dropdown</span>
                             </a>
                             <ul class="dropdown-menu">
-                              <li v-for="sc in srv.children">
-                                <template v-if="sc.name === '-'">
+                              <li v-for="serviceChild in service.children">
+                                <template v-if="serviceChild.name === '-'">
                                   <hr class="dropdown-divider">
                                 </template>
                                 <template v-else>
-                                  <a class="dropdown-item" v-bind:title="sc.fullName" v-bind:href="sc.url">{{sc.name}}</a>
+                                  <a class="dropdown-item" v-bind:title="serviceChild.fullName" v-bind:href="serviceChild.url" target="_blank">{{serviceChild.name}}</a>
                                 </template>
                               </li>
                             </ul>
@@ -160,25 +177,65 @@
                         </template>
                         <template v-else>
                           <!-- render simple link for service without children -->
-                          <li><a class="link-body-emphasis" v-bind:title="srv.fullName" v-bind:href="srv.url">{{srv.name}}</a></li>
+                          <li><a class="link-body-emphasis" v-bind:title="service.fullName" v-bind:href="service.url" target="_blank">{{service.name}}</a></li>
                         </template><!-- end of v-if:children -->
                       </template>
                     </ul>
-                    <template v-if="sa.cockpit">
+                    <template v-if="subaccount.cockpit">
                       <div class="btn-group w-100">
-                        <a target="_blank" type="button" class="btn btn-sm w-100" v-bind:class="(sa.state == 'prod')?'btn-primary':'btn-outline-primary'" v-bind:href="sa.cockpit.url">Cockpit</a>
-                        <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" v-bind:class="(sa.usage == 'prod')?'btn-primary':'btn-outline-primary'" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a type="button" class="btn btn-sm w-100 btn-outline-primary" v-bind:href="subaccount.cockpit.url" target="_blank">Cockpit</a>
+                        <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split btn-outline-primary" data-bs-toggle="dropdown" aria-expanded="false">
                           <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu">
-                          <li v-for="rs in sa.cockpit.children">
-                            <template v-if="rs.name === '-'">
-                              <hr class="dropdown-divider">
+                          <template v-for="cockpitItem in subaccount.cockpit.children">
+                            <template v-if="cockpitItem.name === '-'">
+                              <li><hr class="dropdown-divider"></li>
                             </template>
                             <template v-else>
-                              <a target="_blank" class="dropdown-item" v-bind:href="rs.url">{{rs.name}}</a></li>
+                              <template v-if="cockpitItem.children && cockpitItem.children.length != 0">
+                                <li class="btn-group w-100 dropdown dropend">
+                                  <a class="btn dropdown-item w-100" v-bind:title="cockpitItem.fullName" v-bind:href="cockpitItem.url"  target="_blank">{{cockpitItem.name}}</a>
+                                  <a type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    <li v-for="spaceItem in cockpitItem.children">
+                                      <template v-if="spaceItem.name === '-'">
+                                        <hr class="dropdown-divider">
+                                      </template>
+                                      <template v-else>
+                                        <template v-if="spaceItem.children && spaceItem.children.length != 0">
+                                          <li class="btn-group w-100 dropdown dropend">
+                                            <a class="btn dropdown-item w-100" v-bind:title="spaceItem.fullName" v-bind:href="spaceItem.url" target="_blank">{{spaceItem.name}}</a>
+                                            <a type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                                              <span class="visually-hidden">Toggle Dropdown</span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                              <li v-for="spaceMenuItem in spaceItem.children">
+                                                <template v-if="spaceMenuItem.name === '-'">
+                                                  <hr class="dropdown-divider">
+                                                </template>
+                                                <template v-else>
+                                                  <a class="dropdown-item" v-bind:title="spaceMenuItem.fullName" v-bind:href="spaceMenuItem.url" target="_blank">{{spaceMenuItem.name}}</a>
+                                                </template>
+                                              </li>
+                                            </ul>
+                                          </li>
+                                        </template>
+                                        <template v-else>
+                                          <li><a class="dropdown-item" v-bind:title="spaceItem.fullName" v-bind:href="spaceItem.url" target="_blank">{{spaceItem.name}}</a></li>
+                                        </template>                                 
+                                      </template>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </template>
+                              <template v-else>
+                                <li><a class="dropdown-item" v-bind:href="cockpitItem.url" target="_blank">{{cockpitItem.name}}</a></li>
+                              </template>
                             </template>
-                          </li>
+                          </template>
                         </ul>
                       </div>
                     </template>
@@ -188,34 +245,34 @@
             </div> <!-- end of subaccounts (row) -->
 
             <!-- begin of service table -->
-            <template v-if="dir.allServices">
+            <template v-if="dir.allServices && dir.allServices.length != 0 && !dir.notable">
               <div class="table-responsive">
                 <table class="table text-center table-striped">
                   <thead>
                     <tr>
                       <th></th>
-                      <th v-for="sa in dir.subaccounts">{{dir.short}} {{sa.name}}</th>
+                      <th v-for="subaccount in dir.subaccounts">{{dir.short}} {{subaccount.name}}</th>
                     </tr>
                   </thead>     
                   <tbody>
-                    <tr v-for="sr in dir.allServices">
-                      <th scope="row" class="text-start">{{sr.serviceName}}</th>
-                      <td v-for="srv in sr.serviceInSubaccounts">
-                        <template v-if="srv">
-                          <template v-if="srv.children">
+                    <tr v-for="serviceRow in dir.allServices">
+                      <th scope="row" class="text-start">{{serviceRow.serviceName}}</th>
+                      <td v-for="service in serviceRow.serviceInSubaccounts">
+                        <template v-if="service">
+                          <template v-if="service.children">
                             <!-- render dropdown for services with children -->
                             <div class="btn-group p-0" style="margin-left: 14px">
-                              <a class="btn link-body-emphasis py-0 pe-1 zh-24" target="_blank" v-bind:title="srv.fullName" v-bind:href="srv.url"><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></a>
+                              <a class="btn link-body-emphasis py-0 pe-1 zh-24" v-bind:title="service.fullName" v-bind:href="service.url" target="_blank"><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></a>
                               <a type="button" class="btn py-0 ps-1 zh-24 link-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="visually-hidden">Toggle Dropdown</span>
                               </a>
                               <ul class="dropdown-menu">
-                                <li v-for="sc in srv.children">
-                                  <template v-if="sc.name === '-'">
+                                <li v-for="serviceChild in service.children">
+                                  <template v-if="serviceChildname === '-'">
                                     <hr class="dropdown-divider">
                                   </template>
                                   <template v-else>
-                                    <a class="dropdown-item" v-bind:title="sc.fullName" v-bind:href="sc.url">{{sc.name}}</a>
+                                    <a class="dropdown-item" v-bind:title="serviceChildfullName" v-bind:href="serviceChildurl" target="_blank">{{serviceChildname}}</a>
                                   </template>
                                 </li>
                               </ul>
@@ -223,9 +280,8 @@
                           </template>
                           <template v-else>
                             <!-- render simple link for service without children -->
-                            <a class="link-body-emphasis" :href="srv.url" :title="srv.name" target="_blank"><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></a>
+                            <a class="link-body-emphasis" :title="service.name" :href="service.url" target="_blank"><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></a>
                           </template><!-- end of v-if:children -->
-                          
                         </template>                
                       </td>
                     </tr>
@@ -238,11 +294,11 @@
         </template> <!-- end of global accounts-->
       </template>
     </div><!-- end of btp-tab-pane -->
-    <div id="pane-s4" class="tab-pane fade" role="tabpanel" aria-labelledby="s4-tab" tabindex="0">
+    <div id="pane-S4" name="S4" class="tab-pane fade hide nav-section" role="tabpanel" aria-labelledby="s4-tab" tabindex="1">
       <!-- begin of s4 table -->
       <template v-if="s4.projects">
         <template v-for="prj in s4.projects">
-          <h3 class="display-6 text-center mb-4">{{prj.name}}</h3> 
+          <h3 :name="'S4/' + prj.short" class="display-6 text-center mb-4 nav-section">{{prj.name}}</h3> 
           <div class="table-responsive">
             <table class="table text-center table-striped">
               <thead>
@@ -259,17 +315,17 @@
                       <template v-if="sys.children">
                         <!-- render dropdown for services with children -->
                         <div class="btn-group p-0" style="margin-left: 14px">
-                          <a class="btn link-body-emphasis py-0 pe-1 zh-24" target="_blank" v-bind:title="sys.fullName" v-bind:href="sys.url">{sys.name}</a>
+                          <a class="btn link-body-emphasis py-0 pe-1 zh-24" v-bind:title="sys.fullName" v-bind:href="sys.url" target="_blank" >{sys.name}</a>
                           <a type="button" class="btn py-0 ps-1 zh-24 link-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                           </a>
                           <ul class="dropdown-menu">
-                            <li v-for="sc in sys.children">
-                              <template v-if="sc.name === '-'">
+                            <li v-for="serviceChild in sys.children">
+                              <template v-if="serviceChildname === '-'">
                                 <hr class="dropdown-divider">
                               </template>
                               <template v-else>
-                                <a class="dropdown-item" v-bind:title="sc.fullName" v-bind:href="sc.url">{{sc.name}}</a>
+                                <a class="dropdown-item" v-bind:title="serviceChildfullName" v-bind:href="serviceChildurl" target="_blank">{{serviceChildname}}</a>
                               </template>
                             </li>
                           </ul>
@@ -295,14 +351,16 @@
     <div class="row">
       <div class="col-12 col-md">
         <img class="mb-2" src="./assets/brand/sap-logo-svg.svg" alt="" width="65" height="34">
-        <small class="d-block mb-3 text-body-secondary"><a class="link-secondary" href="https://github.com/sap-pilot/btp-go#readme">BTP GO (build 20230918)</a><br />&copy; SAP America Inc.</small>
+        <small class="d-block mb-3 text-body-secondary"><a class="link-secondary" href="https://github.com/sap-pilot/btp-home#readme" target="_blank">BTP-Home ({{appVer}}-{{linksVer}})</a><br />&copy; SAP America Inc.</small>
       </div>
-      <div class="col col-md" v-for="group in footerLinks">
-        <h5>{{group.groupName}}</h5>
-        <ul class="list-unstyled text-small">
-          <li class="mb-1" v-for="link in group.links"><a class="link-secondary" target="_blank" :href="link.url">{{link.name}}</a></li>
-        </ul>
-      </div>
+      <template v-if="footerLinks">
+        <div class="col col-md" v-for="group in footerLinks">
+          <h5>{{group.groupName}}</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1" v-for="link in group.links"><a class="link-secondary" :href="link.url" target="_blank">{{link.name}}</a></li>
+          </ul>
+        </div>
+      </template>
     </div>
   </footer>
 </div>

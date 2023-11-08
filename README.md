@@ -1,32 +1,39 @@
-# btp-go
-BTP home page of links to services group by directory (project) and subaccount
+# BTP-Home
+BTP home page of links to services group by directory (project) and subaccount. 
+
+![btp-home-template.png](/doc/img/btp-home-template.png)
 
 ## Quick Start
 
 To test this app locally in VSCode or BAS, execute below command to run approuter on port 3010 (or any other unoccupied port):
 
 ```
-npm install
 cd app
 npm install
-PORT=3010 npm start
+PORT=3010 npm run local
 ```
 
-To build & deploy this app to your Cloud Foundry enviornment, execute commands, this will deploy the app and create a route like https://<THIS_APP_HOSTNAME>.<YOUR_DOMAIN>
+To build & deploy this app to your Cloud Foundry enviornment, follow below steps:
 
+1. Follow below customization section to create your own /app/webapp/custom/<YOUR_LINKS>.json
+2. Execute below to deploy and create a route to your app:
 ```
 cf login
 npm run bd
 cf create-route <YOUR_DOMAIN> --hostname <THIS_APP_HOSTNAME>
-cf map-route btp-go <YOUR_DOMAIN> --hostname <THIS_APP_HOSTNAME>
+cf map-route BTP-Home-app <YOUR_DOMAIN> --hostname <THIS_APP_HOSTNAME>
+```
+3. Use CF cockpit or execute below command to add environment variable **CUSTOM_LINKS_PATH** to the links file path for instance "/custom/my-links.json", note you can test locally by adding this variable to /app/local/default-env.json:
+```
+cf set-env BTP-Home-app CUSTOM_LINKS_PATH "/custom/my-links.json"
 ```
 
-## Customize
+## Customization
 
 
 ### Custom Links
 
-To customize the links, copy & edit /app/webapp/data/links.json, the file has below structure, update and repeat as you see fit: 
+To customize the links, copy /app/webapp/assets/links-template.json to /app/webapp/custom/<YOUR_LINKS>.json, update and repeat below structure as you see fit: 
 
 ```
 {
@@ -155,4 +162,4 @@ Check /app/xs-app.json for login setting, you can change the app to no authentic
 ## Contact & Support
 
 Creae issue below for support. Thanks for considering this repo. 
-https://github.com/sap-pilot/btp-go/issues
+https://github.com/sap-pilot/btp-home/issues
