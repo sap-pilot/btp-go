@@ -1,24 +1,390 @@
 const $ = sel => document.querySelector(sel);
 const GET = (url) => axios.get(url);
-const POST = (cmd,data) => axios.post(cmd,data);
+const POST = (cmd, data) => axios.post(cmd, data);
 // escaped CUSTOM_LINKS_PATH defined in env; to-be-replaced by approuter (see xs-app.json)
-const CUSTOM_LINKS_PATH = `{{{CUSTOM_LINKS_PATH}}}`; 
+const CUSTOM_LINKS_PATH = `{{{CUSTOM_LINKS_PATH}}}`;
 // fall back to template links if CUSTOM_LINKS_PATH is not specified in env or default-env.json
-const LINKS_PATH = CUSTOM_LINKS_PATH? CUSTOM_LINKS_PATH : "../assets/links-template.json";
+const LINKS_PATH = CUSTOM_LINKS_PATH ? CUSTOM_LINKS_PATH : "../assets/links-template.json";
 const APP_VERSION = "v0.1";
 
-const HOME_DATA = {
-    appVer: APP_VERSION,
-    linksVer: "N/A",
-    btp: [],
-    s4: [],
-    footerLinks: [],
-    templates: [],
-    currentUser: {},
-    listenerAttached: false
+const homeApp = {
+    fetch: async function () {
+        // get data
+        const { data } = await GET(LINKS_PATH);
+        this.linksVer = data.linksVer;
+        this.btp = data.btp;
+        this.s4 = data.s4;
+        this.footerLinks = data.footerLinks;
+        this.templates = data.templates;
+        this._fnProcessData();
+        // render the app
+        const app = document.getElementById('app');
+        ReactDOM.render(<HomePage btp={this.btp} s4={this.s4} footerLinks={this.footerLinks} />, app);
+    },
+    _fnProcessData: function () {
+        // apply template to services
+        for (const ga of this.btp.globalAccounts) {
+            for (const oDir of ga.directories) {
+                for (const oSubaccount of oDir.subaccounts) {
+                    // add default params
+                    const mValueMap = {
+                        globalAccountId: ga.id,
+                        cockpitRegion: ga.cockpitRegion,
+                        subaccountId: oSubaccount.id,
+                        orgId: oSubaccount.orgId,
+                        subdomain: oSubaccount.subdomain,
+                        region: oSubaccount.region ? oSubaccount.region : oDir.region,
+                        spaces: oSubaccount.spaces,
+                        "int-regionPostfix": ga["int-regionPostfix"],
+                        "int-cpiTenant": ga["int-cpiTenant"]
+                    };
+                    for (const sServiceKey in oSubaccount.services) {
+                        const oSrv = oSubaccount.services[sServiceKey];
+                        const oTemplate = this.templates[sServiceKey];
+                        // loop through service parameters and add them to value map
+                        for (const sParamKey in oSrv) {
+                            if (sParamKey != "instances")
+                                mValueMap[sServiceKey + "-" + sParamKey] = oSrv[sParamKey]; // add service params into value map
+                        }
+                        // render service
+                        this._fnRenderService(sServiceKey, oSrv, oTemplate, mValueMap);
+                    }
+                    // render cockpit
+                    if (this.templates["cockpit"]) {
+                        oSubaccount.cockpit = {};
+                        this._fnRenderService("cockpit", oSubaccount.cockpit, this.templates["cockpit"], mValueMap);
+                    }
+                } // end of subaccounts (oSubaccount)
+                // populate services table within oDir
+                this._fnPopulateServiceTable(oDir);
+            } // end of oDirectories (oDir)
+        } // end of global account (ga)
+        this._fnPopulateS4Table(this.s4, this.templates["s4"]);
+    },
+    // replace variables in string
+    _fnInterpolateStr: function (sStr, mValueMap) {
+        return sStr.replace(/{(.*?)}/g, (match, offset) => mValueMap[offset]);
+    },
+    /**  render service/s4  url and name by template and mValueMap */
+    _fnRenderService: function (sSrvKey, oSrv, oTemplate, mValueMap) {
+        if (!oSrv.url && oTemplate.url) // service url overwrites template url (likewise for below name and fullname)
+            oSrv.url = this._fnInterpolateStr(oTemplate.url, mValueMap)
+        if (!oSrv.name && oTemplate.name)
+            oSrv.name = this._fnInterpolateStr(oTemplate.name, mValueMap);
+        if (!oSrv.fullName && oTemplate.fullName)
+            oSrv.fullName = oTemplate.fullName;
+        else
+            oSrv.fullName = oSrv.name;
+        if (oTemplate.children) {
+            // also render children
+            oSrv.children = oSrv.children ? oSrv.children : [];
+            for (const oTemplateChild of oTemplate.children) {
+                if (oTemplateChild.repeatOn == "instances") {
+                    // apply this oTemplateChild to all oSrv instances  
+                    if (!oSrv.instances)
+                        continue;
+                    for (const oSrvInst of oSrv.instances) {
+                        const instChild = Object.assign({}, oSrvInst);
+                        // build instValueMap
+                        const instValueMap = Object.assign({}, mValueMap);
+                        for (const pk in oSrvInst) {
+                            if (pk != "instances")
+                                instValueMap[sSrvKey + "-" + pk] = oSrvInst[pk]; // add service instance params, note service param with same name will be overwriten
+                        }
+                        // render service instance
+                        this._fnRenderService(sSrvKey, instChild, oTemplateChild, instValueMap);
+                        oSrv.children.push(instChild);
+                    }
+                } else if (oTemplateChild.repeatOn == "spaces") {
+                    // apply this oTemplateChild to all spaces
+                    const aSpaces = mValueMap['spaces'];
+                    if (!aSpaces || aSpaces.length == 0)
+                        continue;
+                    for (const oSpace of aSpaces) {
+                        // copy space info first 
+                        const oSpaceChild = Object.assign({}, oSpace);
+                        // build instValueMap
+                        const oSpaceValueMap = Object.assign({}, mValueMap);
+                        for (const pk in oSpaceChild) {
+                            oSpaceValueMap[pk] = oSpace[pk]; // add space params
+                        }
+                        // render service instance
+                        this._fnRenderService(sSrvKey, oSpaceChild, oTemplateChild, oSpaceValueMap);
+                        oSrv.children.push(oSpaceChild);
+                    }
+                } else {
+                    // render single item (not related to instances)
+                    const oSrvChild = {};
+                    this._fnRenderService(sSrvKey, oSrvChild, oTemplateChild, mValueMap); // render as menu item 
+                    oSrv.children.push(oSrvChild);
+                }
+            }
+            // remove first or last dividers if they present
+            if (oSrv.children.length > 0 && oSrv.children[oSrv.children.length - 1].name == '-')
+                oSrv.children.pop();
+            if (oSrv.children.length > 0 && oSrv.children[0].name == '-')
+                oSrv.children.shift();
+        }
+    },
+    /** populate service table in specified directory (oDir) like this: 
+     *     aAllServices[] -> {serviceName,serviceInSubaccounts[]}  */
+    _fnPopulateServiceTable: function (oDir) {
+        const aAllServices = []; // rows of all serivces in this oDir like {serviceName:<serviceName>,serviceInSubaccount:[]}
+        oDir.allServices = aAllServices;
+        if (!oDir.subaccounts)
+            return;
+        const mServiceMap = {}; // temporary map of serviceType-> above service row
+        for (const [iSaIndex, oSubaccount] of Object.entries(oDir.subaccounts)) {
+            if (!oSubaccount.services)
+                continue;
+            for (const [sSrvType, oSrv] of Object.entries(oSubaccount.services)) {
+                if (!mServiceMap[sSrvType]) {
+                    // initialize row as empty array
+                    const oSrvRow = { serviceName: oSrv.fullName, serviceInSubaccounts: [] };
+                    mServiceMap[sSrvType] = oSrvRow;
+                    aAllServices.push(oSrvRow);
+                    // first time seeing this service, prefill null ref for all subaccounts
+                    for (var i = 0; i < oDir.subaccounts.length; i++) {
+                        oSrvRow.serviceInSubaccounts.push(null);
+                    }
+                }
+                mServiceMap[sSrvType].serviceInSubaccounts[iSaIndex] = oSrv;
+            }
+        }
+        aAllServices.sort((a, b) => (a.serviceName > b.serviceName) ? 1 : ((b.serviceName > a.serviceName) ? -1 : 0))
+    },
+    /**
+     * populate links json s4 systems into s4 table 
+     */
+    _fnPopulateS4Table: function (oS4, oTemplate) {
+        const mS4ValueMap = Object.assign({}, oS4.params); // temporary map of serviceType-> above service row
+        for (const oPrject of oS4.projects) {
+            for (const oProduct of oPrject.products) {
+                oProduct.tieredSystems = [];
+                // first time seeing this product, prefill null ref for all tiers
+                for (var i = 0; i < oPrject.tiers.length; i++) {
+                    oProduct.tieredSystems.push(null);
+                }
+                for (const oSystem of oProduct.systems) {
+                    const iTierIndex = oPrject.tiers.indexOf(oSystem.tier);
+                    if (iTierIndex < 0) {
+                        console.log("# tier ['" + oSystem.tier + "'] not found");
+                    }
+                    if (!oProduct.tieredSystems[iTierIndex]) {
+                        oProduct.tieredSystems[iTierIndex] = [];
+                    }
+                    const mSysValueMap = Object.assign({}, mS4ValueMap);
+                    for (const sKey in oSystem) {
+                        if (sKey != "instances")
+                            mSysValueMap[sKey] = oSystem[sKey]; // add sys params, note s4 param with same name will be overwriten
+                    }
+                    if (!mSysValueMap.host)
+                        mSysValueMap.host = mSysValueMap.sid; // by default assign sid as host name
+                    this._fnRenderService("s4", oSystem, oTemplate, mSysValueMap);
+                    oProduct.tieredSystems[iTierIndex].push(oSystem);
+                }
+            }
+        }
+    },
 };
 
-function HomeFooter() {
+function HomePage({ btp, s4, footerLinks }) {
+    return (
+        <>
+            <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
+                <symbol id="check2" viewBox="0 0 16 16">
+                    <path
+                        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                </symbol>
+                <symbol id="circle-half" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+                </symbol>
+                <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
+                    <path
+                        d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
+                </symbol>
+                <symbol id="sun-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+                </symbol>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
+                <symbol id="check" viewBox="0 0 16 16">
+                    <title>Check</title>
+                    <path
+                        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                </symbol>
+            </svg>
+            <div className="container py-3">
+                <HomeHeader btp={btp} s4={s4} />
+                <main className="tab-content">
+                    <HomeBtpTabPane btp={btp} />
+                </main>
+                <HomeFooter footerLinks={footerLinks} />
+            </div>
+        </>
+    );
+}
+
+function HomeHeader({ btp, s4 }) {
+    return (
+        <header>
+            <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+                <ul key="headerMenuNav" className="nav nav-pills">
+                    <li key="btp" className="btn-group">
+                        <a className="btn nav-link pe-0" id="btp-tab" data-bs-toggle="tab" data-bs-target="#pane-BTP" role="tab"
+                            aria-controls="pane-BTP">BTP</a>
+                        <a className="btn nav-link dropdown-toggle dropdown-toggle-split" role="tab" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <span className="visually-hidden">Toggle Dropdown</span>
+                        </a>
+                        <ul className="dropdown-menu">
+                            {(btp.globalAccounts || []).map((globalAccount, gi) => (
+                                <React.Fragment key={globalAccount.name}>
+                                    {(globalAccount.directories || []).map((dir, di) => (
+                                        <HomeHeaderMenuItem key={dir.short} href={'#BTP/' + dir.short} label={dir.name + ' (' + dir.short + ')'} />
+                                    ))}
+                                </React.Fragment>
+                            ))}
+                        </ul>
+                    </li>
+                    <li key="s4" className="btn-group">
+                        <a className="btn nav-link pe-0" id="s4-tab" data-bs-toggle="tab" data-bs-target="#pane-S4" role="tab"
+                            aria-controls="pane-S4">S/4HANA</a>
+                        <a className="btn nav-link dropdown-toggle dropdown-toggle-split" role="tab" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <span className="visually-hidden">Toggle Dropdown</span>
+                        </a>
+                        <ul className="dropdown-menu">
+                            {(s4.projects || []).map((prj) => (
+                                <HomeHeaderMenuItem key={prj.short} href={'#S4/' + prj.short} label={prj.name + ' (' + prj.short + ')'} />
+                            ))}
+                        </ul>
+                    </li>
+                </ul>
+                <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+                    <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Welcome, XX</a>
+                    <div className="dropdown bd-mode-toggle">
+                        <button className="btn py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+                            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+                            <svg className="bi my-1 theme-icon-active" width="1em" height="1em">
+                                <use href="#circle-half"></use>
+                            </svg>
+                            <span className="visually-hidden" id="bd-theme-text">Toggle theme</span>
+                        </button>
+                        <ul className="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                            <li>
+                                <button type="button" className="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+                                    aria-pressed="false">
+                                    <svg className="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                        <use href="#sun-fill"></use>
+                                    </svg>
+                                    Light
+                                    <svg className="bi ms-auto d-none" width="1em" height="1em">
+                                        <use href="#check2"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" className="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+                                    aria-pressed="false">
+                                    <svg className="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                        <use href="#moon-stars-fill"></use>
+                                    </svg>
+                                    Dark
+                                    <svg className="bi ms-auto d-none" width="1em" height="1em">
+                                        <use href="#check2"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" className="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
+                                    aria-pressed="true">
+                                    <svg className="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                        <use href="#circle-half"></use>
+                                    </svg>
+                                    Auto
+                                    <svg className="bi ms-auto d-none" width="1em" height="1em">
+                                        <use href="#check2"></use>
+                                    </svg>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <a className="me-3 py-2 link-body-emphasis" title="Editor" href="editor.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                        </svg>
+                    </a>
+                </nav>
+            </div>
+        </header>
+    );
+}
+
+function HomeHeaderMenuItem({ href, label }) {
+    return (
+        <li key={label}><a className="dropdown-item" href={href}>{label}</a></li>
+    );
+}
+
+function HomeBtpTabPane({ btp }) {
+    return (
+        <div key="pane-BTP" id="pane-BTP" name="BTP" className="tab-pane fade nav-section" role="tabpanel" aria-labelledby="home-tab"
+            tabIndex="0">
+            {(btp.globalAccounts || []).map((globalAccount) => (
+                <React.Fragment key={globalAccount.name}>
+                    {(globalAccount.directories || []).map((dir) => (
+                        <HomeBtpTabSection key={dir.short} dir={dir} />
+                    ))}
+                </React.Fragment>
+            ))}
+        </div>
+    );
+}
+
+function HomeBtpTabSection({ dir }) {
+    return (
+        <>
+            <h3 name={'BTP/' + dir.short} className="display-6 text-center mb-4 nav-section">{dir.name} ({dir.short})</h3>
+            <div className="row text-center">
+                {(dir.subaccounts || []).map((subaccount) => (
+                    <HomeBtpSubaccountCard key={subaccount.name} dir={dir} subaccount={subaccount} />
+                ))}
+            </div>
+        </>       
+    );
+}
+
+function HomeBtpSubaccountCard({ dir, subaccount }) {
+    return (
+        <div className="col">
+            <div className="card mb-4 rounded-3 shadow-sm">
+                <div className="card-header py-3">
+                    <h4 className="my-0 fw-normal">{dir.short} {subaccount.name}</h4>
+                </div>
+                <div className="card-body">
+                    <ul className="list-unstyled mb-2">
+                        {(Object.values(subaccount.services || {}) || []).map((service) => (
+                            <HomeBtpSubaccountService key={service.name} service={service} />
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function HomeBtpSubaccountService({ service }) {
+    return (
+        <li><a href={service.url} target="_blank" className="link-body-emphasis" >{service.name}</a></li>
+    );
+}
+
+function HomeFooter({ footerLinks }) {
     return (
         <footer className="pt-4 my-md-5 pt-md-5 border-top">
             <div className="row">
@@ -28,29 +394,32 @@ function HomeFooter() {
                         href="https://github.com/sap-pilot/btp-home#readme" target="_blank">BTP-Home
                         (ver)</a><br />&copy; SAP America Inc.</small>
                 </div>
-                <HomeFooterGroup />
+                {(footerLinks || []).map((group) => (
+                    <HomeFooterGroup key={group.groupName} group={group} />
+                ))}
             </div>
         </footer>
     );
 }
 
-function HomeFooterGroup() {
+function HomeFooterGroup({ group }) {
     return (
         <div className="col col-md" v-for="group in footerLinks">
-            <h5>(group.groupName)</h5>
-            <ul className="list-unstyled text-small">
-                <HomeFooterLink />
+            <h5>{group.groupName}</h5>
+            <ul group="list-unstyled text-small">
+                {(group.links || []).map((link) => (
+                    <HomeFooterLink key={link.name} link={link} />
+                ))}
             </ul>
         </div>
     );
 }
 
-function HomeFooterLink() {
+function HomeFooterLink({ link }) {
     return (
-        <li className="mb-1" v-for="link in group.links"><a className="link-secondary" href="link.url"
-            target="_blank">(link.name)</a></li>
+        <li key={link.name} className="mb-1" v-for="link in group.links"><a className="link-secondary" href="{link.url}"
+            target="_blank">{link.name}</a></li>
     );
 }
 
-const app = document.getElementById('app');
-ReactDOM.render(<HomeFooter />, app);
+homeApp.fetch();
