@@ -7,7 +7,7 @@ const POST = (cmd,data) => axios.post(cmd,data);
 // escaped CUSTOM_LINKS_PATH defined in env; to-be-replaced by approuter (see xs-app.json)
 const CUSTOM_LINKS_PATH = `{{{CUSTOM_LINKS_PATH}}}`; 
 // fall back to template links if CUSTOM_LINKS_PATH is not specified in env or default-env.json
-const LINKS_PATH = CUSTOM_LINKS_PATH? CUSTOM_LINKS_PATH : "../assets/links-template.json";
+const LINKS_PATH = CUSTOM_LINKS_PATH? CUSTOM_LINKS_PATH : "../resources/links-template.json";
 const APP_VERSION = "v0.1";
 
 const app = Vue.createApp ({
