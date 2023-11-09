@@ -447,6 +447,7 @@ function HomeBtpSubaccountCard({ dir, subaccount }) {
                             <HomeBtpSubaccountService key={service.name} service={service} />
                         ))}
                     </ul>
+                    <HomeBtpSubaccountCockpit cockpit={subaccount.cockpit} />
                 </div>
             </div>
         </div>
@@ -488,6 +489,104 @@ function HomeBtpSubaccountServiceChild({ serviceChild }) {
     } else {
         return (
             <li><a href={serviceChild.url} title={serviceChild.fullName} target="_blank" className="dropdown-item">{serviceChild.name}</a></li>
+        );
+    }
+}
+
+function HomeBtpSubaccountCockpit({ cockpit }) {
+    if ( !cockpit ) {
+        return null;
+    }
+    return (
+        <div className="btn-group w-100">
+            <a href={cockpit.url} target="_blank" type="button" className="btn btn-sm w-100 btn-outline-primary">Cockpit</a>
+            <button type="button"
+            className="btn btn-sm dropdown-toggle dropdown-toggle-split btn-outline-primary"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span className="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul className="dropdown-menu">
+                {(cockpit.children || []).map((cockpitItem, idx) => (
+                    <HomeBtpSubaccountCockpitItem key={cockpitItem.name+'-'+idx} cockpitItem={cockpitItem} />
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+function HomeBtpSubaccountCockpitItem({ cockpitItem }) {
+    if ( cockpitItem.name === '-' ) {
+        // seperator
+        return (
+            <li><hr className="dropdown-divider" /></li>
+        );
+    } else {
+        if ( !cockpitItem.children || cockpitItem.children.length === 0 ) {
+            // single cockpit menu item
+            return (
+                <li><a href={cockpitItem.url} target="_blank" className="dropdown-item">{cockpitItem.name}</a></li>
+            );
+        } else {
+            // cockpit menu item with children (spaces)
+            return (
+                <li className="btn-group w-100 dropdown dropend">
+                    <a href={cockpitItem.url} title={cockpitItem.fullName} target="_blank" className="btn dropdown-item w-100">{cockpitItem.name}</a>
+                    <a type="button" className="btn dropdown-toggle dropdown-toggle-split"
+                        data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                        <span className="visually-hidden">Toggle Dropdown</span>
+                    </a>
+                    <ul className="dropdown-menu">
+                        {(cockpitItem.children || []).map((spaceItem, idx) => (
+                            <HomeBtpSubaccountCockpitSpaceItem key={spaceItem.name} spaceItem={spaceItem} />
+                        ))}
+                    </ul>
+                </li>
+            );
+        }
+    }
+}
+
+function HomeBtpSubaccountCockpitSpaceItem({ spaceItem }) {
+    if ( spaceItem.name === '-' ) {
+        // seperator
+        return (
+            <li><hr className="dropdown-divider" /></li>
+        );
+    } else {
+        if ( !spaceItem.children || spaceItem.children.length === 0 ) {
+            return (
+                <li><a href={spaceItem.url} title={spaceItem.fullName} target="_blank" className="dropdown-item">{spaceItem.name}</a></li>
+            );
+        } else {
+            // space menu item with children
+            return (
+                <li className="btn-group w-100 dropdown dropend">
+                    <a href={spaceItem.url} title={spaceItem.fullName} target="_blank" className="btn dropdown-item w-100">{spaceItem.name}</a>
+                    <a type="button" className="btn dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                    <span className="visually-hidden">Toggle Dropdown</span>
+                    </a>
+                    <ul className="dropdown-menu">
+                        {(spaceItem.children || []).map((spaceMenuItem, idx) => (
+                            <HomeBtpSubaccountCockpitSpaceMenuItem key={spaceMenuItem.name+'-'+idx} spaceMenuItem={spaceMenuItem} />
+                        ))}
+                    </ul>
+                </li>
+            );
+        }
+
+    }
+}
+
+function HomeBtpSubaccountCockpitSpaceMenuItem({ spaceMenuItem }) {
+    if ( spaceMenuItem.name === '-' ) {
+        // seperator
+        return (
+            <li><hr className="dropdown-divider" /></li>
+        );
+    } else {
+        return (
+            <li><a href={spaceMenuItem.url} title={spaceMenuItem.fullName} target="_blank" className="dropdown-item">{spaceMenuItem.name}</a></li>
         );
     }
 }
