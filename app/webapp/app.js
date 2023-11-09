@@ -428,10 +428,17 @@ function HomeBtpTabSection({ dir }) {
 }
 
 function HomeBtpSubaccountCard({ dir, subaccount }) {
+    const notePill = (subaccount.note?(
+        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            {subaccount.note}
+            <span className="visually-hidden">planned</span>
+        </span>
+    ):null);
     return (
         <div className="col">
-            <div className="card mb-4 rounded-3 shadow-sm">
-                <div className="card-header py-3">
+            <div className={`card mb-4 rounded-3 shadow-sm ${ subaccount.usage === 'prod'? 'border-primary':''} ${ subaccount.state === 'na'? 'opacity-50':''} `}>
+                {notePill}
+                <div className={`card-header py-3 ${ subaccount.usage === 'prod'? 'text-bg-primary border-primary':''}`}>
                     <h4 className="my-0 fw-normal">{dir.short} {subaccount.name}</h4>
                 </div>
                 <div className="card-body">
@@ -447,9 +454,42 @@ function HomeBtpSubaccountCard({ dir, subaccount }) {
 }
 
 function HomeBtpSubaccountService({ service }) {
-    return (
-        <li><a href={service.url} target="_blank" className="link-body-emphasis" >{service.name}</a></li>
-    );
+    if ( !service.children || service.children === 0 ) {
+        // single service link without children
+        return (
+            <li><a href={service.url} target="_blank" className="link-body-emphasis" >{service.name}</a></li>
+        );
+    } else {
+        // service link with children
+        return (
+            <li className="btn-group py-0">
+                <a href={service.url} title={service.fullName} target="_blank" className="btn link-body-emphasis py-0 pe-1 zc-dropdown" >{service.name}</a>
+                <a type="button"
+                className="btn py-0 ps-1 zc-dropdown link-secondary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <span className="visually-hidden">Toggle Dropdown</span>
+                </a>
+                <ul className="dropdown-menu">
+                    {(service.children || []).map((serviceChild, idx) => (
+                        <HomeBtpSubaccountServiceChild key={serviceChild.name+'-'+idx} serviceChild={serviceChild} />
+                    ))}
+                </ul>
+            </li>
+        );
+    }
+}
+
+function HomeBtpSubaccountServiceChild({ serviceChild }) {
+    if ( serviceChild.name === '-' ) {
+        // seperator
+        return (
+            <li><hr className="dropdown-divider" /></li>
+        );
+    } else {
+        return (
+            <li><a href={serviceChild.url} title={serviceChild.fullName} target="_blank" className="dropdown-item">{serviceChild.name}</a></li>
+        );
+    }
 }
 
 function HomeFooter({ footerLinks }) {
