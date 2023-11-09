@@ -64,9 +64,8 @@
     }
   })
 
-  window.addEventListener('DOMContentLoaded', () => {
+  const setupTheme = () => {
     showActiveTheme(getPreferredTheme())
-
     document.querySelectorAll('[data-bs-theme-value]')
       .forEach(toggle => {
         toggle.addEventListener('click', () => {
@@ -75,6 +74,14 @@
           setTheme(theme)
           showActiveTheme(theme, true)
         })
-      })
-  })
+      });
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    setupTheme();
+  });
+  // for react page rendered event
+  window.addEventListener('ZPageRendered', () => {
+    setupTheme();
+  });
 })()

@@ -245,6 +245,7 @@ const homeApp = {
         document.addEventListener('scroll', this._fnHandleScrollUpdateHeader);
         window.addEventListener("hashchange", this._fnHandleHashChange);
         this._fnHandleHashChange();
+        window.dispatchEvent(new Event("ZPageRendered"));
     }
 };
 
