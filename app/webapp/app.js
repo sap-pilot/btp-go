@@ -20,6 +20,7 @@ const homeApp = {
         // render the app
         const app = document.getElementById('app');
         ReactDOM.render(<HomePage btp={this.btp} s4={this.s4} footerLinks={this.footerLinks} />, app);
+        this.setupListeners();
     },
     _fnProcessData: function () {
         // apply template to services
@@ -186,9 +187,83 @@ const homeApp = {
             }
         }
     },
+    _fnHandleHashChange(event) {
+        let sHash = window.location.hash ? window.location.hash.slice(1) : "";
+        let sTab = sHash? sHash.split('/')[0] : "";
+        if (!sTab || !sTab.match("^(BTP|S4)$")) {
+            sHash = sTab = "BTP"; // set initial tab if none specified or matched
+        }
+        const oTabBtn = document.querySelector('a[data-bs-target="#pane-' + sTab + '"]');
+        if (oTabBtn && !oTabBtn.classList.contains("active")) {
+            oTabBtn.click();
+        }
+        const aSplitBtns = document.querySelectorAll("ul.nav-pills > li > a.dropdown-toggle-split");
+        aSplitBtns.forEach(oBtn => {
+            oBtn.classList.remove("active");
+        });
+        if (oTabBtn && oTabBtn.nextSibling && oTabBtn.nextSibling.classList.contains("dropdown-toggle-split")) {
+            oTabBtn.nextSibling.classList.add("active");
+        }
+        if (sHash !== sTab) {
+            // scroll to element
+            const oSection = document.querySelector("h3[name='"+sHash+"']");
+            if (oSection) {
+                document.removeEventListener('scroll', this._fnHandleScrollUpdateHeader);
+                oSection.scrollIntoView();
+                document.addEventListener("scrollend", this._fnHandleScrollEnd); // add fnScrollUpdateHeader after scrollend
+    
+            }
+        }
+    },
+    _fnHandleScrollUpdateHeader: function(event) {
+        const aHeaders = document.querySelectorAll('.nav-section');  
+        for ( const oHeader of aHeaders) {
+            const rect = oHeader.getBoundingClientRect();
+            if(rect.top > 0 && rect.top < 100) {
+                const location = window.location.toString().split('#')[0];
+                history.replaceState(null, null, location + '#' + oHeader.getAttribute("name"));
+                break; // only update for 1st visible header
+            }
+        }
+    },
+    _fnHandleScrollEnd(event) {
+        document.removeEventListener('scrollend', this._fnHandleScrollEnd);
+        document.addEventListener('scroll', this._fnHandleScrollUpdateHeader);
+    },
+    setupListeners: function() {
+        if (this.listenerAttached)
+            return; 
+        this.listenerAttached = true;
+        const aTabBtns = document.querySelectorAll("ul.nav-pills > li > a");
+        aTabBtns.forEach(oBtn => {
+            oBtn.addEventListener('shown.bs.tab', function(e) {
+                var sId = e.target.getAttribute("data-bs-target").substr(6);
+                if (sId && (!window.location.hash || window.location.hash.indexOf(sId) < 0))
+                    window.location.hash = sId;
+            });
+        });
+        document.addEventListener('scroll', this._fnHandleScrollUpdateHeader);
+        window.addEventListener("hashchange", this._fnHandleHashChange);
+        this._fnHandleHashChange();
+    }
 };
 
 function HomePage({ btp, s4, footerLinks }) {
+    return (
+        <>
+            <HomeIcons />
+            <div className="container py-3">
+                <HomeHeader btp={btp} s4={s4} />
+                <main className="tab-content">
+                    <HomeBtpTabPane btp={btp} />
+                </main>
+                <HomeFooter footerLinks={footerLinks} />
+            </div>
+        </>
+    );
+}
+
+function HomeIcons() {
     return (
         <>
             <svg xmlns="http://www.w3.org/2000/svg" className="d-none">
@@ -217,13 +292,6 @@ function HomePage({ btp, s4, footerLinks }) {
                         d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                 </symbol>
             </svg>
-            <div className="container py-3">
-                <HomeHeader btp={btp} s4={s4} />
-                <main className="tab-content">
-                    <HomeBtpTabPane btp={btp} />
-                </main>
-                <HomeFooter footerLinks={footerLinks} />
-            </div>
         </>
     );
 }
