@@ -257,6 +257,7 @@ function HomePage({ btp, s4, footerLinks }) {
                 <HomeHeader btp={btp} s4={s4} />
                 <main className="tab-content">
                     <HomeBtpTabPane btp={btp} />
+                    <HomeS4TabPane s4={s4} />
                 </main>
                 <HomeFooter footerLinks={footerLinks} />
             </div>
@@ -546,6 +547,86 @@ function HomeDropdownMenuItem({ menuItem }) {
                 </li>
             );
         }
+    }
+}
+
+function HomeS4TabPane({ s4 }) {
+    return (
+        <div id="pane-S4" name="S4" className="tab-pane fade hide nav-section" role="tabpanel" aria-labelledby="s4-tab"
+        tabIndex="1">
+            {(s4.projects || []).map((project, idx) => (
+                <HomeS4ProjectSection key={project.name} project={project} />
+            ))}
+        </div>
+    );
+}
+
+function HomeS4ProjectSection({ project }) {
+    return (
+        <>
+            <h3 name={'S4/' + project.short} className="display-6 text-center mb-4 nav-section">{project.name}</h3>
+            <div className="table-responsive">
+                <table className="table text-center table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            {(project.tiers || []).map((tier, idx) => (
+                                <th key={tier}>{tier}</th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {(project.products || []).map((prd, idx) => (
+                        <tr key={prd.name}>
+                            <td>{prd.name}</td>
+                            {(prd.tieredSystems || []).map((ts, idx) => (
+                                <td key={idx}>
+                                    {(ts || []).map((sys, idx) => (
+                                        <HomeS4ProjecSystemLink key={sys.name} sys={sys} />
+                                    ))}
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+        </>
+    );
+}
+
+function HomeS4ProjecSystemLink({ sys }) {
+    if (!sys.children || sys.children.length == 0) {
+        // single system link
+        return (
+            <>            
+                <a href={sys.url} title={sys.name} target="_blank" className="link-body-emphasis">{sys.name}</a><br />
+            </>
+        );
+    }
+    else {
+        // system link with dropdown
+        return (
+            <>
+                <div className="btn-group p-0" style="margin-left: 14px">
+                    <a href={sys.url} title={sys.fullName} target="_blank" className="btn link-body-emphasis py-0 pe-1 zh-24" > {sys.name}</a>
+                    <a type="button"
+                        className="btn py-0 ps-1 zh-24 link-secondary dropdown-toggle dropdown-toggle-split"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <span className="visually-hidden">Toggle Dropdown</span>
+                    </a>
+                    <ul className="dropdown-menu">
+                    {(sys.children || []).map((serviceChild, idx) => (
+                        <li key={idx}>
+                        (serviceChildname ==='-'? <hr className="dropdown-divider" />: 
+                            <a href={serviceChild.url} title={serviceChild.fullName} target="_blank" className="dropdown-item">{{serviceChil.name}}</a>
+                        )
+                        </li>
+                    ))}
+                    </ul>
+                </div>
+            </>
+        );
     }
 }
 
