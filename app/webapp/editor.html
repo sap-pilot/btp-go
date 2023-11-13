@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Links to BTP and S/4HANA">
-  <title>Editor - BTP Homepage</title>
+  <title>Editor :: BTP-Home</title>
   <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
@@ -24,9 +24,33 @@
 
 
 <body id="editorApp">
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <table style="height: 100vh; width: 100%;">
+    <tr>
+      <td style="height: 50px; width: 50%; padding: 8px">
+        <span class="fs-4">Homepage Editor</span>
+        <form style="float: right">
+          <button class="btn btn-primary me-2">Save</button>
+          <button class="btn btn-secondary me-2" title="Cancel and return to home page" onclick="cancelEditor(); return false;">Cancel</a>
+      </form></td>
+      <td style="width: 50%; padding: 8px; text-align: center"><span class="fs-4">Preview</span></td>
+    </tr>
+    <tr>
+      <td><textarea id="editorArea" style="height:100%; width:100%; resize: none;"></textarea></td>
+      <td><div id="app"></div></td>
+    </tr>
+    <tr>
+      <td style="height: 50px; width: 50%; padding: 8px">
+        <span class="fs-4"></span>
+        <form style="float: right">
+            <button class="btn btn-primary me-2">Save</button>
+            <button class="btn btn-secondary me-2" title="Cancel and return to home page" onclick="cancelEditor(); return false;">Cancel</a>
+        </form></td>
+      <td  style="width: 50%; padding: 8px; text-align: center"><span class="fs-4">End of preview</span></td>
+    </tr>
+  </table>
+  <!--<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Homepage Editor</a>
+      <a class="navbar-brand" href="#"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -45,14 +69,19 @@
         </form>
       </div>
     </div>
-  </nav>
-  <main class="container-fluid flex-column tab-content" style="top:60px;position:absolute;height:100%">
-    <div id="pane-edit" class="tab-pane show active h-100" role="tabpanel" aria-labelledby="edit-tab" tabindex="0">
-      <textarea style="height:100%;width:100%">hello editor</textarea>
-    </div>
-  </main>
+  </nav>-->
 </body>
-<script src="./resources/js/color-modes.js"></script>
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="./resources/js/color-modes.js"></script>
+<script src="./app.js" type="text/jsx"></script>
+<script>
+  function cancelEditor(event) {
+    if (confirm('Make sure to cancel the change and return to home page?')) {
+      window.location.href='index.html'; 
+    }
+  }
+</script>
 </html>

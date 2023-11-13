@@ -4,27 +4,30 @@ const POST = (cmd, data) => axios.post(cmd, data);
 // escaped CUSTOM_LINKS_PATH defined in env; to-be-replaced by approuter (see xs-app.json)
 const CUSTOM_LINKS_PATH = `{{{CUSTOM_LINKS_PATH}}}`;
 // fall back to template links if CUSTOM_LINKS_PATH is not specified in env or default-env.json
-const LINKS_PATH = CUSTOM_LINKS_PATH ? CUSTOM_LINKS_PATH : "../resources/links-template.json";
-const APP_VERSION = "v0.1";
+const LINKS_PATH = CUSTOM_LINKS_PATH ? CUSTOM_LINKS_PATH : "./resources/links-template.json";
+const APP_VERSION = "v0.2";
 
 const homeApp = {
-    fetch: async function () {
+    run: async function () {
         // get data
+        this.editorArea = document.getElementById("editorArea");
+        this.editorMode = this.editorArea? true: false;
         const { data } = await GET(LINKS_PATH);
-        this.linksVer = data.linksVer;
-        this.btp = data.btp;
-        this.s4 = data.s4;
-        this.footerLinks = data.footerLinks;
-        this.templates = data.templates;
+        this.data = data;
+        if (this.editorArea ) {
+            // fill in editor content
+            this.editorArea.innerHTML = JSON.stringify(data, null, 4);
+        }
         this._fnProcessData();
         // render the app
         const app = document.getElementById('app');
-        ReactDOM.render(<HomePage btp={this.btp} s4={this.s4} footerLinks={this.footerLinks} />, app);
+        ReactDOM.render(<HomePage btp={this.data.btp} s4={this.data.s4} footerLinks={this.data.footerLinks} 
+            version={APP_VERSION} editorMode={this.editorMode}/>, app);
         this.setupListeners();
     },
     _fnProcessData: function () {
         // apply template to services
-        for (const ga of this.btp.globalAccounts) {
+        for (const ga of this.data.btp.globalAccounts) {
             for (const oDir of ga.directories) {
                 for (const oSubaccount of oDir.subaccounts) {
                     // add default params
@@ -41,7 +44,7 @@ const homeApp = {
                     };
                     for (const sServiceKey in oSubaccount.services) {
                         const oSrv = oSubaccount.services[sServiceKey];
-                        const oTemplate = this.templates[sServiceKey];
+                        const oTemplate = this.data.templates[sServiceKey];
                         // loop through service parameters and add them to value map
                         for (const sParamKey in oSrv) {
                             if (sParamKey != "instances")
@@ -51,16 +54,16 @@ const homeApp = {
                         this._fnRenderService(sServiceKey, oSrv, oTemplate, mValueMap);
                     }
                     // render cockpit
-                    if (this.templates["cockpit"]) {
+                    if (this.data.templates["cockpit"]) {
                         oSubaccount.cockpit = {};
-                        this._fnRenderService("cockpit", oSubaccount.cockpit, this.templates["cockpit"], mValueMap);
+                        this._fnRenderService("cockpit", oSubaccount.cockpit, this.data.templates["cockpit"], mValueMap);
                     }
                 } // end of subaccounts (oSubaccount)
                 // populate services table within oDir
                 this._fnPopulateServiceTable(oDir);
             } // end of oDirectories (oDir)
         } // end of global account (ga)
-        this._fnPopulateS4Table(this.s4, this.templates["s4"]);
+        this._fnPopulateS4Table(this.data.s4, this.data.templates["s4"]);
     },
     // replace variables in string
     _fnInterpolateStr: function (sStr, mValueMap) {
@@ -249,17 +252,17 @@ const homeApp = {
     }
 };
 
-function HomePage({ btp, s4, footerLinks }) {
+function HomePage({ btp, s4, footerLinks, version, editorMode }) {
     return (
         <>
             <HomeIcons />
             <div className="container py-3">
-                <HomeHeader btp={btp} s4={s4} />
+                <HomeHeader btp={btp} s4={s4} editorMode={editorMode} />
                 <main className="tab-content">
                     <HomeBtpTabPane btp={btp} />
                     <HomeS4TabPane s4={s4} />
                 </main>
-                <HomeFooter footerLinks={footerLinks} />
+                <HomeFooter footerLinks={footerLinks} version={version} />
             </div>
         </>
     );
@@ -298,7 +301,65 @@ function HomeIcons() {
     );
 }
 
-function HomeHeader({ btp, s4 }) {
+function HomeHeader({ btp, s4, editorMode }) {
+    const navbarRight = editorMode? null : (
+        <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Welcome, XX</a>
+            <div className="dropdown bd-mode-toggle">
+                <button className="btn py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+                    aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+                    <svg className="bi my-1 theme-icon-active" width="1em" height="1em">
+                        <use href="#circle-half"></use>
+                    </svg>
+                    <span className="visually-hidden" id="bd-theme-text">Toggle theme</span>
+                </button>
+                <ul className="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+                    <li>
+                        <button type="button" className="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+                            aria-pressed="false">
+                            <svg className="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                <use href="#sun-fill"></use>
+                            </svg>
+                            Light
+                            <svg className="bi ms-auto d-none" width="1em" height="1em">
+                                <use href="#check2"></use>
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" className="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+                            aria-pressed="false">
+                            <svg className="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                <use href="#moon-stars-fill"></use>
+                            </svg>
+                            Dark
+                            <svg className="bi ms-auto d-none" width="1em" height="1em">
+                                <use href="#check2"></use>
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" className="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
+                            aria-pressed="true">
+                            <svg className="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+                                <use href="#circle-half"></use>
+                            </svg>
+                            Auto
+                            <svg className="bi ms-auto d-none" width="1em" height="1em">
+                                <use href="#check2"></use>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <a className="me-3 py-2 link-body-emphasis" title="Editor" href="editor.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                    <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                </svg>
+            </a>
+        </nav>
+    );
     return (
         <header>
             <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
@@ -334,62 +395,7 @@ function HomeHeader({ btp, s4 }) {
                         </ul>
                     </li>
                 </ul>
-                <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                    <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Welcome, XX</a>
-                    <div className="dropdown bd-mode-toggle">
-                        <button className="btn py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
-                            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-                            <svg className="bi my-1 theme-icon-active" width="1em" height="1em">
-                                <use href="#circle-half"></use>
-                            </svg>
-                            <span className="visually-hidden" id="bd-theme-text">Toggle theme</span>
-                        </button>
-                        <ul className="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-                            <li>
-                                <button type="button" className="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                                    aria-pressed="false">
-                                    <svg className="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-                                        <use href="#sun-fill"></use>
-                                    </svg>
-                                    Light
-                                    <svg className="bi ms-auto d-none" width="1em" height="1em">
-                                        <use href="#check2"></use>
-                                    </svg>
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button" className="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
-                                    aria-pressed="false">
-                                    <svg className="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-                                        <use href="#moon-stars-fill"></use>
-                                    </svg>
-                                    Dark
-                                    <svg className="bi ms-auto d-none" width="1em" height="1em">
-                                        <use href="#check2"></use>
-                                    </svg>
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button" className="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
-                                    aria-pressed="true">
-                                    <svg className="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
-                                        <use href="#circle-half"></use>
-                                    </svg>
-                                    Auto
-                                    <svg className="bi ms-auto d-none" width="1em" height="1em">
-                                        <use href="#check2"></use>
-                                    </svg>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                    <a className="me-3 py-2 link-body-emphasis" title="Editor" href="editor.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                            <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                        </svg>
-                    </a>
-                </nav>
+                {navbarRight}
             </div>
         </header>
     );
@@ -630,15 +636,15 @@ function HomeS4ProjecSystemLink({ sys }) {
     }
 }
 
-function HomeFooter({ footerLinks }) {
+function HomeFooter({ footerLinks, version }) {
     return (
         <footer className="pt-4 my-md-5 pt-md-5 border-top">
             <div className="row">
                 <div className="col-12 col-md">
                     <img className="mb-2" src="./assets/brand/sap-logo-svg.svg" alt="" width="65" height="34" />
                     <small className="d-block mb-3 text-body-secondary"><a className="link-secondary"
-                        href="https://github.com/sap-pilot/btp-home#readme" target="_blank">BTP-Home
-                        (ver)</a><br />&copy; SAP America Inc.</small>
+                        href="https://github.com/sap-pilot/btp-home#readme" target="_blank">BTP-Home 
+                        ({version})</a><br />&copy; SAP America Inc.</small>
                 </div>
                 {(footerLinks || []).map((group) => (
                     <HomeFooterGroup key={group.groupName} group={group} />
@@ -668,4 +674,4 @@ function HomeFooterLink({ link }) {
     );
 }
 
-homeApp.fetch();
+homeApp.run();
