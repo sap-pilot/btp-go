@@ -4,20 +4,23 @@ const POST = (cmd, data) => axios.post(cmd, data);
 // escaped CUSTOM_LINKS_PATH defined in env; to-be-replaced by approuter (see xs-app.json)
 const CUSTOM_LINKS_PATH = `{{{CUSTOM_LINKS_PATH}}}`;
 // fall back to template links if CUSTOM_LINKS_PATH is not specified in env or default-env.json
-const LINKS_PATH = CUSTOM_LINKS_PATH ? CUSTOM_LINKS_PATH : "./resources/links-template.json";
+const TEMPLATE_PATH = CUSTOM_LINKS_PATH ? CUSTOM_LINKS_PATH : "./resources/links-template.json";
+const UPLOAD_PATH = "/srv/home/updateHomeContent";
+const READ_PATH = "/srv/home/getHomeContent()";
 const APP_VERSION = "v0.2-231112";
 
 const homeApp = {
     run: async function () {
         // get data
         this.editorArea = document.getElementById("editorArea");
+        this.saveBtn = document.getElementById("saveBtn");
         this.editorMode = this.editorArea? true: false;
-        const { data } = await GET(LINKS_PATH);
+        const { data } = await GET(READ_PATH);
         if (this.editorArea) {
             // fill in editor content
-            this.editorArea.innerHTML = JSON.stringify(data, null, 4);
+            this.editorArea.innerHTML = data.content;
         }
-        this.handleData(data);
+        this.handleData(JSON.parse(data.content));
     },
     handleData: function( data ) {
         this.data = data;
@@ -27,6 +30,17 @@ const homeApp = {
         ReactDOM.render(<HomePage btp={this.data.btp} s4={this.data.s4} footerLinks={this.data.footerLinks} 
             version={APP_VERSION} editorMode={this.editorMode}/>, app);
         this.setupListeners();
+    },
+    _handleUpload: async function() {
+        if (!homeApp.editorArea) {
+            return; // nothing to save
+        }
+        const newContent = homeApp.editorArea.value;
+        const { data } = await POST(UPLOAD_PATH, { homeContent: { id: "newHomeContent", content: newContent}});
+        console.log("upload completed, returned data: "+data.value);
+        if (confirm("Update completed: "+data.value + " - Return to home page?")) {
+            window.location.href = "index.html";
+        }
     },
     _processData: function () {
         // apply template to services
@@ -266,6 +280,9 @@ const homeApp = {
         window.dispatchEvent(new Event("ZPageRendered"));
         if (this.editorArea) {
             this.editorArea.addEventListener("input", this._handleEditorInput);
+        }
+        if (this.saveBtn) {
+            this.saveBtn.addEventListener("click", this._handleUpload);
         }
     }
 };
