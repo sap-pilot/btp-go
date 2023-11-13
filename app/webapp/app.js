@@ -5,7 +5,7 @@ const POST = (cmd, data) => axios.post(cmd, data);
 const CUSTOM_LINKS_PATH = `{{{CUSTOM_LINKS_PATH}}}`;
 // fall back to template links if CUSTOM_LINKS_PATH is not specified in env or default-env.json
 const LINKS_PATH = CUSTOM_LINKS_PATH ? CUSTOM_LINKS_PATH : "./resources/links-template.json";
-const APP_VERSION = "v0.2";
+const APP_VERSION = "v0.2-231112";
 
 const homeApp = {
     run: async function () {
