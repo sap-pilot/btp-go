@@ -13,19 +13,22 @@ const homeApp = {
         this.editorArea = document.getElementById("editorArea");
         this.editorMode = this.editorArea? true: false;
         const { data } = await GET(LINKS_PATH);
-        this.data = data;
-        if (this.editorArea ) {
+        if (this.editorArea) {
             // fill in editor content
             this.editorArea.innerHTML = JSON.stringify(data, null, 4);
         }
-        this._fnProcessData();
+        this.handleData(data);
+    },
+    handleData: function( data ) {
+        this.data = data;
+        this._processData();
         // render the app
         const app = document.getElementById('app');
         ReactDOM.render(<HomePage btp={this.data.btp} s4={this.data.s4} footerLinks={this.data.footerLinks} 
             version={APP_VERSION} editorMode={this.editorMode}/>, app);
         this.setupListeners();
     },
-    _fnProcessData: function () {
+    _processData: function () {
         // apply template to services
         for (const ga of this.data.btp.globalAccounts) {
             for (const oDir of ga.directories) {
@@ -51,30 +54,30 @@ const homeApp = {
                                 mValueMap[sServiceKey + "-" + sParamKey] = oSrv[sParamKey]; // add service params into value map
                         }
                         // render service
-                        this._fnRenderService(sServiceKey, oSrv, oTemplate, mValueMap);
+                        this._renderService(sServiceKey, oSrv, oTemplate, mValueMap);
                     }
                     // render cockpit
                     if (this.data.templates["cockpit"]) {
                         oSubaccount.cockpit = {};
-                        this._fnRenderService("cockpit", oSubaccount.cockpit, this.data.templates["cockpit"], mValueMap);
+                        this._renderService("cockpit", oSubaccount.cockpit, this.data.templates["cockpit"], mValueMap);
                     }
                 } // end of subaccounts (oSubaccount)
                 // populate services table within oDir
-                this._fnPopulateServiceTable(oDir);
+                this._populateServiceTable(oDir);
             } // end of oDirectories (oDir)
         } // end of global account (ga)
-        this._fnPopulateS4Table(this.data.s4, this.data.templates["s4"]);
+        this._populateS4Table(this.data.s4, this.data.templates["s4"]);
     },
     // replace variables in string
-    _fnInterpolateStr: function (sStr, mValueMap) {
+    _interpolateStr: function (sStr, mValueMap) {
         return sStr.replace(/{(.*?)}/g, (match, offset) => mValueMap[offset]);
     },
     /**  render service/s4  url and name by template and mValueMap */
-    _fnRenderService: function (sSrvKey, oSrv, oTemplate, mValueMap) {
+    _renderService: function (sSrvKey, oSrv, oTemplate, mValueMap) {
         if (!oSrv.url && oTemplate.url) // service url overwrites template url (likewise for below name and fullname)
-            oSrv.url = this._fnInterpolateStr(oTemplate.url, mValueMap)
+            oSrv.url = this._interpolateStr(oTemplate.url, mValueMap)
         if (!oSrv.name && oTemplate.name)
-            oSrv.name = this._fnInterpolateStr(oTemplate.name, mValueMap);
+            oSrv.name = this._interpolateStr(oTemplate.name, mValueMap);
         if (!oSrv.fullName && oTemplate.fullName)
             oSrv.fullName = oTemplate.fullName;
         else
@@ -96,7 +99,7 @@ const homeApp = {
                                 instValueMap[sSrvKey + "-" + pk] = oSrvInst[pk]; // add service instance params, note service param with same name will be overwriten
                         }
                         // render service instance
-                        this._fnRenderService(sSrvKey, instChild, oTemplateChild, instValueMap);
+                        this._renderService(sSrvKey, instChild, oTemplateChild, instValueMap);
                         oSrv.children.push(instChild);
                     }
                 } else if (oTemplateChild.repeatOn == "spaces") {
@@ -113,13 +116,13 @@ const homeApp = {
                             oSpaceValueMap[pk] = oSpace[pk]; // add space params
                         }
                         // render service instance
-                        this._fnRenderService(sSrvKey, oSpaceChild, oTemplateChild, oSpaceValueMap);
+                        this._renderService(sSrvKey, oSpaceChild, oTemplateChild, oSpaceValueMap);
                         oSrv.children.push(oSpaceChild);
                     }
                 } else {
                     // render single item (not related to instances)
                     const oSrvChild = {};
-                    this._fnRenderService(sSrvKey, oSrvChild, oTemplateChild, mValueMap); // render as menu item 
+                    this._renderService(sSrvKey, oSrvChild, oTemplateChild, mValueMap); // render as menu item 
                     oSrv.children.push(oSrvChild);
                 }
             }
@@ -132,7 +135,7 @@ const homeApp = {
     },
     /** populate service table in specified directory (oDir) like this: 
      *     aAllServices[] -> {serviceName,serviceInSubaccounts[]}  */
-    _fnPopulateServiceTable: function (oDir) {
+    _populateServiceTable: function (oDir) {
         const aAllServices = []; // rows of all serivces in this oDir like {serviceName:<serviceName>,serviceInSubaccount:[]}
         oDir.allServices = aAllServices;
         if (!oDir.subaccounts)
@@ -160,7 +163,7 @@ const homeApp = {
     /**
      * populate links json s4 systems into s4 table 
      */
-    _fnPopulateS4Table: function (oS4, oTemplate) {
+    _populateS4Table: function (oS4, oTemplate) {
         const mS4ValueMap = Object.assign({}, oS4.params); // temporary map of serviceType-> above service row
         for (const oPrject of oS4.projects) {
             for (const oProduct of oPrject.products) {
@@ -184,13 +187,13 @@ const homeApp = {
                     }
                     if (!mSysValueMap.host)
                         mSysValueMap.host = mSysValueMap.sid; // by default assign sid as host name
-                    this._fnRenderService("s4", oSystem, oTemplate, mSysValueMap);
+                    this._renderService("s4", oSystem, oTemplate, mSysValueMap);
                     oProduct.tieredSystems[iTierIndex].push(oSystem);
                 }
             }
         }
     },
-    _fnHandleHashChange(event) {
+    _handleHashChange(event) {
         let sHash = window.location.hash ? window.location.hash.slice(1) : "";
         let sTab = sHash? sHash.split('/')[0] : "";
         if (!sTab || !sTab.match("^(BTP|S4)$")) {
@@ -211,14 +214,14 @@ const homeApp = {
             // scroll to element
             const oSection = document.querySelector("h3[name='"+sHash+"']");
             if (oSection) {
-                document.removeEventListener('scroll', this._fnHandleScrollUpdateHeader);
+                document.removeEventListener('scroll', this._handleScrollUpdateHeader);
                 oSection.scrollIntoView();
-                document.addEventListener("scrollend", this._fnHandleScrollEnd); // add fnScrollUpdateHeader after scrollend
+                document.addEventListener("scrollend", this._handleScrollEnd); // add fnScrollUpdateHeader after scrollend
     
             }
         }
     },
-    _fnHandleScrollUpdateHeader: function(event) {
+    _handleScrollUpdateHeader: function(event) {
         const aHeaders = document.querySelectorAll('.nav-section');  
         for ( const oHeader of aHeaders) {
             const rect = oHeader.getBoundingClientRect();
@@ -229,9 +232,21 @@ const homeApp = {
             }
         }
     },
-    _fnHandleScrollEnd(event) {
-        document.removeEventListener('scrollend', this._fnHandleScrollEnd);
-        document.addEventListener('scroll', this._fnHandleScrollUpdateHeader);
+    _handleScrollEnd(event) {
+        document.removeEventListener('scrollend', this._handleScrollEnd);
+        document.addEventListener('scroll', this._handleScrollUpdateHeader);
+    },
+    _handleEditorInput(event) {
+        const newText = homeApp.editorArea.value;
+        let newData = null;
+        try {
+            newData = JSON.parse(newText);
+        } catch (e) {
+            return;
+        }
+        if (newData) {
+            homeApp.handleData(newData);
+        }
     },
     setupListeners: function() {
         if (this.listenerAttached)
@@ -245,10 +260,13 @@ const homeApp = {
                     window.location.hash = sId;
             });
         });
-        document.addEventListener('scroll', this._fnHandleScrollUpdateHeader);
-        window.addEventListener("hashchange", this._fnHandleHashChange);
-        this._fnHandleHashChange();
+        document.addEventListener('scroll', this._handleScrollUpdateHeader);
+        window.addEventListener("hashchange", this._handleHashChange);
+        this._handleHashChange();
         window.dispatchEvent(new Event("ZPageRendered"));
+        if (this.editorArea) {
+            this.editorArea.addEventListener("input", this._handleEditorInput);
+        }
     }
 };
 
@@ -561,7 +579,7 @@ function HomeS4TabPane({ s4 }) {
         <div id="pane-S4" name="S4" className="tab-pane fade hide nav-section" role="tabpanel" aria-labelledby="s4-tab"
         tabIndex="1">
             {(s4.projects || []).map((project, idx) => (
-                <HomeS4ProjectSection key={project.name} project={project} />
+                <HomeS4ProjectSection key={project.name+'-'+idx} project={project} />
             ))}
         </div>
     );
@@ -583,12 +601,12 @@ function HomeS4ProjectSection({ project }) {
                     </thead>
                     <tbody>
                     {(project.products || []).map((prd, idx) => (
-                        <tr key={prd.name}>
+                        <tr key={prd.name+'-'+idx}>
                             <td>{prd.name}</td>
                             {(prd.tieredSystems || []).map((ts, idx) => (
                                 <td key={idx}>
                                     {(ts || []).map((sys, idx) => (
-                                        <HomeS4ProjecSystemLink key={sys.name} sys={sys} />
+                                        <HomeS4ProjecSystemLink key={sys.name+'-'+idx} sys={sys} />
                                     ))}
                                 </td>
                             ))}
@@ -646,8 +664,8 @@ function HomeFooter({ footerLinks, version }) {
                         href="https://github.com/sap-pilot/btp-home#readme" target="_blank">BTP-Home 
                         ({version})</a><br />&copy; SAP America Inc.</small>
                 </div>
-                {(footerLinks || []).map((group) => (
-                    <HomeFooterGroup key={group.groupName} group={group} />
+                {(footerLinks || []).map((group, idx) => (
+                    <HomeFooterGroup key={group.groupName+'-'+idx} group={group} />
                 ))}
             </div>
         </footer>
@@ -659,8 +677,8 @@ function HomeFooterGroup({ group }) {
         <div className="col col-md" v-for="group in footerLinks">
             <h5>{group.groupName}</h5>
             <ul group="list-unstyled text-small">
-                {(group.links || []).map((link) => (
-                    <HomeFooterLink key={link.name} link={link} />
+                {(group.links || []).map((link, idx) => (
+                    <HomeFooterLink key={link.name+'-'+idx} link={link} />
                 ))}
             </ul>
         </div>
