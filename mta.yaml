@@ -1,6 +1,6 @@
-_schema-version: '3.1'
+_schema-version: '3.2'
 ID: BTP-Home
-version: 0.0.1
+version: 0.0.2
 description: "BTP home page of links to services group by directory (project)
   and subaccount"
 parameters:
@@ -9,6 +9,7 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
+        - npm ci
         - npx cds build --production
 modules:
   - name: BTP-Home-app
@@ -27,7 +28,36 @@ modules:
       memory: 256M
     requires:
       - name: BTP-Home-xsuaa
-
+      - name: BTP-Home-dest
+      - name: BTP-Home-conn
+      - name: cpapp-logs
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          url: ~{srv-url}
+          timeout: 600000
+          forwardAuthToken: true
+  - name: BTP-Home-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+    - name: BTP-Home-xsuaa
+    - name: BTP-Home-conn
+    - name: BTP-Home-dest
+    - name: cpapp-logs
+    provides:
+    - name: srv-api
+      properties:
+        srv-url: ${default-url}
+    build-parameters:
+      ignore:
+      - default-*.json
+      - .env
+      - '*node_modules*'
+    parameters:d 
+      disk-quota: 256M
+      memory: 256M
 resources:
   - name: BTP-Home-xsuaa
     type: org.cloudfoundry.managed-service
@@ -38,3 +68,19 @@ resources:
       config:
         xsappname: BTP-Home-${space}
         tenant-mode: dedicated
+  - name: BTP-Home-dest
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-name: BTP-Home-dest
+      service-plan: lite
+  - name: BTP-Home-conn
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+  - name: cpapp-logs
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: application-logs
+      service-plan: standard

@@ -7,6 +7,6 @@ service HomeService @(requires: 'authenticated-user') {
             updator    : String;
             updateTime : String;
     }
-    action   updateHomeContent(homeContent : HomeContent) returns array of String;
-    function getHomeContent()                             returns HomeContent;
+    action   updateContent(homeContent : HomeContent) returns array of String;
+    function getContent()                             returns HomeContent;
 }

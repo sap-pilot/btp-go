@@ -1,13 +1,9 @@
 const $ = sel => document.querySelector(sel);
 const GET = (url) => axios.get(url);
 const POST = (cmd, data) => axios.post(cmd, data);
-// escaped CUSTOM_LINKS_PATH defined in env; to-be-replaced by approuter (see xs-app.json)
-const CUSTOM_LINKS_PATH = `{{{CUSTOM_LINKS_PATH}}}`;
-// fall back to template links if CUSTOM_LINKS_PATH is not specified in env or default-env.json
-const TEMPLATE_PATH = CUSTOM_LINKS_PATH ? CUSTOM_LINKS_PATH : "./resources/links-template.json";
-const UPLOAD_PATH = "/srv/home/updateHomeContent";
-const READ_PATH = "/srv/home/getHomeContent()";
-const APP_VERSION = "v0.2-231112";
+const UPLOAD_PATH = "/srv/home/updateContent";
+const READ_PATH = "/srv/home/getContent()";
+const APP_VERSION = "v0.2-231113";
 
 const homeApp = {
     run: async function () {
@@ -339,7 +335,7 @@ function HomeIcons() {
 function HomeHeader({ btp, s4, editorMode }) {
     const navbarRight = editorMode? null : (
         <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-            <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Welcome, XX</a>
+            <a className="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Welcome</a>
             <div className="dropdown bd-mode-toggle">
                 <button className="btn py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
                     aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
@@ -659,8 +655,8 @@ function HomeS4ProjecSystemLink({ sys }) {
                     <ul className="dropdown-menu">
                     {(sys.children || []).map((serviceChild, idx) => (
                         <li key={idx}>
-                        (serviceChildname ==='-'? <hr className="dropdown-divider" />: 
-                            <a href={serviceChild.url} title={serviceChild.fullName} target="_blank" className="dropdown-item">{{serviceChil.name}}</a>
+                        (serviceChildname ==='-'? <hr className="dropdown-divider" /> : 
+                            <a href={serviceChild.url} title={serviceChild.fullName} target="_blank" className="dropdown-item">{serviceChild.name}</a>
                         )
                         </li>
                     ))}
