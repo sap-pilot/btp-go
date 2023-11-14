@@ -8,7 +8,9 @@
     "build": "mbt build -p=cf --mtar=BTP-Home.mtar",
     "deploy": "cf deploy mta_archives/BTP-Home.mtar -f --retries 1",
     "bd": "mbt build -p=cf --mtar=BTP-Home.mtar && cf deploy mta_archives/BTP-Home.mtar -f --retries 1",
-    "undeploy": "cf undeploy BTP-Home --delete-services --delete-service-keys"
+    "undeploy": "cf undeploy BTP-Home --delete-services --delete-service-keys",
+    "start-local": "CDS_ENV=development cds-serve",
+    "start": "CDS_ENV=production cds-serve"
   },
   "repository": {
     "type": "git",
@@ -29,12 +31,32 @@
     "@sap/cds-dk": "^7"
   },
   "dependencies": {
-    "@sap/xssec": "^3",
-    "passport": "^0"
+    "@sap/cds": "^7",
+    "@sap/xsenv": "^4.0.0",
+    "@sap/xssec": "^3.3.4",
+    "express": "^4",
+    "passport": "^0.6.0"
   },
   "cds": {
-    "requires": {
-      "auth": "xsuaa"
+    "auth": {
+      "[development]": {
+          "kind": "basic",
+          "users": {
+              "admin": {
+                  "password": "admin",
+                  "roles": [
+                      "admin"
+                  ],
+                  "userAttributes": {}
+              }
+          }
+      },
+      "[production]": {
+          "kind": "xsuaa",
+          "passport": {
+              "strategy": "xsuaa"
+          }
+      }
     }
   }
 }

@@ -18,6 +18,12 @@
             "authenticationType": "none"
         },
         {
+            "source": "^/srv/(.*)$",
+            "target": "/$1",
+            "destination": "srv-api",
+            "csrfProtection": false
+        },
+        {
             "source": "^/(.*)$",
             "target": "$1",
             "localDir": "../webapp",

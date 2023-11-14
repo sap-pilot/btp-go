@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Links to BTP and S/4HANA">
+  <title>Editor - BTP Homepage</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3S315ELXYK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-3S315ELXYK');
+  </script>
+</head>
+
+
+<body id="editorApp">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Homepage Editor</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          
+        </ul>
+        <form class="d-flex">
+          <div class="btn-group me-2" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary">Edit</button>
+            <button type="button" class="btn">Preview</button>
+          </div>
+          <button class="btn btn-primary me-2 disabled">Save</button>
+          <a class="btn btn-outline-primary me-2" href="index.html" title="Cancel and return to home page">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <main class="container-fluid flex-column tab-content" style="top:60px;position:absolute;height:100%">
+    <div id="pane-edit" class="tab-pane show active h-100" role="tabpanel" aria-labelledby="edit-tab" tabindex="0">
+      <textarea style="height:100%;width:100%">hello editor</textarea>
+    </div>
+  </main>
+</body>
+<script src="../resources/js/color-modes.js"></script>
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+</html>

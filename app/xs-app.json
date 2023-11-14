@@ -15,6 +15,12 @@
             "localDir": "webapp/assets",
             "cacheControl": "max-age=604800, must-revalidate",
             "authenticationType": "none"
+        },        
+        {
+            "source": "^/srv/(.*)$",
+            "target": "/$1",
+            "destination": "srv-api",
+            "csrfProtection": false
         },
         {
             "source": "^/(.*)$",
