@@ -1,7 +1,9 @@
 const cds = require('@sap/cds');
 const fs = require('fs');
+const gitRepo = require("./ext/git-repo.js");
 
-const CUSTOM_LINK_PATH = "./custom/landscape.json";
+const GIT_REPO_LANDSCAPE_PATH = process.env.GIT_REPO_LANDSCAPE_PATH;
+const INITIAL_LANSCAPE_CONTENT = '{"btp":{"globalAccounts":[]},"s4":{"projects":[]},"templates":[],"footerLinks":[]}';
 
 console.log('node version [%s]', process.version);
 
@@ -15,15 +17,12 @@ const getContent = async (req) => {
     const userId = req.user.id;
     console.log("read homeContent, requester: [" + userId + "]");
     const homeContent = {id: "homeContent", updator: "N/A", updateTime: "N/A"};
-    if (!fs.existsSync(CUSTOM_LINK_PATH)) {
-        console.log("Warning: backend home content file doesn't exist: '"+CUSTOM_LINK_PATH+"', create initial file now.");
-        const dir = "./custom/";
-        if (!fs.existsSync(dir)){
-            fs.mkdirSync(dir, { recursive: true });
-        }
-        fs.writeFileSync(CUSTOM_LINK_PATH, '{"btp":{"globalAccounts":[]},"s4":{"projects":[]},"templates":[],"footerLinks":[]}');
-    } 
-    homeContent.content = fs.readFileSync(CUSTOM_LINK_PATH, { encoding: 'utf8' });
+    if (!fs.existsSync(GIT_REPO_LANDSCAPE_PATH)) {
+        console.log(`Warning: backend home content file doesn't exist: ${GIT_REPO_LANDSCAPE_PATH}, returning INITIAL_LANSCAPE_CONTENT`);
+        homeContent.content = INITIAL_LANSCAPE_CONTENT;
+    } else {
+        homeContent.content = fs.readFileSync(GIT_REPO_LANDSCAPE_PATH, { encoding: 'utf8' });
+    }
     const endTime = new Date().getTime();
     console.log("read homeContent completed, took time: "+(endTime-startTime)+" msecs");
     return homeContent;
@@ -35,11 +34,12 @@ const updateContent = async (req) => {
     console.log("update homeContent, requester: [" + userId + "]");
     const homeContent = req.data.homeContent;
     var ret = [];
-    if (!fs.existsSync(CUSTOM_LINK_PATH)) {
-        ret.push("Error: backend home content file doesn't exist: '"+CUSTOM_LINK_PATH+"'");
+    if (!fs.existsSync(GIT_REPO_LANDSCAPE_PATH)) {
+        ret.push("Error: backend home content file doesn't exist: '"+GIT_REPO_LANDSCAPE_PATH+"'");
     } else if (homeContent && homeContent.content) {
-        fs.writeFileSync(CUSTOM_LINK_PATH, homeContent.content);
-        ret.push("Success");
+        fs.writeFileSync(GIT_REPO_LANDSCAPE_PATH, homeContent.content);
+        ret.push("Success: local file updated");
+        let msg = gitRepo.commitAndPush("Update landscape content", userId, userId);
     } else {
         ret.push("Error: no homeContent nor homeContent.content provided");
     }
