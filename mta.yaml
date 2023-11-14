@@ -55,7 +55,7 @@ modules:
       - default-*.json
       - .env
       - '*node_modules*'
-    parameters:d 
+    parameters:
       disk-quota: 256M
       memory: 256M
 resources:

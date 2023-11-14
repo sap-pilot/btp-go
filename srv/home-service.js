@@ -1,7 +1,7 @@
 const cds = require('@sap/cds');
 const fs = require('fs');
 
-const CUSTOM_LINK_PATH = "./app/webapp/custom/cvx-links.json";
+const CUSTOM_LINK_PATH = "./custom/landscape.json";
 
 console.log('node version [%s]', process.version);
 
@@ -17,7 +17,7 @@ const getContent = async (req) => {
     const homeContent = {id: "homeContent", updator: "N/A", updateTime: "N/A"};
     if (!fs.existsSync(CUSTOM_LINK_PATH)) {
         console.log("Warning: backend home content file doesn't exist: '"+CUSTOM_LINK_PATH+"', create initial file now.");
-        const dir = "./app/webapp/custom/";
+        const dir = "./custom/";
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir, { recursive: true });
         }
