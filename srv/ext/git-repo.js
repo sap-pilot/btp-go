@@ -30,7 +30,7 @@ class GitRepo {
     }
 
     commitAndPush( message, userName, userEmail ) {
-        let ret1 = execSync(`cd ${LOCAL_REPO_PATH} && git config user.name "${userName}" && git config user.email "${userEmail}"`).toString();
+        let ret1 = execSync(`cd ${LOCAL_REPO_PATH} && git config user.name "${userName}" && git config user.email "${userEmail}" && git config push.autoSetupRemote true`).toString();
         let ret2 = execSync(`git add -A && git commit -m '${message}' && git push --force`).toString();
         console.log(`commit and push completed, ret1=\n${ret1}\nret2=\n${ret2}`);
     }
