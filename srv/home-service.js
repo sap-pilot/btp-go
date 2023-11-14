@@ -37,9 +37,16 @@ const updateContent = async (req) => {
     if (!fs.existsSync(GIT_REPO_LANDSCAPE_PATH)) {
         ret.push("Error: backend home content file doesn't exist: '"+GIT_REPO_LANDSCAPE_PATH+"'");
     } else if (homeContent && homeContent.content) {
-        fs.writeFileSync(GIT_REPO_LANDSCAPE_PATH, homeContent.content);
-        ret.push("Success: local file updated");
-        let msg = gitRepo.commitAndPush("Update landscape content", userId, userId);
+        // read existing content
+        let currentContent = fs.readFileSync(GIT_REPO_LANDSCAPE_PATH, { encoding: 'utf8' });
+        if (currentContent === homeContent.content) {
+            ret.push("Nothing changed");
+        } else {
+            fs.writeFileSync(GIT_REPO_LANDSCAPE_PATH, homeContent.content);
+            ret.push("Success: landscape defination updated");
+            let msg = gitRepo.commitAndPush("Update landscape content", userId?userId.split('@')[0]:'N/A', userId?userId:'N/A');
+            ret.push("Update repo result="+msg);
+        }
     } else {
         ret.push("Error: no homeContent nor homeContent.content provided");
     }

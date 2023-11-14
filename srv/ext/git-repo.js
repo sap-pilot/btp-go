@@ -9,7 +9,7 @@ class GitRepo {
     constructor() {
         console.info("initializing GIT_REPO ...");
         if (!GIT_REPO_URL) {
-            console.error("no GIT_REPO_URL specified in env, not able to initialize");
+            console.error("no GIT_REPO_URL specified in env, not able to initialize gitRepo");
             return;
         }
         // if (existsSync(LOCAL_REPO_PATH)) {
@@ -30,9 +30,9 @@ class GitRepo {
     }
 
     commitAndPush( message, userName, userEmail ) {
-        let ret1 = execSync(`cd ${LOCAL_REPO_PATH} && git config user.name "${userName}" && git config user.email "${userEmail}"`).toString();
-        let ret2 = execSync(`git add -A && git commit -m '${message}' && git push --set-upstream origin ${GIT_REPO_BRANCH} --force`).toString();
-        console.log(`commit and push completed, ret1=\n${ret1}\nret2=\n${ret2}`);
+        let ret = execSync(`cd ${LOCAL_REPO_PATH} && git config user.name "${userName}" && git config user.email "${userEmail}" && git add -A && git commit -m '${message}' && git push --set-upstream origin ${GIT_REPO_BRANCH} --force`).toString();
+        console.log(`commit and push completed, ret=\n${ret}`);
+        return ret;
     }
 }
 
