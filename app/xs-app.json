@@ -27,7 +27,11 @@
             "target": "$1",
             "localDir": "webapp",
             "cacheControl": "max-age=0, must-revalidate",
-            "authenticationType": "xsuaa"
+            "authenticationType": "xsuaa",
+            "replace": {
+                "pathSuffixes": ["app.js"],
+                "vars": ["CUSTOM_LINKS_PATH", "CUSTOM_LINKS_PATH"]
+            }
         }
     ]
 }

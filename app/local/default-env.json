@@ -1,5 +1,4 @@
 {
-    "CUSTOM_LINKS_PATH": "/custom/cvx-links.json",
     "destinations": [
         {
             "name": "srv-api",
