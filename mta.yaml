@@ -52,7 +52,7 @@ modules:
         srv-url: ${default-url}
     build-parameters:
       ignore:
-      - default-*.json
+     # - default-*.json
       - .env
       - '*node_modules*'
     parameters:

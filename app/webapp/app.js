@@ -700,7 +700,7 @@ function HomeFooterGroup({ group }) {
 
 function HomeFooterLink({ link }) {
     return (
-        <li key={link.name} className="mb-1" v-for="link in group.links"><a className="link-secondary" href="{link.url}"
+        <li key={link.name} className="mb-1" v-for="link in group.links"><a className="link-secondary" href={link.url}
             target="_blank">{link.name}</a></li>
     );
 }

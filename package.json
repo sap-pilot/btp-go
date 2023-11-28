@@ -42,7 +42,7 @@
       "[development]": {
           "kind": "basic",
           "users": {
-              "admin": {
+              "john@sap-test.de": {
                   "password": "admin",
                   "roles": [
                       "admin"
