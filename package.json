@@ -33,7 +33,7 @@
   "dependencies": {
     "@sap/cds": "^7",
     "@sap/xsenv": "^4.0.0",
-    "@sap/xssec": "^3.3.4",
+    "@sap/xssec": "^3.6.1",
     "express": "^4",
     "passport": "^0.6.0"
   },
