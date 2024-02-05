@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Links to BTP and S/4HANA">
-  <title>Edit :: BTP-Home</title>
+  <title>Editor :: BTP-Homepage</title>
   <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
@@ -35,18 +35,21 @@
       <td style="width: 50%; padding: 8px; text-align: center"><span class="fs-4">Preview</span></td>
     </tr>
     <tr>
-      <td><textarea id="editorArea" style="height:100%; width:100%; resize: none;"></textarea></td>
+      <td><form class="form-floating" style="height:100%; width:100%; resize: none;">
+        <textarea id="editorArea" class="form-control numbered" style="height:100%; width:100%; resize: none; font-family: 'Courier New'; font-size: smaller;"></textarea>
+        <label id="editorAreaLabel" for="editorArea" class="d-none">Invalid input</label>
+      </form></td>
       <td><div id="app"></div></td>
     </tr>
-    <tr>
+    <!-- <tr>
       <td style="height: 50px; width: 50%; padding: 8px">
         <span class="fs-4"></span>
         <form style="float: right">
-            <button class="btn btn-primary">Save</button>
+            <button id="saveBtn" class="btn btn-primary">Save</button>
             <button class="btn btn-secondary" title="Cancel and return to home page" onclick="cancelEditor(); return false;">Cancel</a>
         </form></td>
       <td style="width: 50%; padding: 8px; text-align: center"><span class="fs-4">End of preview</span></td>
-    </tr>
+    </tr> -->
   </table>
   <!--<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
@@ -82,6 +85,37 @@
     if (confirm('Make sure to cancel the change and return to home page?')) {
       window.location.href='index.html'; 
     }
+  }
+  function validateJSON() {
+    let eEditorArea = document.getElementById("editorArea");
+    let eEditorLabel = document.getElementById("editorAreaLabel");
+    let eSaveBtn = document.getElementById("saveBtn");
+    if (!eEditorArea || !eEditorLabel || !eSaveBtn) {
+      console.error("not able to find editorArea or editorAreaLabel or saveBtn");
+      return;
+    }
+    let sErrorMessage = null;
+    const newContent = eEditorArea.value;
+    try {
+      let parsedContent = JSON.parse(newContent);
+    } catch (e) {
+      sErrorMessage = e.toString? 'Invalid JSON: ' + e.toString() : 'Invalid JSON'; 
+    }
+    if (sErrorMessage) {
+      eEditorArea.classList.add("is-invalid");
+      eEditorLabel.classList.remove("d-none");
+      eEditorLabel.innerHTML = sErrorMessage;
+      eSaveBtn.setAttribute("disabled", "disabled");
+      eSaveBtn.setAttribute("title", "Not able to save, invalid JSON");
+      return false;
+    } else {
+      eEditorArea.classList.remove("is-invalid");
+      eEditorLabel.classList.add("d-none");
+      eSaveBtn.removeAttribute("disabled");
+      eSaveBtn.setAttribute("title", "Valid JSON, click to save content");
+      return true;
+    }
+    // note: use this tool to format JSON: https://www.freeformatter.com/json-formatter.html#before-output
   }
 </script>
 </html>

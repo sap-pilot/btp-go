@@ -5,7 +5,7 @@ const $ = sel => document.querySelector(sel);
 const GET = (url) => axios.get(url);
 const POST = (cmd,data) => axios.post(cmd,data);
 // escaped CUSTOM_LINKS_PATH defined in env; to-be-replaced by approuter (see xs-app.json)
-const CUSTOM_LINKS_PATH = `{{{CUSTOM_LINKS_PATH}}}`; 
+const CUSTOM_LINKS_PATH = '/srv/home/getContent()'; 
 // fall back to template links if CUSTOM_LINKS_PATH is not specified in env or default-env.json
 const LINKS_PATH = CUSTOM_LINKS_PATH? CUSTOM_LINKS_PATH : "../resources/links-template.json";
 const APP_VERSION = "v0.1";
@@ -32,11 +32,12 @@ const app = Vue.createApp ({
     methods: {
         async fetch () {
             const {data} = await GET(LINKS_PATH);
-            this.linksVer = data.linksVer;
-            this.btp = data.btp;
-            this.s4 = data.s4;
-            this.footerLinks = data.footerLinks;
-            this.templates = data.templates;
+            const content = JSON.parse(ret.content)
+            this.linksVer = content.linksVer;
+            this.btp = content.btp;
+            this.s4 = content.s4;
+            this.footerLinks = content.footerLinks;
+            this.templates = content.templates;
             // apply template to services
             for (const ga of this.btp.globalAccounts) {
                 for (const oDir of ga.directories) {

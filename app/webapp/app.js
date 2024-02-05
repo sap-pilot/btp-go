@@ -3,7 +3,7 @@ const GET = (url) => axios.get(url);
 const POST = (cmd, data) => axios.post(cmd, data);
 const UPLOAD_PATH = "/srv/home/updateContent";
 const READ_PATH = "/srv/home/getContent()";
-const APP_VERSION = "v0.2-231113";
+const APP_VERSION = "v0.2.231128";
 
 const homeApp = {
     run: async function () {
@@ -15,6 +15,7 @@ const homeApp = {
         if (this.editorArea) {
             // fill in editor content
             this.editorArea.innerHTML = data.content;
+            validateJSON();
         }
         this.handleData(JSON.parse(data.content));
     },
@@ -29,7 +30,7 @@ const homeApp = {
     },
     _handleUpload: async function() {
         if (!homeApp.editorArea) {
-            return; // nothing to save
+            return false; // nothing to save
         }
         const newContent = homeApp.editorArea.value;
         const { data } = await POST(UPLOAD_PATH, { homeContent: { id: "newHomeContent", content: newContent}});
@@ -247,6 +248,9 @@ const homeApp = {
         document.addEventListener('scroll', this._handleScrollUpdateHeader);
     },
     _handleEditorInput(event) {
+        if (!validateJSON()) {
+            return; // invalid JSON
+        }
         const newText = homeApp.editorArea.value;
         let newData = null;
         try {
